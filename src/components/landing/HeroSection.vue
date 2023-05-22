@@ -1,5 +1,5 @@
 <script setup>
-import RedButton from '@/components/UI/RedButton.vue'
+import SignUpButton from '@/components/UI/RedButton.vue'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 </script>
@@ -13,6 +13,6 @@ const { t } = useI18n()
     >
       {{ t('landing.hero_heading') }}
     </p>
-    <RedButton class="px-[14px] py-2 md:px-4">{{ t('landing.hero_button') }}</RedButton>
+    <SignUpButton class="px-[14px] py-2 md:px-4">{{ t('landing.hero_button') }}</SignUpButton>
   </section>
 </template>

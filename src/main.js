@@ -5,6 +5,7 @@ import { createPinia } from 'pinia'
 import { createI18n } from 'vue-i18n'
 import en from '@/assets/locales/en'
 import ka from '@/assets/locales/ka'
+import '@/config/vee-validate/rules'
 
 import App from './App.vue'
 import router from './router'

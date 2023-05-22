@@ -5,7 +5,21 @@ export default {
     extend: {
       colors: {
         darkBlue: '#11101A',
-        offGold: '#DDCCAA'
+        offGold: '#DDCCAA',
+        semiOpaqueBlack: 'rgba(0,0,0,0.54)',
+        darkPurple: '#222030',
+        darkGray: ' #6C757D',
+        lightGray: '#CED4DA',
+        greenSuccess: '#198754',
+        redFail: '#E31221'
+      },
+      padding: {
+        13: '52px',
+        18: '72px',
+        30: '120px'
+      },
+      boxShadow: {
+        input: ' 0px 0px 0px 4px #0D6EFD40'
       }
     }
   },

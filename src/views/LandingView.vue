@@ -7,10 +7,13 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <AppHeader />
-  <HeroSection />
-  <div></div>
-  <p class="text-offGold text-[8px] md:font-medium md:text-sm py-[10px] md:py-4 absolute bottom-0">
-    © 2022 movie quotes. {{ t('landing.footer_text') }}.
-  </p>
+  <div class="bg-darkBlue min-h-screen">
+    <AppHeader />
+    <HeroSection />
+    <p
+      class="text-offGold text-[8px] md:font-medium md:text-sm py-[10px] md:py-4 px-9 md:px-[70px]"
+    >
+      © 2022 movie quotes. {{ t('landing.footer_text') }}.
+    </p>
+  </div>
 </template>
