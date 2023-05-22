@@ -11,7 +11,8 @@ export default {
         darkGray: ' #6C757D',
         lightGray: '#CED4DA',
         greenSuccess: '#198754',
-        redFail: '#E31221'
+        redFail: '#E31221',
+        blue: ' #0D6EFD'
       },
       padding: {
         13: '52px',

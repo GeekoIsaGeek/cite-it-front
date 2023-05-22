@@ -25,6 +25,10 @@ const props = defineProps({
   name: {
     type: String,
     required: true
+  },
+  required: {
+    type: Boolean,
+    required: false
   }
 })
 
@@ -34,7 +38,7 @@ const isTouched = useIsFieldTouched(props.name)
 
 const borderStyles = computed(() => {
   if (isTouched.value) {
-    return `border border-${isValid.value ? 'greenSuccess' : 'redFail'}`
+    return `border-2 border-${isValid.value ? 'greenSuccess' : 'redFail'}`
   }
   return ''
 })
@@ -43,12 +47,12 @@ const borderStyles = computed(() => {
 <template>
   <div class="flex flex-col w-full gap-2 relative">
     <label class="text-base text-white">
-      {{ label }}
+      {{ label }} <span v-if="required" class="text-red-500">*</span>
     </label>
     <Field
       :class="[
         borderStyles,
-        'w-full bg-lightGray border border-gray-400 outline-none py-[7px] pr-9 px-[13px] rounded flex flex-row focus:shadow-input'
+        'w-full bg-lightGray border border-gray-400 outline-none h-[38px] pr-9 px-[13px] rounded flex flex-row focus:shadow-input'
       ]"
       :rules="rules"
       :name="name"
