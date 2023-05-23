@@ -4,50 +4,57 @@ import ModalWrapper from '@/components/shared/ModalWrapper.vue'
 import FormField from '@/components/shared/FormField.vue'
 import GoogleAuthButton from '@/components/UI/GoogleAuthButton.vue'
 import SignUpButton from '@/components/UI/RedButton.vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 </script>
 
 <template>
   <Teleport to="body">
     <ModalWrapper>
-      <FormWrapper heading="Create an account" subHeading="Start your journey!">
+      <FormWrapper
+        :heading="t('auth.register_heading')"
+        :subHeading="t('auth.register_subheading')"
+      >
         <template v-slot:default="{ isTouched, isValid }">
           <FormField
-            placeholder="At least 3 & max.15 lower case characters  "
-            label="Name"
+            :placeholder="t('auth.username_placeholder')"
+            :label="t('auth.username')"
             type="text"
             rules="required|min:3|max:15|only_lowercase"
             name="username"
             required
           />
           <FormField
-            placeholder="Enter your email"
-            label="Email"
+            :placeholder="t('auth.email_placeholder')"
+            :label="t('auth.email_label')"
             type="email"
             rules="required|email"
             name="email"
             required
           />
           <FormField
-            placeholder="Password"
-            label="Password"
+            :placeholder="t('auth.password_label')"
+            :label="t('auth.password_label')"
             type="password"
             rules="required|min:8|max:15|only_lowercase"
             name="password"
             required
           />
           <FormField
-            placeholder="Confirm password"
-            label="Confirm password"
+            :placeholder="t('auth.confirm_password')"
+            :label="t('auth.confirm_password')"
             type="password"
             rules="required|confirmed:@password"
             name="confirmation"
             required
           />
-          <SignUpButton class="h-[38px]" :disabled="isTouched && !isValid">Sign up</SignUpButton>
-          <GoogleAuthButton action="Sign up" />
+          <SignUpButton class="h-[38px]" :disabled="isTouched && !isValid">{{
+            t('auth.sign_up')
+          }}</SignUpButton>
+          <GoogleAuthButton :action="t('auth.google_sign_up')" />
 
           <p class="mt-4 text-center text-darkGray">
-            Already have an account?
+            {{ t('auth.already_have_account') }}?
             <button @click.prevent class="text-blue underline">Log in</button>
           </p>
         </template>
