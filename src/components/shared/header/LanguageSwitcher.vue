@@ -6,7 +6,6 @@ const { locale } = useI18n()
 const showLocales = ref(false)
 
 const handleLocalization = (language) => {
-  console.log(language)
   if (language === 'English') {
     locale.value = 'en'
   } else {

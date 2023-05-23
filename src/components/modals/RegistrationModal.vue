@@ -5,7 +5,15 @@ import FormField from '@/components/shared/FormField.vue'
 import GoogleAuthButton from '@/components/UI/GoogleAuthButton.vue'
 import SignUpButton from '@/components/UI/RedButton.vue'
 import { useI18n } from 'vue-i18n'
+import { RouterLink } from 'vue-router'
+import { reactive } from 'vue'
+
 const { t } = useI18n()
+const credentials = reactive({
+  username: null,
+  email: null,
+  password: null
+})
 </script>
 
 <template>
@@ -23,6 +31,7 @@ const { t } = useI18n()
             rules="required|min:3|max:15|only_lowercase"
             name="username"
             required
+            :setValue="(username) => (credentials.username = username)"
           />
           <FormField
             :placeholder="t('auth.email_placeholder')"
@@ -31,6 +40,7 @@ const { t } = useI18n()
             rules="required|email"
             name="email"
             required
+            :setValue="(email) => (credentials.email = email)"
           />
           <FormField
             :placeholder="t('auth.password_label')"
@@ -39,6 +49,7 @@ const { t } = useI18n()
             rules="required|min:8|max:15|only_lowercase"
             name="password"
             required
+            :setValue="(password) => (credentials.password = password)"
           />
           <FormField
             :placeholder="t('auth.confirm_password')"
@@ -54,8 +65,8 @@ const { t } = useI18n()
           <GoogleAuthButton :action="t('auth.google_sign_up')" />
 
           <p class="mt-4 text-center text-darkGray">
-            {{ t('auth.already_have_account') }}?
-            <button @click.prevent class="text-blue underline">Log in</button>
+            {{ t('auth.already_have_account') }}
+            <RouterLink to="/login" class="text-blue underline">Log in</RouterLink>
           </p>
         </template>
       </FormWrapper>

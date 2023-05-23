@@ -5,8 +5,15 @@ import FormField from '@/components/shared/FormField.vue'
 import SignInButton from '@/components/UI/RedButton.vue'
 import GoogleAuthButton from '@/components/UI/GoogleAuthButton.vue'
 import { useI18n } from 'vue-i18n'
+import { RouterLink } from 'vue-router'
+import { reactive } from 'vue'
 
 const { t } = useI18n()
+const credentials = reactive({
+  email: null,
+  password: null,
+  remember: false
+})
 </script>
 
 <template>
@@ -20,18 +27,26 @@ const { t } = useI18n()
             type="email"
             rules="required|min:3"
             name="email"
+            :setValue="(email) => (credentials.email = email)"
           />
           <FormField
-            :placeholder="t('auth.password_placeholder')"
+            :placeholder="t('auth.password_label')"
             :label="t('auth.password_label')"
             type="password"
             rules="required"
             name="password"
+            :setValue="(password) => (credentials.password = password)"
           />
           <div class="flex justify-between">
             <!-- Checkbox -->
             <div class="flex gap-2 items-center">
-              <input type="checkbox" value="" name="remember" class="h-4 w-4" />
+              <input
+                type="checkbox"
+                :value="credentials.remember"
+                name="remember"
+                class="h-4 w-4"
+                @change="() => (credentials.remember = !credentials.remember)"
+              />
               <label for="remember" class="text-white">{{ t('auth.remember') }}</label>
             </div>
             <!-- Checkbox -->
@@ -46,7 +61,9 @@ const { t } = useI18n()
 
           <p class="mt-4 text-center text-darkGray">
             {{ t('auth.dont_have_account') }}
-            <button @click.prevent class="text-blue underline">{{ t('auth.sign_up') }}</button>
+            <RouterLink to="/register" class="text-blue underline">{{
+              t('auth.sign_up')
+            }}</RouterLink>
           </p>
         </template>
       </FormWrapper>

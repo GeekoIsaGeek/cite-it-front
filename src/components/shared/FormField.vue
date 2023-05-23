@@ -29,6 +29,10 @@ const props = defineProps({
   required: {
     type: Boolean,
     required: false
+  },
+  setValue: {
+    type: Function,
+    required: false
   }
 })
 
@@ -42,6 +46,13 @@ const borderStyles = computed(() => {
   }
   return ''
 })
+
+const handleInput = (e) => {
+  if (props.setValue) {
+    props.setValue(e.target.value)
+  }
+  return
+}
 </script>
 
 <template>
@@ -59,6 +70,7 @@ const borderStyles = computed(() => {
       :type="variableType"
       :placeholder="placeholder"
       as="input"
+      @input="handleInput"
     />
     <img
       :src="isValid ? valid : invalid"
