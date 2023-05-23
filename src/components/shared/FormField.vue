@@ -63,7 +63,7 @@ const handleInput = (e) => {
     <Field
       :class="[
         borderStyles,
-        'w-full bg-lightGray border border-gray-400 outline-none h-[38px] pr-9 px-[13px] rounded flex flex-row focus:shadow-input'
+        'w-full bg-lightGray outline-none h-[38px] pr-9 px-[13px] rounded flex flex-row focus:shadow-input'
       ]"
       :rules="rules"
       :name="name"

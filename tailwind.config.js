@@ -19,6 +19,9 @@ export default {
         18: '72px',
         30: '120px'
       },
+      width: {
+        90: '360px'
+      },
       boxShadow: {
         input: ' 0px 0px 0px 4px #0D6EFD40'
       }

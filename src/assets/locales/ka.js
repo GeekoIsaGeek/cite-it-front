@@ -27,5 +27,12 @@ export default {
     get_started: 'დაწყება',
     already_have_account: 'უკვე გაქვთ ანგარიში?',
     google_sign_up: 'Google-ით რეგისტრაცია'
+  },
+  auth_feedback: {
+    thank_you: 'მადლობა',
+    check_email: 'გთხოვთ შეამოწმოთ ელფოსტა და მიყვეთ ინსტრუქციებს ანგარიშის გასააქტიურებლად',
+    go_to_email: 'ელფოსტაზე გადასვლა',
+    activated: 'თქვენი ანგარიში გააქტიურდა',
+    news_feed: 'სიახლეებზე გადასვლა'
   }
 }

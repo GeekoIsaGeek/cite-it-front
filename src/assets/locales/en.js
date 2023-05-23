@@ -27,5 +27,12 @@ export default {
     get_started: 'Get started',
     already_have_account: 'Already have an account?',
     google_sign_up: 'Sign up with Google'
+  },
+  auth_feedback: {
+    thank_you: 'Thank you',
+    check_email: 'Please check your email and follow the instructions to activate your account',
+    go_to_email: 'Go to my email',
+    activated: 'Your account has been activated',
+    news_feed: 'Go to my news feed'
   }
 }
