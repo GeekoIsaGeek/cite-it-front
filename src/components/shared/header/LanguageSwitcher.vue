@@ -8,8 +8,10 @@ const showLocales = ref(false)
 const handleLocalization = (language) => {
   if (language === 'English') {
     locale.value = 'en'
+    localStorage.setItem('locale', 'en')
   } else {
     locale.value = 'ka'
+    localStorage.setItem('locale', 'ka')
   }
 }
 </script>
