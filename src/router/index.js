@@ -15,6 +15,7 @@ const router = createRouter({
     },
     {
       path: '/login',
+      name: 'login',
       components: {
         default: Login,
         overlay: LandingView
@@ -22,6 +23,7 @@ const router = createRouter({
     },
     {
       path: '/register',
+      name: 'register',
       components: {
         default: Register,
         overlay: LandingView
@@ -29,6 +31,7 @@ const router = createRouter({
     },
     {
       path: '/email-confirmation',
+      name: 'email-confirmation',
       components: {
         default: ConfirmEmail,
         overlay: LandingView
@@ -36,6 +39,7 @@ const router = createRouter({
     },
     {
       path: '/activation-succeed',
+      name: 'activation-succeed',
       components: {
         default: AccountActivated,
         overlay: LandingView

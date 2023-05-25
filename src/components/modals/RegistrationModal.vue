@@ -1,7 +1,7 @@
 <script setup>
 import FormWrapper from '@/components/shared/FormWrapper.vue'
 import ModalWrapper from '@/components/shared/ModalWrapper.vue'
-import FormField from '@/components/shared/FormField.vue'
+import BaseInput from '@/components/UI/BaseInput.vue'
 import GoogleAuthButton from '@/components/UI/GoogleAuthButton.vue'
 import SignUpButton from '@/components/UI/RedButton.vue'
 import { useI18n } from 'vue-i18n'
@@ -24,7 +24,7 @@ const credentials = reactive({
         :subHeading="t('auth.register_subheading')"
       >
         <template v-slot:default="{ isTouched, isValid }">
-          <FormField
+          <BaseInput
             :placeholder="t('auth.username_placeholder')"
             :label="t('auth.username')"
             type="text"
@@ -33,7 +33,7 @@ const credentials = reactive({
             required
             :setValue="(username) => (credentials.username = username)"
           />
-          <FormField
+          <BaseInput
             :placeholder="t('auth.email_placeholder')"
             :label="t('auth.email_label')"
             type="email"
@@ -42,7 +42,7 @@ const credentials = reactive({
             required
             :setValue="(email) => (credentials.email = email)"
           />
-          <FormField
+          <BaseInput
             :placeholder="t('auth.password_label')"
             :label="t('auth.password_label')"
             type="password"
@@ -51,7 +51,7 @@ const credentials = reactive({
             required
             :setValue="(password) => (credentials.password = password)"
           />
-          <FormField
+          <BaseInput
             :placeholder="t('auth.confirm_password')"
             :label="t('auth.confirm_password')"
             type="password"
@@ -66,7 +66,7 @@ const credentials = reactive({
 
           <p class="mt-4 text-center text-darkGray">
             {{ t('auth.already_have_account') }}
-            <RouterLink to="/login" class="text-blue underline">Log in</RouterLink>
+            <RouterLink :to="{ name: 'login' }" class="text-blue underline">Log in</RouterLink>
           </p>
         </template>
       </FormWrapper>

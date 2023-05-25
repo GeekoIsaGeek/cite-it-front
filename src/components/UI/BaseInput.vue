@@ -1,5 +1,5 @@
 <script setup>
-import { Field, useIsFieldTouched, useIsFieldValid } from 'vee-validate'
+import { ErrorMessage, Field, useIsFieldTouched, useIsFieldValid } from 'vee-validate'
 import preview from '@/assets/images/preview.svg'
 import valid from '@/assets/images/valid-icon.svg'
 import invalid from '@/assets/images/invalid-icon.svg'
@@ -86,4 +86,5 @@ const handleInput = (e) => {
       @click="variableType = variableType === 'password' ? 'text' : 'password'"
     />
   </div>
+  <ErrorMessage :name="name" class="text-redFail mt-[-10px]" />
 </template>

@@ -14,11 +14,13 @@ const router = useRouter()
 
     <div class="flex gap-3">
       <LanguageSwitcher />
-      <SignUpButton class="px-6 py-2 hidden md:flex" @click="() => router.push('/register')">{{
-        t('landing.signup')
-      }}</SignUpButton>
+      <SignUpButton
+        class="px-6 py-2 hidden md:flex"
+        @click="() => router.push({ name: 'register' })"
+        >{{ t('landing.signup') }}</SignUpButton
+      >
       <button
-        @click="() => router.push('/login')"
+        @click="() => router.push({ name: 'login' })"
         class="px-6 py-2 border border-white flex justify-center items-center text-white rounded hover:text-darkBlue hover:bg-white transition-colors"
       >
         {{ t('landing.login') }}
