@@ -1,5 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
+import LandingView from '@/views/LandingView.vue'
+import Login from '@/components/modals/LoginModal.vue'
+import Register from '@/components/modals/RegistrationModal.vue'
+import ConfirmEmail from '@/components/modals/Feedbacks/ConfirmEmail.vue'
+import AccountActivated from '@/components/modals/Feedbacks/AccountActivated.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,7 +11,43 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: LandingView
+    },
+    {
+      path: '/login',
+      name: 'login',
+      components: {
+        default: Login,
+        overlay: LandingView
+      }
+    },
+    {
+      path: '/register',
+      name: 'register',
+      components: {
+        default: Register,
+        overlay: LandingView
+      }
+    },
+    {
+      path: '/email-confirmation',
+      name: 'email-confirmation',
+      components: {
+        default: ConfirmEmail,
+        overlay: LandingView
+      }
+    },
+    {
+      path: '/activation-succeed',
+      name: 'activation-succeed',
+      components: {
+        default: AccountActivated,
+        overlay: LandingView
+      }
+    },
+    {
+      path: '/:catchAll(.*)',
+      redirect: '/'
     }
   ]
 })
