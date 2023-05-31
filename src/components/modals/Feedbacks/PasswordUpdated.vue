@@ -7,12 +7,15 @@ const router = useRouter()
 </script>
 
 <template>
-  <AuthFeedbackWrapper :heading="$t('auth_feedback.thank_you')" :message="$t('landing.login')">
+  <AuthFeedbackWrapper
+    :heading="$t('auth_feedback.thank_you')"
+    :message="$t('forgot_password.success')"
+  >
     <template #image>
       <img :src="success" alt="success sign" />
     </template>
     <GoToNewsFeed @click="router.push({ name: 'login' })" class="py-[7px] w-full">
-      {{ $t('auth_feedback.news_feed') }}
+      {{ $t('landing.login') }}
     </GoToNewsFeed>
   </AuthFeedbackWrapper>
 </template>

@@ -8,9 +8,11 @@ defineProps({
 </script>
 
 <template>
-  <button
+  <a
+    href="http://localhost:8000/api/auth/redirect"
+    target="_blank"
     class="text-white flex items-center justify-center gap-2 border border-lightGray rounded h-[38px] hover:bg-white hover:text-darkBlue transition-colors"
   >
     <i class="ri-google-fill" /> {{ action }}
-  </button>
+  </a>
 </template>

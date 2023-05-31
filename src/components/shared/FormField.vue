@@ -3,7 +3,7 @@ import { Field, useIsFieldTouched, useIsFieldValid } from 'vee-validate'
 import preview from '@/assets/images/preview.svg'
 import valid from '@/assets/images/valid-icon.svg'
 import invalid from '@/assets/images/invalid-icon.svg'
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 
 const props = defineProps({
   label: {
@@ -40,13 +40,6 @@ const variableType = ref(props.type)
 const isValid = useIsFieldValid(props.name)
 const isTouched = useIsFieldTouched(props.name)
 
-const borderStyles = computed(() => {
-  if (isTouched.value) {
-    return `border-2 border-${isValid.value ? 'greenSuccess' : 'redFail'}`
-  }
-  return ''
-})
-
 const handleInput = (e) => {
   if (props.setValue) {
     props.setValue(e.target.value)
@@ -60,18 +53,18 @@ const handleInput = (e) => {
     <label class="text-base text-white">
       {{ label }} <span v-if="required" class="text-red-500">*</span>
     </label>
-    <Field
-      :class="[
-        borderStyles,
-        'w-full bg-lightGray outline-none h-[38px] pr-9 px-[13px] rounded flex flex-row focus:shadow-input'
-      ]"
-      :rules="rules"
-      :name="name"
-      :type="variableType"
-      :placeholder="placeholder"
-      as="input"
-      @input="handleInput"
-    />
+    <Field v-slot="{ field, meta }" :rules="rules" :name="name" @input="handleInput">
+      <input
+        :placeholder="placeholder"
+        :type="variableType"
+        v-bind="field"
+        :class="{
+          'border-2 border-greenSuccess': meta.valid && meta.touched,
+          'border-2 border-redFail': !meta.valid && meta.touched,
+          'w-full bg-lightGray outline-none h-[38px] pr-9 px-[13px] rounded flex flex-row focus:shadow-input': true
+        }"
+      />
+    </Field>
     <img
       :src="isValid ? valid : invalid"
       alt="validation status sign"
