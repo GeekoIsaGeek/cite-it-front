@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { setLocale } from '@vee-validate/i18n'
 
 const { locale } = useI18n()
 const showLocales = ref(false)
@@ -8,9 +9,11 @@ const showLocales = ref(false)
 const handleLocalization = (language) => {
   if (language === 'English') {
     locale.value = 'en'
+    setLocale('en') // this is needed to localize vee-validate error messages
     localStorage.setItem('locale', 'en')
   } else {
     locale.value = 'ka'
+    setLocale('ka')
     localStorage.setItem('locale', 'ka')
   }
 }

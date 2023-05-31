@@ -5,14 +5,15 @@ defineProps({
     required: true
   }
 })
+const link = `${import.meta.env.VITE_SERVER_URL}/api/auth/redirect`
 </script>
 
 <template>
   <a
-    href="http://localhost:8000/api/auth/redirect"
+    :href="link"
     target="_blank"
     class="text-white flex items-center justify-center gap-2 border border-lightGray rounded h-[38px] hover:bg-white hover:text-darkBlue transition-colors"
   >
-    <i class="ri-google-fill" /> {{ action }}
+    <i class="ri-google-fill"></i> {{ action }}
   </a>
 </template>

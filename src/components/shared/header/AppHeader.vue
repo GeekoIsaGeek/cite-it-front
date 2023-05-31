@@ -29,12 +29,12 @@ const handleLogout = async () => {
       <LanguageSwitcher />
       <SignUpButton
         class="px-6 py-2 hidden md:flex"
-        @click="() => router.push('/register')"
+        @click="() => router.push({ name: 'register' })"
         v-if="!isAuthorized"
-        >{{ $t('landing.signup') }}</SignUpButton
-      >
+        >{{ $t('landing.signup') }}
+      </SignUpButton>
       <button
-        @click="() => router.push('/login')"
+        @click="() => router.push({ name: 'login' })"
         v-if="!isAuthorized"
         class="px-6 py-2 border border-white flex justify-center items-center text-white rounded hover:text-darkBlue hover:bg-white transition-colors"
       >

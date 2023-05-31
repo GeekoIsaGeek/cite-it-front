@@ -1,7 +1,7 @@
 <script setup>
 import ModalWrapper from '@/components/shared/ModalWrapper.vue'
 import FormWrapper from '@/components/shared/FormWrapper.vue'
-import FormField from '@/components/shared/FormField.vue'
+import BaseInput from '@/components/UI/BaseInput.vue'
 import ResetButton from '@/components/UI/RedButton.vue'
 import arrow from '@/assets/images/arrow-back.png'
 import { useRoute } from 'vue-router'
@@ -18,7 +18,12 @@ const credentials = reactive({
 })
 
 const handlePasswordUpdate = async () => {
-  const response = await axios.post('http://localhost:8000/api/reset-password', credentials)
+  const url = `${import.meta.env.VITE_SERVER_URL}/api/reset-password`
+  const response = await axios.post(url, credentials, {
+    headers: {
+      'Access-Control-Allow-Credentials': 'true'
+    }
+  })
   console.log(response)
 }
 </script>
@@ -30,7 +35,7 @@ const handlePasswordUpdate = async () => {
       :subHeading="$t('forgot_password.password_update_message')"
     >
       <template v-slot:default="{ isTouched, isValid }">
-        <FormField
+        <BaseInput
           :placeholder="$t('auth.password_label')"
           :label="$t('auth.password_label')"
           type="password"
@@ -39,7 +44,7 @@ const handlePasswordUpdate = async () => {
           required
           :setValue="(password) => (credentials.password = password)"
         />
-        <FormField
+        <BaseInput
           :placeholder="$t('auth.confirm_password')"
           :label="$t('auth.confirm_password')"
           type="password"

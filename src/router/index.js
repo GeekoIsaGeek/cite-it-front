@@ -20,30 +20,31 @@ const router = createRouter({
     },
     {
       path: '/login',
+      name: 'login',
       components: {
         default: Login,
         overlay: LandingView
-      },
-      name: 'login'
+      }
     },
     {
       path: '/register',
+      name: 'register',
       components: {
         default: Register,
         overlay: LandingView
-      },
-      name: 'register'
+      }
     },
     {
       path: '/email-confirmation',
+      name: 'email-confirmation',
       components: {
         default: ConfirmEmail,
         overlay: LandingView
-      },
-      name: 'email-confirmation'
+      }
     },
     {
       path: '/verification-succeed',
+
       components: {
         default: AccountActivated,
         overlay: LandingView

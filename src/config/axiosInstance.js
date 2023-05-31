@@ -2,7 +2,7 @@ import axios from 'axios'
 
 axios.defaults.withCredentials = 'true'
 export default axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: import.meta.env.VITE_SERVER_URL,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',

@@ -1,9 +1,10 @@
 <script setup>
 import FormWrapper from '@/components/shared/FormWrapper.vue'
 import ModalWrapper from '@/components/shared/ModalWrapper.vue'
-import FormField from '@/components/shared/FormField.vue'
+import BaseInput from '@/components/UI/BaseInput.vue'
 import SignInButton from '@/components/UI/RedButton.vue'
 import GoogleAuthButton from '@/components/UI/GoogleAuthButton.vue'
+import RememberCheckbox from '@/components/UI/RememberCheckbox.vue'
 import { useI18n } from 'vue-i18n'
 import { RouterLink } from 'vue-router'
 import { reactive, ref } from 'vue'
@@ -56,7 +57,7 @@ const handleLogin = async () => {
     <ModalWrapper>
       <FormWrapper :heading="$t('auth.login_heading')" :subHeading="`${$t('auth.login_heading')}.`">
         <template v-slot:default="{ isTouched, isValid }">
-          <FormField
+          <BaseInput
             :placeholder="$t('auth.email_placeholder')"
             :label="$t('auth.email_label')"
             type="email"
@@ -64,7 +65,8 @@ const handleLogin = async () => {
             name="email"
             :setValue="(email) => (credentials.usernameOrEmail = email)"
           />
-          <FormField
+
+          <BaseInput
             :placeholder="$t('auth.password_label')"
             :label="$t('auth.password_label')"
             type="password"
@@ -73,18 +75,10 @@ const handleLogin = async () => {
             :setValue="(password) => (credentials.password = password)"
           />
           <div class="flex justify-between">
-            <!-- Checkbox -->
-            <div class="flex gap-2 items-center">
-              <input
-                type="checkbox"
-                :value="credentials.remember"
-                name="remember"
-                class="h-4 w-4"
-                @change="() => (credentials.remember = !credentials.remember)"
-              />
-              <label for="remember" class="text-white">{{ $t('auth.remember') }}</label>
-            </div>
-            <!-- Checkbox -->
+            <RememberCheckbox
+              :setValue="() => (credentials.remember = !credentials.remember)"
+              :value="credentials.remember"
+            />
             <RouterLink :to="{ name: 'forgot-password' }" class="text-blue underline">
               {{ $t('auth.forgot_password') }}
             </RouterLink>
@@ -97,7 +91,7 @@ const handleLogin = async () => {
 
           <p class="mt-4 text-center text-darkGray">
             {{ $t('auth.dont_have_account') }}
-            <RouterLink to="/register" class="text-blue underline">{{
+            <RouterLink :to="{ name: 'register' }" class="text-blue underline">{{
               $t('auth.sign_up')
             }}</RouterLink>
           </p>

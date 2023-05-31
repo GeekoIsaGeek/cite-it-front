@@ -1,10 +1,10 @@
 <script setup>
 import ModalWrapper from '@/components/shared/ModalWrapper.vue'
 import FormWrapper from '@/components/shared/FormWrapper.vue'
-import FormField from '@/components/shared/FormField.vue'
 import SendButton from '@/components/UI/RedButton.vue'
 import arrow from '@/assets/images/arrow-back.png'
 import { RouterLink, useRouter } from 'vue-router'
+import BaseInput from '@/components/UI/BaseInput.vue'
 import request from '@/config/axiosInstance.js'
 
 import { ref } from 'vue'
@@ -25,7 +25,7 @@ const sendEmail = async () => {
       :heading="$t('forgot_password.heading')"
       :subHeading="$t('forgot_password.subHeading')"
     >
-      <FormField
+      <BaseInput
         name="email"
         :label="$t('auth.email_label')"
         :placeholder="$t('auth.email_placeholder')"

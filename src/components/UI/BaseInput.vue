@@ -1,5 +1,5 @@
 <script setup>
-import { Field, useIsFieldTouched, useIsFieldValid } from 'vee-validate'
+import { ErrorMessage, Field, useIsFieldTouched, useIsFieldValid } from 'vee-validate'
 import preview from '@/assets/images/preview.svg'
 import valid from '@/assets/images/valid-icon.svg'
 import invalid from '@/assets/images/invalid-icon.svg'
@@ -53,6 +53,7 @@ const handleInput = (e) => {
     <label class="text-base text-white">
       {{ label }} <span v-if="required" class="text-red-500">*</span>
     </label>
+
     <Field v-slot="{ field, meta }" :rules="rules" :name="name" @input="handleInput">
       <input
         :placeholder="placeholder"
@@ -79,4 +80,5 @@ const handleInput = (e) => {
       @click="variableType = variableType === 'password' ? 'text' : 'password'"
     />
   </div>
+  <ErrorMessage :name="name" class="text-redFail mt-[-10px] break-words max-w-[360px]" />
 </template>

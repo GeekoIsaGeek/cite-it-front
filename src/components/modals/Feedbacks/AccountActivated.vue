@@ -11,8 +11,9 @@ const router = useRouter()
     <template #image>
       <img :src="success" alt="success sign" />
     </template>
+
     <GoToNewsFeed @click="router.push({ name: 'login' })" class="py-[7px] w-full">
-      {{ $t('auth_feedback.news_feed') }}
+      {{ t('auth_feedback.go_to_login') }}
     </GoToNewsFeed>
   </AuthFeedbackWrapper>
 </template>
