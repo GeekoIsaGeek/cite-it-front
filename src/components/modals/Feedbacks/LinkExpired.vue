@@ -1,7 +1,7 @@
 <script setup>
 import AuthFeedbackWrapper from '@/components/shared/AuthFeedbackWrapper.vue'
-import LinkButton from '@/components/UI/LinkButton.vue'
 import expired from '@/assets/images/flat-color-icons_expired.svg'
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>
@@ -12,8 +12,11 @@ import expired from '@/assets/images/flat-color-icons_expired.svg'
     <template #image>
       <img :src="expired" alt="warning" />
     </template>
-    <LinkButton link="">
+    <RouterLink
+      :to="{ name: 'link-expired' }"
+      class="bg-[#E31221] hover:bg-[#CC0E10] border-none active:bg-[#B80D0F] disabled:bg-[#EC4C57] rounded text-white flex justify-center items-center transition-colors py-[7px]"
+    >
       {{ $t('forgot_password.request_another_link') }}
-    </LinkButton>
+    </RouterLink>
   </AuthFeedbackWrapper>
 </template>

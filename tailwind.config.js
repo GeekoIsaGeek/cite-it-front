@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        darkBlue: '#11101A',
+        darkBlue: '#0c0d12',
         offGold: '#DDCCAA',
         semiOpaqueBlack: 'rgba(0,0,0,0.54)',
         darkPurple: '#222030',

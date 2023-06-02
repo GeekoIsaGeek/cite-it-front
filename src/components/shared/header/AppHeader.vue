@@ -4,6 +4,14 @@ import LanguageSwitcher from '@/components/shared/header/LanguageSwitcher.vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/userStore.js'
 import request from '@/config/axiosInstance.js'
+import Notifications from '@/components/shared/header/NotificationsButton.vue'
+
+defineProps({
+  showNotifications: {
+    type: Boolean,
+    required: false
+  }
+})
 
 const userStore = useUserStore()
 userStore.fetchUser()
@@ -26,6 +34,7 @@ const handleLogout = async () => {
     <h3 class="text-sm text-offGold font-medium md:text-base">MOVIE QUOTES</h3>
 
     <div class="flex gap-3">
+      <Notifications v-if="showNotifications" />
       <LanguageSwitcher />
       <SignUpButton
         class="px-6 py-2 hidden md:flex"
