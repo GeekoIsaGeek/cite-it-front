@@ -7,6 +7,8 @@ import arrow from '@/assets/images/arrow-back.png'
 import { useRoute } from 'vue-router'
 import { reactive } from 'vue'
 import axios from 'axios'
+import FormError from '@/components/shared/FormError.vue'
+import { ref } from 'vue'
 
 const route = useRoute()
 
@@ -17,14 +19,19 @@ const credentials = reactive({
   password_confirmation: null
 })
 
+const errorMessage = ref(null)
+
 const handlePasswordUpdate = async () => {
   const url = `${import.meta.env.VITE_SERVER_URL}/api/reset-password`
-  const response = await axios.post(url, credentials, {
-    headers: {
-      'Access-Control-Allow-Credentials': 'true'
-    }
-  })
-  console.log(response)
+  try {
+    await axios.post(url, credentials, {
+      headers: {
+        'Access-Control-Allow-Credentials': 'true'
+      }
+    })
+  } catch (error) {
+    errorMessage.value = error.response.data.message
+  }
 }
 </script>
 
@@ -53,6 +60,7 @@ const handlePasswordUpdate = async () => {
           :setValue="(password) => (credentials.password_confirmation = password)"
           required
         />
+        <FormError>{{ errorMessage }}</FormError>
         <ResetButton class="mt-2" :disabled="isTouched && !isValid" @click="handlePasswordUpdate">{{
           $t('forgot_password.reset_password')
         }}</ResetButton>

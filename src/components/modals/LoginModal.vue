@@ -10,7 +10,7 @@ import { RouterLink } from 'vue-router'
 import { reactive, ref } from 'vue'
 import request from '@/config/axiosInstance.js'
 import ServerErrors from '@/components/shared/ServerErrors.vue'
-import { useUserStore } from '@/stores/user.js'
+import { useUserStore } from '@/stores/userStore.js'
 import { useRouter } from 'vue-router'
 
 const { locale } = useI18n()
@@ -41,12 +41,11 @@ const handleLogin = async () => {
     const response = await request.get('/api/user')
     setUser(response.data)
     router.push({ name: 'home' })
-  } catch (e) {
-    console.log(e)
-    if (e.response.data.error) {
-      serverErrors.value = [e.response.data.error]
+  } catch (error) {
+    if (error.response.data.error) {
+      serverErrors.value = [error.response.data.error]
     } else {
-      serverErrors.value = Object.values(e.response.data.errors)?.map((error) => error[0])
+      serverErrors.value = Object.values(error.response.data.errors)?.map((error) => error[0])
     }
   }
 }

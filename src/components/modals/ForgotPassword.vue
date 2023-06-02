@@ -6,15 +6,19 @@ import arrow from '@/assets/images/arrow-back.png'
 import { RouterLink, useRouter } from 'vue-router'
 import BaseInput from '@/components/UI/BaseInput.vue'
 import request from '@/config/axiosInstance.js'
-
+import FormError from '@/components/shared/FormError.vue'
 import { ref } from 'vue'
+
 const router = useRouter()
 const email = ref(null)
+const errorMessage = ref(null)
 
 const sendEmail = async () => {
-  const response = await request.post('/api/forgot-password', { email: email.value })
-  if (response.status === 200) {
+  try {
+    await request.post('/api/forgot-password', { email: email.value })
     router.push({ name: 'password-reset-email-confirmation' })
+  } catch (error) {
+    errorMessage.value = error.response.data.message
   }
 }
 </script>
@@ -33,6 +37,7 @@ const sendEmail = async () => {
         type="email"
         :setValue="(receivedEmail) => (email = receivedEmail)"
       />
+      <FormError>{{ errorMessage }}</FormError>
       <SendButton @click="sendEmail">{{ $t('forgot_password.send') }}</SendButton>
       <p class="text-darkGray mt-5 flex items-center gap-4 justify-center">
         <img :src="arrow" alt="arrow" />

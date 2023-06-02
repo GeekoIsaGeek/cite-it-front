@@ -2,7 +2,12 @@
 import AuthFeedbackWrapper from '@/components/shared/AuthFeedbackWrapper.vue'
 import envelope from '@/assets/images/email-has-been-sent.svg'
 import LinkButton from '@/components/UI/LinkButton.vue'
-const mailDomain = 'gio@gmail.com'.split('@').pop()
+import { useUserStore } from '@/stores/userStore.js'
+import { computed } from 'vue'
+
+const userStore = useUserStore()
+const mailDomain = computed(() => userStore.user.email?.split('@').pop())
+
 defineProps({
   message: {
     type: String,

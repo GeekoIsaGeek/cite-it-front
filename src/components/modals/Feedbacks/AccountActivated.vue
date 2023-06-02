@@ -13,7 +13,7 @@ const router = useRouter()
     </template>
 
     <GoToNewsFeed @click="router.push({ name: 'login' })" class="py-[7px] w-full">
-      {{ t('auth_feedback.go_to_login') }}
+      {{ $t('auth_feedback.go_to_login') }}
     </GoToNewsFeed>
   </AuthFeedbackWrapper>
 </template>
