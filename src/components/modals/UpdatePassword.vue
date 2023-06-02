@@ -24,11 +24,9 @@ const errorMessage = ref(null)
 const handlePasswordUpdate = async () => {
   const url = `${import.meta.env.VITE_SERVER_URL}/api/reset-password`
   try {
-    await axios.post(url, credentials, {
-      headers: {
-        'Access-Control-Allow-Credentials': 'true'
-      }
-    })
+    axios.defaults.withCredentials = true
+    const response = await axios.post(url, credentials)
+    console.log(response)
   } catch (error) {
     errorMessage.value = error.response.data.message
   }
