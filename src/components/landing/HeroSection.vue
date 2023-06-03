@@ -1,7 +1,5 @@
 <script setup>
-import SignUpButton from '@/components/UI/RedButton.vue'
-import { useI18n } from 'vue-i18n'
-const { t } = useI18n()
+import Button from '@/components/UI/RedButton.vue'
 </script>
 
 <template>
@@ -11,8 +9,8 @@ const { t } = useI18n()
     <p
       class="text-offGold text-2xl font-bold md:text-5xl 2xl:text-6xl w-[70%] 2xl:w-[38%] text-center"
     >
-      {{ t('landing.hero_heading') }}
+      {{ $t('landing.hero_heading') }}
     </p>
-    <SignUpButton class="px-[14px] py-2 md:px-4">{{ t('landing.hero_button') }}</SignUpButton>
+    <Button class="px-[14px] py-2 md:px-4">{{ $t('landing.hero_button') }}</Button>
   </section>
 </template>

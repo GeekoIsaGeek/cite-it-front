@@ -2,10 +2,23 @@
 import SignUpButton from '@/components/UI/RedButton.vue'
 import LanguageSwitcher from '@/components/shared/header/LanguageSwitcher.vue'
 import { useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n'
-const { t } = useI18n()
+import { useUserStore } from '@/stores/userStore.js'
+import request from '@/config/axiosInstance.js'
+
+const userStore = useUserStore()
+userStore.fetchUser()
+const { clearUser } = userStore
 
 const router = useRouter()
+const handleLogout = async () => {
+  try {
+    await request.post('/api/logout')
+    clearUser()
+    router.push('/login')
+  } catch (error) {
+    console.error(error)
+  }
+}
 </script>
 
 <template>
@@ -17,13 +30,22 @@ const router = useRouter()
       <SignUpButton
         class="px-6 py-2 hidden md:flex"
         @click="() => router.push({ name: 'register' })"
-        >{{ t('landing.signup') }}</SignUpButton
-      >
+        v-if="!userStore.isLoggedIn"
+        >{{ $t('landing.signup') }}
+      </SignUpButton>
       <button
         @click="() => router.push({ name: 'login' })"
+        v-if="!userStore.isLoggedIn"
         class="px-6 py-2 border border-white flex justify-center items-center text-white rounded hover:text-darkBlue hover:bg-white transition-colors"
       >
-        {{ t('landing.login') }}
+        {{ $t('landing.login') }}
+      </button>
+      <button
+        @click="handleLogout"
+        v-if="userStore.isLoggedIn"
+        class="px-6 py-2 border border-white flex justify-center items-center text-white rounded hover:text-darkBlue hover:bg-white transition-colors"
+      >
+        {{ $t('landing.logout') }}
       </button>
     </div>
   </header>

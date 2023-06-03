@@ -53,14 +53,15 @@ const handleInput = (e) => {
     <label class="text-base text-white">
       {{ label }} <span v-if="required" class="text-red-500">*</span>
     </label>
-    <Field v-slot="{ field, meta }" :rules="rules" :name="name" :type="variableType">
+
+    <Field v-slot="{ field, meta }" :rules="rules" :name="name" @input="handleInput">
       <input
-        v-bind="field"
         :placeholder="placeholder"
-        @input="handleInput"
+        :type="variableType"
+        v-bind="field"
         :class="{
-          'border-2 border-greenSuccess': meta.touched && meta.valid,
-          'border-2 border-redFail': meta.touched && !meta.valid,
+          'border-2 border-greenSuccess': meta.valid && meta.touched,
+          'border-2 border-redFail': !meta.valid && meta.touched,
           'w-full bg-lightGray outline-none h-[38px] pr-9 px-[13px] rounded flex flex-row focus:shadow-input': true
         }"
       />

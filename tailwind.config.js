@@ -24,6 +24,9 @@ export default {
       },
       boxShadow: {
         input: ' 0px 0px 0px 4px #0D6EFD40'
+      },
+      fontFamily: {
+        montserrat: 'Montserrat'
       }
     }
   },
