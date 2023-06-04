@@ -53,5 +53,13 @@ export default {
     request_another_link: 'ახალი ლინკის მოთხოვნა',
     create_new_password: 'პაროლის შეცვლა',
     password_update_message: 'ახალი პაროლი უნდა განსხვავდებოდეს წინა პაროლებისგან'
+  },
+  news_feed: {
+    edit: 'პროფილის რედაქტირება',
+    news_feed: 'ნიუს ფიდი',
+    movies: 'ჩემი ფილმები'
+  },
+  my_profile: {
+    my_profile: 'ჩემი პროფილი'
   }
 }

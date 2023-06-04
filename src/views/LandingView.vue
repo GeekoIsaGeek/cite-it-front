@@ -1,7 +1,7 @@
 <script setup>
 import HeroSection from '@/components/landing/HeroSection.vue'
-import AppHeader from '@/components/shared/header/AppHeader.vue'
 import MovieWrapper from '@/components/landing/MovieWrapper.vue'
+import AppHeader from '@/components/shared/header/AppHeader.vue'
 </script>
 
 <template>

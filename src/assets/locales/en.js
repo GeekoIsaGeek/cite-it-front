@@ -52,5 +52,13 @@ export default {
     request_another_link: 'Request another link',
     create_new_password: 'Create new password',
     password_update_message: 'Your new password must be different from previous used passwords'
+  },
+  news_feed: {
+    edit: 'Edit your profile',
+    news_feed: 'News feed',
+    movies: 'List of movies'
+  },
+  my_profile: {
+    my_profile: 'ჩემი პროფილი'
   }
 }
