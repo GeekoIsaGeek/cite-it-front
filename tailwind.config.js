@@ -12,7 +12,9 @@ export default {
         lightGray: '#CED4DA',
         greenSuccess: '#198754',
         redFail: '#E31221',
-        blue: ' #0D6EFD'
+        blue: ' #0D6EFD',
+        veryDarkPurple: '#191724',
+        blackishPurple: ' #11101A'
       },
       padding: {
         13: '52px',

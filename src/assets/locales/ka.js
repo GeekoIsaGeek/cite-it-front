@@ -60,6 +60,8 @@ export default {
     movies: 'ჩემი ფილმები'
   },
   my_profile: {
-    my_profile: 'ჩემი პროფილი'
+    my_profile: 'ჩემი პროფილი',
+    edit: 'რედაქტირება',
+    username: 'Username'
   }
 }

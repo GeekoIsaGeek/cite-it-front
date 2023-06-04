@@ -59,6 +59,8 @@ export default {
     movies: 'List of movies'
   },
   my_profile: {
-    my_profile: 'ჩემი პროფილი'
+    my_profile: 'My Profile',
+    edit: 'Edit',
+    username: 'Username'
   }
 }
