@@ -6,7 +6,7 @@ import PasswordGroup from '@/components/my-profile/MyProfileFormPasswordGroup.vu
 </script>
 
 <template>
-  <Form class="flex flex-col gap-5 text-[#212529] mt-10">
+  <Form class="flex flex-col gap-5 text-[#212529] min-w-max mt-10">
     <UsernameGroup />
     <EmailGroup />
     <PasswordGroup />

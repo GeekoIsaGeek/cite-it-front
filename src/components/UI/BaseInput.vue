@@ -66,21 +66,22 @@ const handleInput = (e) => {
         :class="{
           'border-2 border-greenSuccess': meta.valid && meta.touched,
           'border-2 border-redFail': !meta.valid && meta.touched,
-          'w-full bg-lightGray outline-none h-[38px] pr-9 px-[13px] rounded flex flex-row focus:shadow-input': true
+          'w-full bg-lightGray outline-none h-[38px] pr-9 px-[13px] rounded flex flex-row focus:shadow-input': true,
+          'pr-16': type === 'password'
         }"
       />
     </Field>
     <img
       :src="isValid ? valid : invalid"
       alt="validation status sign"
-      v-if="isTouched && type !== 'password'"
+      v-if="isTouched"
       class="absolute bottom-[10px] right-[13px] cursor-pointer"
     />
     <img
       :src="preview"
       alt="preview"
       v-if="type === 'password'"
-      class="absolute bottom-[13px] right-[13px] cursor-pointer"
+      :class="`absolute bottom-[13px] right-[${isTouched ? 40 : 13}px] cursor-pointer`"
       @click="variableType = variableType === 'password' ? 'text' : 'password'"
     />
   </div>
