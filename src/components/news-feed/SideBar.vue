@@ -6,7 +6,7 @@ import TheHomeIcon from '@/components/icons/TheHomeIcon.vue'
 </script>
 
 <template>
-  <nav class="w-[490px] min-h-screen text-white flex flex-col gap-11">
+  <nav class="pr-[10vw] min-h-screen text-white flex flex-col gap-11">
     <div class="flex items-center gap-6 ml-[-10px]">
       <img
         :src="avatarPlaceholder"

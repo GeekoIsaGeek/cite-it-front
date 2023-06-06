@@ -6,7 +6,7 @@ import { useUserStore } from '@/stores/userStore.js'
 import { computed } from 'vue'
 
 const userStore = useUserStore()
-const mailDomain = computed(() => userStore.user.email?.split('@').pop())
+const mailDomain = computed(() => userStore.user.email?.split('@').pop()) || 'gmail.com'
 
 defineProps({
   message: {

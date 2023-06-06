@@ -33,6 +33,10 @@ const props = defineProps({
   setValue: {
     type: Function,
     required: false
+  },
+  style: {
+    type: String,
+    required: false
   }
 })
 
@@ -80,5 +84,5 @@ const handleInput = (e) => {
       @click="variableType = variableType === 'password' ? 'text' : 'password'"
     />
   </div>
-  <ErrorMessage :name="name" class="text-redFail mt-[-10px] break-words max-w-[360px]" />
+  <ErrorMessage :name="name" class="text-redFail text-base mt-[-10px] break-words max-w-[360px]" />
 </template>

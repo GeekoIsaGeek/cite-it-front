@@ -62,6 +62,10 @@ export default {
   my_profile: {
     my_profile: 'ჩემი პროფილი',
     edit: 'რედაქტირება',
-    username: 'Username'
+    username: 'მომხმარებლის სახელი',
+    upload_photo: 'ატვირთეთ ფოტო',
+    should_contain: 'პაროლი უნდა შედგებოდეს',
+    min_chars: '8 ან მეტ სიმბოლოსგან',
+    max_chars: 'მაქსიმუმ 15 დაბალი რეგისტრის სიმბოლოსგან'
   }
 }

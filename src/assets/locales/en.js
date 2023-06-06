@@ -61,6 +61,10 @@ export default {
   my_profile: {
     my_profile: 'My Profile',
     edit: 'Edit',
-    username: 'Username'
+    username: 'Username',
+    upload_photo: 'Upload new photo',
+    should_contain: 'Password should contain',
+    min_chars: '8 or more characters',
+    max_chars: '15 lowercase character at most'
   }
 }
