@@ -2,7 +2,7 @@
 import ModalWrapper from '@/components/shared/ModalWrapper.vue'
 import FormWrapper from '@/components/shared/FormWrapper.vue'
 import SendButton from '@/components/UI/RedButton.vue'
-import arrow from '@/assets/images/arrow-back.png'
+import arrow from '@/assets/images/arrow-back.svg'
 import { RouterLink, useRouter } from 'vue-router'
 import BaseInput from '@/components/UI/BaseInput.vue'
 import request from '@/config/axiosInstance.js'

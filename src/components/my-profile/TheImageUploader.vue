@@ -16,8 +16,10 @@ const uploadImage = (event) => {
 </script>
 
 <template>
-  <div class="flex items-center flex-col gap-2">
-    <div class="w-[8vw] h-[8vw] relative rounded-full mt-[-3vw] overflow-hidden">
+  <div class="flex items-center flex-col gap-2 pt-6 md:pt-[unset] md:mb-[unset] mb-14">
+    <div
+      class="md:w-[15vw] md:h-[15vw] w-44 h-44 xl:w-[8vw] xl:h-[8vw] relative rounded-full md:mt-[-3vw] overflow-hidden"
+    >
       <input
         type="file"
         accept="image/jpg, image/png, image/webp"

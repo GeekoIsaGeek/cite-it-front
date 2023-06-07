@@ -22,7 +22,7 @@ defineProps({
       :placeholder="placeholder"
       :type="type"
       disabled
-      class="w-full bg-lightGray outline-none h-[38px] pr-9 px-[13px] rounded flex flex-row focus:shadow-input placeholder-[#212529]"
+      class="bg-transparent w-full md:bg-lightGray outline-none h-[38px] md:pr-9 md:px-[13px] pb-4 md:pb-[unset] md:rounded flex flex-row focus:shadow-input placeholder-white md:placeholder-[#212529] border-b border-b-gray-500"
     />
   </div>
 </template>

@@ -34,7 +34,7 @@ const props = defineProps({
     type: Function,
     required: false
   },
-  style: {
+  styles: {
     type: String,
     required: false
   }
@@ -64,6 +64,7 @@ const handleInput = (e) => {
         :type="variableType"
         v-bind="field"
         :class="{
+          [styles]: true,
           'border-2 border-greenSuccess': meta.valid && meta.touched,
           'border-2 border-redFail': !meta.valid && meta.touched,
           'w-full bg-lightGray outline-none h-[38px] pr-9 px-[13px] rounded flex flex-row focus:shadow-input': true,
