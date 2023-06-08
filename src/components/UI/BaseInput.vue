@@ -1,8 +1,8 @@
 <script setup>
 import { ErrorMessage, Field, useIsFieldTouched, useIsFieldValid } from 'vee-validate'
-import preview from '@/assets/images/preview.svg'
-import valid from '@/assets/images/valid-icon.svg'
-import invalid from '@/assets/images/invalid-icon.svg'
+import ThePreviewIcon from '@/components/icons/ThePreviewIcon.vue'
+import TheInvalidIcon from '@/components/icons/TheInvalidIcon.vue'
+import TheValidIcon from '@/components/icons/TheValidIcon.vue'
 import { ref } from 'vue'
 
 const props = defineProps({
@@ -72,17 +72,11 @@ const handleInput = (e) => {
         }"
       />
     </Field>
-    <img
-      :src="isValid ? valid : invalid"
-      alt="validation status sign"
-      v-if="isTouched"
-      class="absolute bottom-[10px] right-[13px] cursor-pointer"
-    />
-    <img
-      :src="preview"
-      alt="preview"
+    <TheValidIcon v-if="isValid && isTouched" />
+    <TheInvalidIcon v-if="!isValid && isTouched" />
+    <ThePreviewIcon
       v-if="type === 'password'"
-      :class="`absolute bottom-[13px] right-[${isTouched ? 40 : 13}px] cursor-pointer`"
+      :class="`right-[${isTouched ? 40 : 13}px]`"
       @click="variableType = variableType === 'password' ? 'text' : 'password'"
     />
   </div>

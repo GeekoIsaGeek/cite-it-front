@@ -1,6 +1,6 @@
 <script setup>
 import AuthFeedbackWrapper from '@/components/shared/AuthFeedbackWrapper.vue'
-import expired from '@/assets/images/flat-color-icons_expired.svg'
+import TheExpiredIcon from '@/components/icons/TheExpiredIcon.vue'
 import { RouterLink } from 'vue-router'
 </script>
 
@@ -10,7 +10,7 @@ import { RouterLink } from 'vue-router'
     :message="$t('forgot_password.link_expired_message')"
   >
     <template #image>
-      <img :src="expired" alt="warning" />
+      <TheExpiredIcon />
     </template>
     <RouterLink
       :to="{ name: 'link-expired' }"

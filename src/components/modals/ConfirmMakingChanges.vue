@@ -1,12 +1,19 @@
 <script setup>
 import ConfirmButton from '@/components/UI/RedButton.vue'
-import ProfileUpdated from '@/components/modals/Feedbacks/ProfileUpdated.vue'
-defineProps({
+import { inject } from 'vue'
+
+const props = defineProps({
   modalCloser: {
     type: Function,
     required: true
   }
 })
+
+const showSuccessMessage = inject('showSuccessMessage')
+const handleConfirm = () => {
+  showSuccessMessage.value = true
+  props.modalCloser()
+}
 </script>
 
 <template>
@@ -24,10 +31,11 @@ defineProps({
           <button @click="modalCloser()" class="hover:text-gray-400">
             {{ $t('my_profile.cancel') }}
           </button>
-          <ConfirmButton class="px-[6px]">{{ $t('my_profile.confirm') }}</ConfirmButton>
+          <ConfirmButton @click="handleConfirm" class="px-[6px]">{{
+            $t('my_profile.confirm')
+          }}</ConfirmButton>
         </div>
       </div>
-      <ProfileUpdated />
     </div>
   </Teleport>
 </template>

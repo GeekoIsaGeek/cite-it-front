@@ -4,9 +4,13 @@ import TheImageUploader from '@/components/my-profile/TheImageUploader.vue'
 import ProfileForm from '@/components/my-profile/MyProfileForm.vue'
 import ButtonSave from '@/components/UI/RedButton.vue'
 import TheGoBackIconVue from '@/components/icons/TheGoBackIcon.vue'
+import ProfileUpdated from '@/components/modals/Feedbacks/ProfileUpdated.vue'
 import { useRouter } from 'vue-router'
+import { ref, provide } from 'vue'
 
 const router = useRouter()
+const showSuccessMessage = ref(false)
+provide('showSuccessMessage', showSuccessMessage)
 const handleCancel = () => {}
 </script>
 
@@ -32,5 +36,6 @@ const handleCancel = () => {}
         <ButtonSave class="px-4">{{ $t('my_profile.save_changes') }}</ButtonSave>
       </div>
     </section>
+    <ProfileUpdated v-if="showSuccessMessage" :modalCloser="() => (showSuccessMessage = false)" />
   </NewsFeedWrapper>
 </template>

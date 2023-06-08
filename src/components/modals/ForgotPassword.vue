@@ -2,7 +2,7 @@
 import ModalWrapper from '@/components/shared/ModalWrapper.vue'
 import FormWrapper from '@/components/shared/FormWrapper.vue'
 import SendButton from '@/components/UI/RedButton.vue'
-import arrow from '@/assets/images/arrow-back.svg'
+import GoBackIcon from '@/components/icons/TheGoBackIcon.vue'
 import { RouterLink, useRouter } from 'vue-router'
 import BaseInput from '@/components/UI/BaseInput.vue'
 import request from '@/config/axiosInstance.js'
@@ -40,7 +40,7 @@ const sendEmail = async () => {
       <FormError>{{ errorMessage }}</FormError>
       <SendButton @click="sendEmail">{{ $t('forgot_password.send') }}</SendButton>
       <p class="text-darkGray mt-5 flex items-center gap-4 justify-center">
-        <img :src="arrow" alt="arrow" />
+        <GoBackIcon />
         <RouterLink :to="{ name: 'login' }">{{ $t('forgot_password.back_to_login') }}</RouterLink>
       </p>
     </FormWrapper>
