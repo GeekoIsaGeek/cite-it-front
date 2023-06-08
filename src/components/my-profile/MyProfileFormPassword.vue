@@ -5,12 +5,12 @@ import PasswordGroup from '@/components/my-profile/MyProfileFormPasswordGroup.vu
 
 import { ref } from 'vue'
 import { computed } from 'vue'
-const showPasswordInput = ref(false)
 const isSmallerDevice = computed(() => window.innerWidth < 640)
+const showPasswordInput = ref(false)
 </script>
 
 <template>
-  <div class="md:max-w-[30vw] relative">
+  <div class="w-full relative">
     <MyProfileFormFakeInput
       :label="$t('auth.password_label')"
       type="password"
@@ -23,7 +23,7 @@ const isSmallerDevice = computed(() => window.innerWidth < 640)
       {{ $t('my_profile.edit') }}
     </button>
   </div>
-  <PasswordGroup v-if="showPasswordInput" />
+  <PasswordGroup v-if="showPasswordInput" class="hidden md:block" />
 
   <EditPasswordModal
     v-if="showPasswordInput && isSmallerDevice"

@@ -10,7 +10,7 @@ const isSmallerDevice = computed(() => window.innerWidth < 640)
 </script>
 
 <template>
-  <div class="md:w-[30vw] relative">
+  <div class="w-full relative">
     <MyProfileFormFakeInput
       :label="$t('my_profile.username')"
       type="text"
@@ -23,11 +23,12 @@ const isSmallerDevice = computed(() => window.innerWidth < 640)
       {{ $t('my_profile.edit') }}
     </button>
   </div>
-  <div class="md:max-w-[30vw]">
+
+  <div class="w-full hidden md:block">
     <BaseInput
       name="username"
       :label="$t('my_profile.username')"
-      :placeholder="'Enter your username'"
+      :placeholder="$t('my_profile.username')"
       type="text"
       rules="required|min:3|only_lowercase"
       v-if="showUsernameInput"
@@ -41,10 +42,9 @@ const isSmallerDevice = computed(() => window.innerWidth < 640)
     <BaseInput
       name="username"
       :label="$t('my_profile.username')"
-      :placeholder="'Enter your username'"
+      :placeholder="$t('my_profile.username')"
       type="text"
       rules="required|min:3|only_lowercase"
-      v-if="showUsernameInput"
     />
   </EditUsernameModal>
 </template>

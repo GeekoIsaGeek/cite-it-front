@@ -68,6 +68,9 @@ export default {
     max_chars: '15 lowercase character at most',
     new_password: 'New Password',
     cancel: 'Cancel',
-    save_changes: 'Save changes'
+    save_changes: 'Save changes',
+    confirm: 'confirm',
+    confirm_changes: 'Are you sure to make changes?',
+    profile_updated: 'Changes updated successfully'
   }
 }

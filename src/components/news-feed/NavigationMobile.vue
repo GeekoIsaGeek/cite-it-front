@@ -32,12 +32,14 @@ const closeNavigationMenu = () => generalStore.setShowMobileNavigation(false)
         >
       </div>
     </div>
+
     <div class="flex items-center gap-6">
       <TheHomeIcon class="mb-[3px] w-6 h-6" />
       <RouterLink to="" @click="closeNavigationMenu" class="text-lg">{{
         $t('news_feed.news_feed')
       }}</RouterLink>
     </div>
+
     <div class="flex items-center gap-6">
       <TheCameraIcon class="mb-[3px] h-6 w-6" />
       <RouterLink to="" @click="closeNavigationMenu" class="text-lg">{{

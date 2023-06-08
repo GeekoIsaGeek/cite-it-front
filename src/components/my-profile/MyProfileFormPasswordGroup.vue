@@ -6,14 +6,14 @@ const confirmPassword = ref(null)
 </script>
 
 <template>
-  <div class="flex flex-col gap-10">
-    <div class="my-4 py-6 px-6 border border-[#CED4DA33] rounded-[4px] text-white md:max-w-[30vw]">
+  <div class="flex flex-col w-full gap-10">
+    <div class="my-4 py-6 px-6 border border-[#CED4DA33] rounded-[4px] text-white">
       <p class="text-white mb-4">{{ $t('my_profile.should_contain') }}:</p>
       <p class="text-[14px] mb-1"><span>・</span> {{ $t('my_profile.min_chars') }}</p>
       <p class="text-[14px]"><span>・</span> {{ $t('my_profile.max_chars') }}</p>
     </div>
 
-    <div class="md:max-w-[30vw]">
+    <div>
       <BaseInput
         name="new_password"
         :label="$t('my_profile.new_password')"
@@ -23,7 +23,7 @@ const confirmPassword = ref(null)
         :setValue="(password) => (newPassword = password)"
       />
     </div>
-    <div class="md:max-w-[30vw]">
+    <div>
       <BaseInput
         name="confirmation"
         :label="$t('auth.confirm_password')"

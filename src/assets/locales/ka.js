@@ -69,6 +69,9 @@ export default {
     max_chars: 'მაქსიმუმ 15 დაბალი რეგისტრის სიმბოლოსგან',
     new_password: 'ახალი პაროლი',
     cancel: 'გაუქმება',
-    save_changes: 'ცვლილებების შენახვა'
+    save_changes: 'ცვლილებების შენახვა',
+    confirm: 'დადასტურება',
+    confirm_changes: 'დარწმუნებული ხართ რომ გინდათ შეცვლა?',
+    profile_updated: 'პროფილი წარმატებით განახლდა'
   }
 }

@@ -10,7 +10,7 @@ const isSmallerDevice = computed(() => window.innerWidth < 640)
 </script>
 
 <template>
-  <div class="w-full md:w-[30vw] relative">
+  <div class="w-full relative">
     <MyProfileFormFakeInput
       :label="$t('auth.email_label')"
       type="email"
@@ -24,11 +24,11 @@ const isSmallerDevice = computed(() => window.innerWidth < 640)
     </button>
   </div>
 
-  <div class="md:max-w-[30vw]">
+  <div class="w-full hidden md:block">
     <BaseInput
       name="email"
       :label="$t('auth.email_label')"
-      :placeholder="'username'"
+      :placeholder="$t('auth.email_placeholder')"
       type="email"
       rules="required|email"
       v-if="showEmailInput"
@@ -42,7 +42,7 @@ const isSmallerDevice = computed(() => window.innerWidth < 640)
     <BaseInput
       name="email"
       :label="$t('auth.email_label')"
-      :placeholder="'username'"
+      :placeholder="$t('auth.email_placeholder')"
       type="email"
       rules="required|email"
     />

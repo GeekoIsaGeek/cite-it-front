@@ -22,7 +22,7 @@ const handleCancel = () => {}
         {{ $t('my_profile.my_profile') }}
       </h2>
       <div
-        class="flex flex-col md:pl-10 xl:pl-15 items-center md:mt-32 md:bg-blackishPurple rounded-[12px] lg:min-h-[600px] md:pb-32 w-full relative"
+        class="flex flex-col md:items-center md:pr-10 md:mt-32 md:bg-blackishPurple rounded-[12px] lg:min-h-[600px] md:pb-32 w-full relative"
       >
         <TheImageUploader />
         <ProfileForm />
