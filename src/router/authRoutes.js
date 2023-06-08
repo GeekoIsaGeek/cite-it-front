@@ -11,7 +11,7 @@ import LandingView from '@/views/LandingView.vue'
 
 export default [
   {
-    path: '/login',
+    path: 'login',
     name: 'login',
     components: {
       default: Login,
@@ -19,7 +19,7 @@ export default [
     }
   },
   {
-    path: '/register',
+    path: 'register',
     name: 'register',
     components: {
       default: Register,
@@ -27,7 +27,7 @@ export default [
     }
   },
   {
-    path: '/email-confirmation',
+    path: 'email-confirmation',
     name: 'email-confirmation',
     components: {
       default: ConfirmEmail,
@@ -35,7 +35,7 @@ export default [
     }
   },
   {
-    path: '/verification-succeed',
+    path: 'verification-succeed',
 
     components: {
       default: AccountActivated,
@@ -44,7 +44,7 @@ export default [
     name: 'verification-succeed'
   },
   {
-    path: '/forgot-password',
+    path: 'forgot-password',
     components: {
       default: ForgotPassword,
       overlay: LandingView
@@ -52,7 +52,7 @@ export default [
     name: 'forgot-password'
   },
   {
-    path: '/password-reset-email-confirmation',
+    path: 'password-reset-email-confirmation',
     components: {
       default: ConfirmPasswordResetEmail,
       overlay: LandingView
@@ -60,7 +60,7 @@ export default [
     name: 'password-reset-email-confirmation'
   },
   {
-    path: '/password-updated',
+    path: 'password-updated',
     components: {
       default: PasswordUpdated,
       overlay: LandingView
@@ -68,7 +68,7 @@ export default [
     name: 'password-updated'
   },
   {
-    path: '/link-expired',
+    path: 'link-expired',
     components: {
       default: LinkExpired,
       overlay: LandingView
@@ -76,7 +76,7 @@ export default [
     name: 'link-expired'
   },
   {
-    path: '/update-password',
+    path: 'update-password',
     name: 'update-password',
     components: {
       default: UpdatePassword,
