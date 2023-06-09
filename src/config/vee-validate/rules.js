@@ -17,16 +17,16 @@ configure({
   generateMessage: localize({
     en: {
       messages: {
-        min: 'You must enter 3 symbols at least',
-        max: 'You must enter 15 symbols at most',
+        min: ({ rule }) => `You must enter ${rule.params} symbols at least`,
+        max: ({ rule }) => `You must enter ${rule.params} symbols at most`,
         only_lowercase: 'Only lowercase letters and numbers are allowed'
       }
     },
     ka: {
       messages: {
         required: 'ეს ველი აუცილებლად უნდა შეავსოთ',
-        min: 'შეიყვანეთ მინიმუმ 3 სიმბოლო',
-        max: 'შეიყვანეთ მაქსიმუმ 15 სიმბოლო',
+        min: ({ rule }) => `შეიყვანეთ მინიმუმ ${rule.params} სიმბოლო`,
+        max: ({ rule }) => `შეიყვანეთ მაქსიმუმ ${rule.params} სიმბოლო`,
         confirmed: 'პაროლები არ ემთხვევა',
         only_lowercase: 'დაშვებულია მხოლოდ დაბალი რეგისტრის სიმბოლოების და ციფრების შეყვანა',
         email: 'ელ-ფოსტა არავალიდურია'

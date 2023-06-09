@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        darkBlue: '#11101A',
+        darkBlue: '#0c0d12',
         offGold: '#DDCCAA',
         semiOpaqueBlack: 'rgba(0,0,0,0.54)',
         darkPurple: '#222030',
@@ -12,7 +12,9 @@ export default {
         lightGray: '#CED4DA',
         greenSuccess: '#198754',
         redFail: '#E31221',
-        blue: ' #0D6EFD'
+        blue: ' #0D6EFD',
+        veryDarkPurple: '#191724',
+        blackishPurple: ' #11101A'
       },
       padding: {
         13: '52px',

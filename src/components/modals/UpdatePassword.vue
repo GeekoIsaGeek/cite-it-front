@@ -3,7 +3,7 @@ import ModalWrapper from '@/components/shared/ModalWrapper.vue'
 import FormWrapper from '@/components/shared/FormWrapper.vue'
 import BaseInput from '@/components/UI/BaseInput.vue'
 import ResetButton from '@/components/UI/RedButton.vue'
-import arrow from '@/assets/images/arrow-back.png'
+import GoBackIcon from '@/components/icons/TheGoBackIcon.vue'
 import { useRoute } from 'vue-router'
 import { reactive } from 'vue'
 import axios from 'axios'
@@ -24,11 +24,8 @@ const errorMessage = ref(null)
 const handlePasswordUpdate = async () => {
   const url = `${import.meta.env.VITE_SERVER_URL}/api/reset-password`
   try {
-    await axios.post(url, credentials, {
-      headers: {
-        'Access-Control-Allow-Credentials': 'true'
-      }
-    })
+    axios.defaults.withCredentials = true
+    await axios.post(url, credentials)
   } catch (error) {
     errorMessage.value = error.response.data.message
   }
@@ -64,8 +61,9 @@ const handlePasswordUpdate = async () => {
         <ResetButton class="mt-2" :disabled="isTouched && !isValid" @click="handlePasswordUpdate">{{
           $t('forgot_password.reset_password')
         }}</ResetButton>
+
         <p class="text-darkGray mt-5 flex items-center gap-4 justify-center">
-          <img :src="arrow" alt="arrow" />
+          <GoBackIcon />
           <RouterLink :to="{ name: 'login' }">{{ $t('forgot_password.back_to_login') }}</RouterLink>
         </p>
       </template>

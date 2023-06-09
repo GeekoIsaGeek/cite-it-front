@@ -1,8 +1,8 @@
 <script setup>
 import { ErrorMessage, Field, useIsFieldTouched, useIsFieldValid } from 'vee-validate'
-import preview from '@/assets/images/preview.svg'
-import valid from '@/assets/images/valid-icon.svg'
-import invalid from '@/assets/images/invalid-icon.svg'
+import ThePreviewIcon from '@/components/icons/ThePreviewIcon.vue'
+import TheInvalidIcon from '@/components/icons/TheInvalidIcon.vue'
+import TheValidIcon from '@/components/icons/TheValidIcon.vue'
 import { ref } from 'vue'
 
 const props = defineProps({
@@ -33,6 +33,10 @@ const props = defineProps({
   setValue: {
     type: Function,
     required: false
+  },
+  styles: {
+    type: String,
+    required: false
   }
 })
 
@@ -60,25 +64,21 @@ const handleInput = (e) => {
         :type="variableType"
         v-bind="field"
         :class="{
+          [styles]: true,
           'border-2 border-greenSuccess': meta.valid && meta.touched,
           'border-2 border-redFail': !meta.valid && meta.touched,
-          'w-full bg-lightGray outline-none h-[38px] pr-9 px-[13px] rounded flex flex-row focus:shadow-input': true
+          'w-full bg-lightGray outline-none h-[38px] pr-9 px-[13px] rounded flex flex-row focus:shadow-input': true,
+          'pr-16': type === 'password'
         }"
       />
     </Field>
-    <img
-      :src="isValid ? valid : invalid"
-      alt="validation status sign"
-      v-if="isTouched && type !== 'password'"
-      class="absolute bottom-[10px] right-[13px] cursor-pointer"
-    />
-    <img
-      :src="preview"
-      alt="preview"
+    <TheValidIcon v-if="isValid && isTouched" />
+    <TheInvalidIcon v-if="!isValid && isTouched" />
+    <ThePreviewIcon
       v-if="type === 'password'"
-      class="absolute bottom-[13px] right-[13px] cursor-pointer"
+      :class="`right-[${isTouched ? 40 : 13}px]`"
       @click="variableType = variableType === 'password' ? 'text' : 'password'"
     />
   </div>
-  <ErrorMessage :name="name" class="text-redFail mt-[-10px] break-words max-w-[360px]" />
+  <ErrorMessage :name="name" class="text-redFail text-base mt-[-10px] break-words max-w-[360px]" />
 </template>

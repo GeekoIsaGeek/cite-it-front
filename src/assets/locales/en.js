@@ -52,5 +52,25 @@ export default {
     request_another_link: 'Request another link',
     create_new_password: 'Create new password',
     password_update_message: 'Your new password must be different from previous used passwords'
+  },
+  news_feed: {
+    edit: 'Edit your profile',
+    news_feed: 'News feed',
+    movies: 'List of movies'
+  },
+  my_profile: {
+    my_profile: 'My Profile',
+    edit: 'Edit',
+    username: 'Username',
+    upload_photo: 'Upload new photo',
+    should_contain: 'Password should contain',
+    min_chars: '8 or more characters',
+    max_chars: '15 lowercase character at most',
+    new_password: 'New Password',
+    cancel: 'Cancel',
+    save_changes: 'Save changes',
+    confirm: 'confirm',
+    confirm_changes: 'Are you sure to make changes?',
+    profile_updated: 'Changes updated successfully'
   }
 }

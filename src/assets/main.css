@@ -14,3 +14,8 @@
   box-sizing: border-box;
   font-family: 'Helvetica neue ge';
 }
+
+img {
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+}

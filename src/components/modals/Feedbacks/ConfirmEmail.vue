@@ -1,12 +1,12 @@
 <script setup>
 import AuthFeedbackWrapper from '@/components/shared/AuthFeedbackWrapper.vue'
-import envelope from '@/assets/images/email-has-been-sent.svg'
 import LinkButton from '@/components/UI/LinkButton.vue'
+import TheEnvelopeIcon from '@/components/icons/TheEnvelopeIcon.vue'
 import { useUserStore } from '@/stores/userStore.js'
 import { computed } from 'vue'
 
 const userStore = useUserStore()
-const mailDomain = computed(() => userStore.user.email?.split('@').pop())
+const mailDomain = computed(() => userStore.user.email?.split('@').pop()) || 'gmail.com'
 
 defineProps({
   message: {
@@ -22,7 +22,7 @@ defineProps({
     :message="$t('auth_feedback.check_email')"
   >
     <template #image>
-      <img :src="envelope" alt="envelope" />
+      <TheEnvelopeIcon />
     </template>
     <LinkButton :link="`https://${mailDomain}`">
       {{ $t('auth_feedback.go_to_email') }}

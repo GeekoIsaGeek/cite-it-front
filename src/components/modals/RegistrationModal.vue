@@ -10,7 +10,9 @@ import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import request from '@/config/axiosInstance.js'
 import ServerErrors from '@/components/shared/ServerErrors.vue'
+import { useUserStore } from '@/stores/userStore.js'
 
+const { setUser } = useUserStore()
 const { locale } = useI18n()
 const router = useRouter()
 
@@ -32,6 +34,7 @@ const handleRegistration = async () => {
     await request.post('/api/register', credentials, {
       headers: additionalHeaders
     })
+    setUser(credentials)
     router.push('/email-confirmation')
   } catch (error) {
     if (error.response.data.error) {

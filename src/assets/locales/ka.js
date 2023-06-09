@@ -53,5 +53,25 @@ export default {
     request_another_link: 'ახალი ლინკის მოთხოვნა',
     create_new_password: 'პაროლის შეცვლა',
     password_update_message: 'ახალი პაროლი უნდა განსხვავდებოდეს წინა პაროლებისგან'
+  },
+  news_feed: {
+    edit: 'პროფილის რედაქტირება',
+    news_feed: 'ნიუს ფიდი',
+    movies: 'ჩემი ფილმები'
+  },
+  my_profile: {
+    my_profile: 'ჩემი პროფილი',
+    edit: 'შეცვლა',
+    username: 'მომხმარებლის სახელი',
+    upload_photo: 'ატვირთეთ ფოტო',
+    should_contain: 'პაროლი უნდა შედგებოდეს',
+    min_chars: '8 ან მეტ სიმბოლოსგან',
+    max_chars: 'მაქსიმუმ 15 დაბალი რეგისტრის სიმბოლოსგან',
+    new_password: 'ახალი პაროლი',
+    cancel: 'გაუქმება',
+    save_changes: 'ცვლილებების შენახვა',
+    confirm: 'დადასტურება',
+    confirm_changes: 'დარწმუნებული ხართ რომ გინდათ შეცვლა?',
+    profile_updated: 'პროფილი წარმატებით განახლდა'
   }
 }

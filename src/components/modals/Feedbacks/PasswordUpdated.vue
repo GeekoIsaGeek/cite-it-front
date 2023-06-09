@@ -1,6 +1,7 @@
 <script setup>
 import AuthFeedbackWrapper from '@/components/shared/AuthFeedbackWrapper.vue'
-import success from '@/assets/images/success.svg'
+import TheSuccessIconPurple from '@/components/icons/TheSuccessIconPurple.vue'
+
 import GoToNewsFeed from '@/components/UI/RedButton.vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
@@ -12,7 +13,7 @@ const router = useRouter()
     :message="$t('forgot_password.success')"
   >
     <template #image>
-      <img :src="success" alt="success sign" />
+      <TheSuccessIconPurple />
     </template>
     <GoToNewsFeed @click="router.push({ name: 'login' })" class="py-[7px] w-full">
       {{ $t('landing.login') }}

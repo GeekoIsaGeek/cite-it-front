@@ -1,11 +1,13 @@
 <script setup>
 import HeroSection from '@/components/landing/HeroSection.vue'
-import AppHeader from '@/components/shared/header/AppHeader.vue'
 import MovieWrapper from '@/components/landing/MovieWrapper.vue'
+import AppHeader from '@/components/shared/header/AppHeader.vue'
+import NavigationMobile from '@/components/news-feed/NavigationMobile.vue'
 </script>
 
 <template>
   <div class="bg-darkBlue min-h-screen">
+    <NavigationMobile />
     <AppHeader />
     <HeroSection />
     <div class="relative">

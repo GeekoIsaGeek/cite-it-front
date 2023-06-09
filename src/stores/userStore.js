@@ -8,7 +8,6 @@ export const useUserStore = defineStore('user', {
       isLoggedIn: false
     }
   },
-
   actions: {
     setUser(userData) {
       this.user = userData

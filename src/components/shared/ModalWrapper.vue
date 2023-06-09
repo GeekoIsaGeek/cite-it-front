@@ -1,5 +1,10 @@
 <script setup>
+import { onBeforeUnmount } from 'vue'
+import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+
+onMounted(() => (document.body.style.overflow = 'hidden'))
+onBeforeUnmount(() => (document.body.style.overflow = 'auto'))
 const router = useRouter()
 </script>
 
