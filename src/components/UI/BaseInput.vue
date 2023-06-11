@@ -77,11 +77,12 @@ const handleInput = (event) => {
         }"
       />
     </Field>
+
     <TheValidIcon v-if="isValid && isTouched" />
     <TheInvalidIcon v-if="!isValid && isTouched" />
     <ThePreviewIcon
       v-if="type === 'password'"
-      :class="`right-[${isTouched ? 40 : 13}px]`"
+      :class="`right-${isTouched ? '[40px]' : '[13px]'}`"
       @click="variableType = variableType === 'password' ? 'text' : 'password'"
     />
   </div>
