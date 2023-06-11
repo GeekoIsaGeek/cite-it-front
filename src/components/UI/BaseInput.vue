@@ -58,10 +58,14 @@ const handleInput = (event) => {
       {{ label }} <span v-if="required" class="text-red-500">*</span>
     </label>
 
-    <Field v-slot="{ field, meta }" :rules="rules" :name="name">
+    <Field
+      v-slot="{ field, meta }"
+      :rules="rules"
+      :name="name"
+      @input="(event) => handleInput(event)"
+    >
       <input
         :placeholder="placeholder"
-        @input="(event) => handleInput(event)"
         :type="variableType"
         v-bind="field"
         :class="{
