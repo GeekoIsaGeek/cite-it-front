@@ -1,16 +1,21 @@
 <script setup>
 import AvatarPlaceholder from '@/assets/images/Profile_avatar_placeholder_large.png'
+import { useUserStore } from '@/stores/userStore'
+import useGetAvatar from '@/composables/useGetAvatar'
 import { ref } from 'vue'
 
-const avatar = ref(null)
+const userStore = useUserStore()
+const avatar = ref(useGetAvatar())
 
 const uploadImage = (event) => {
+  const image = event.target.files[0]
   const reader = new FileReader()
   reader.onload = (loadEvent) => {
     avatar.value = loadEvent.target.result
   }
-  if (event.target.files[0]) {
-    reader.readAsDataURL(event.target.files[0])
+  if (image) {
+    userStore.updateProfilePicture(image)
+    reader.readAsDataURL(image)
   }
 }
 </script>

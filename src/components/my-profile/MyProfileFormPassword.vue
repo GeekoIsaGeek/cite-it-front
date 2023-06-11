@@ -3,10 +3,11 @@ import MyProfileFormFakeInput from '@/components/my-profile/MyProfileFormFakeInp
 import EditPasswordModal from '@/components/shared/EditFieldWrapper.vue'
 import PasswordGroup from '@/components/my-profile/MyProfileFormPasswordGroup.vue'
 
-import { ref } from 'vue'
-import { computed } from 'vue'
+import { ref, computed, inject } from 'vue'
 const isSmallerDevice = computed(() => window.innerWidth < 640)
 const showPasswordInput = ref(false)
+
+const handleUpdate = inject('handleUpdate')
 </script>
 
 <template>
@@ -28,6 +29,7 @@ const showPasswordInput = ref(false)
   <EditPasswordModal
     v-if="showPasswordInput && isSmallerDevice"
     :modalCloser="() => (showPasswordInput = false)"
+    :handleUpdate="handleUpdate"
   >
     <PasswordGroup
   /></EditPasswordModal>

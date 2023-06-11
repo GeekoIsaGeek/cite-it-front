@@ -44,9 +44,9 @@ const variableType = ref(props.type)
 const isValid = useIsFieldValid(props.name)
 const isTouched = useIsFieldTouched(props.name)
 
-const handleInput = (e) => {
+const handleInput = (event) => {
   if (props.setValue) {
-    props.setValue(e.target.value)
+    props.setValue(event.target.value)
   }
   return
 }
@@ -58,9 +58,10 @@ const handleInput = (e) => {
       {{ label }} <span v-if="required" class="text-red-500">*</span>
     </label>
 
-    <Field v-slot="{ field, meta }" :rules="rules" :name="name" @input="handleInput">
+    <Field v-slot="{ field, meta }" :rules="rules" :name="name">
       <input
         :placeholder="placeholder"
+        @input="(event) => handleInput(event)"
         :type="variableType"
         v-bind="field"
         :class="{

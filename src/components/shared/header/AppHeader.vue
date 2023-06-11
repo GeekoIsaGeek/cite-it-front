@@ -41,7 +41,7 @@ const handleLogout = async () => {
       class="cursor-pointer md:hidden text-white text-2xl"
       @click="generalStore.setShowMobileNavigation(true)"
     />
-    <div class="flex gap-3">
+    <div class="flex items-center gap-3">
       <Notifications v-if="showNotifications" />
       <LanguageSwitcher />
       <SignUpButton

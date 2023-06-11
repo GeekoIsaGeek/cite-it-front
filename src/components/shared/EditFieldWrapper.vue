@@ -15,6 +15,10 @@ const props = defineProps({
   modalCloser: {
     type: Function,
     required: true
+  },
+  handleUpdate: {
+    type: Function,
+    required: false
   }
 })
 
@@ -22,10 +26,6 @@ const router = useRouter()
 const handleCancelation = () => {
   router.push({ name: 'my-profile' })
   props.modalCloser()
-}
-
-const handleEdit = () => {
-  showConfirmModal.value = true
 }
 </script>
 
@@ -43,11 +43,14 @@ const handleEdit = () => {
         <button @click="handleCancelation" class="text-white hover:text-gray-400">
           {{ $t('my_profile.cancel') }}
         </button>
-        <ButtonEdit @click="handleEdit" class="px-4">{{ $t('my_profile.edit') }}</ButtonEdit>
+        <ButtonEdit @click="() => (showConfirmModal = true)" class="px-4">{{
+          $t('my_profile.edit')
+        }}</ButtonEdit>
       </div>
       <ConfirmMakingChanges
         v-if="showConfirmModal"
         :modalCloser="() => (showConfirmModal = false)"
+        :handleUpdate="handleUpdate"
       />
     </div>
   </Teleport>

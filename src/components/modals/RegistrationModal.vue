@@ -11,6 +11,7 @@ import { useRouter } from 'vue-router'
 import request from '@/config/axiosInstance.js'
 import ServerErrors from '@/components/shared/ServerErrors.vue'
 import { useUserStore } from '@/stores/userStore.js'
+import { getServerErrorMessages } from '@/utils/getErrors.js'
 
 const { setUser } = useUserStore()
 const { locale } = useI18n()
@@ -31,17 +32,14 @@ const additionalHeaders = {
 
 const handleRegistration = async () => {
   try {
+    serverErrors.value = []
     await request.post('/api/register', credentials, {
       headers: additionalHeaders
     })
     setUser(credentials)
-    router.push('/email-confirmation')
+    router.push({ name: 'email-confirmation' })
   } catch (error) {
-    if (error.response.data.error) {
-      serverErrors.value = [error.response.data.error]
-    } else {
-      serverErrors.value = Object.values(error.response.data.errors)?.map((error) => error[0])
-    }
+    serverErrors.value = getServerErrorMessages(error)
   }
 }
 </script>
