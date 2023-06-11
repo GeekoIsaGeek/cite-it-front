@@ -14,14 +14,16 @@ const handlePasswordUpdate = (passwordConfirm) => {
 </script>
 
 <template>
-  <div class="flex flex-col w-full gap-10">
-    <div class="my-4 py-6 mb-8 px-6 border border-[#CED4DA33] rounded-[4px] text-white">
+  <div class="flex flex-col w-full gap-5">
+    <div
+      class="hidden md:block my-4 py-6 mb-8 px-6 border border-[#CED4DA33] rounded-[4px] text-white"
+    >
       <p class="text-white mb-4">{{ $t('my_profile.should_contain') }}:</p>
       <p class="text-[14px] mb-1"><span>・</span> {{ $t('my_profile.min_chars') }}</p>
       <p class="text-[14px]"><span>・</span> {{ $t('my_profile.max_chars') }}</p>
     </div>
 
-    <div class="mb-5">
+    <div class="md:mb-5">
       <BaseInput
         name="new_password"
         :label="$t('my_profile.new_password')"

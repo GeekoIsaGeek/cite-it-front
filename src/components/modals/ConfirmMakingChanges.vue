@@ -15,6 +15,7 @@ const props = defineProps({
 const handleConfirm = async () => {
   if (props.handleUpdate) {
     await props.handleUpdate()
+    props.modalCloser()
   }
 }
 </script>

@@ -6,8 +6,14 @@ import PasswordGroup from '@/components/my-profile/MyProfileFormPasswordGroup.vu
 import { ref, computed, inject } from 'vue'
 const isSmallerDevice = computed(() => window.innerWidth < 640)
 const showPasswordInput = ref(false)
+const serverErrors = ref([])
 
-const handleUpdate = inject('handleUpdate')
+const updateHandler = inject('handleUpdate')
+const handleUpdate = async () => {
+  serverErrors.value = []
+  const errors = await updateHandler()
+  if (errors) serverErrors.value = errors
+}
 </script>
 
 <template>
@@ -30,6 +36,7 @@ const handleUpdate = inject('handleUpdate')
     v-if="showPasswordInput && isSmallerDevice"
     :modalCloser="() => (showPasswordInput = false)"
     :handleUpdate="handleUpdate"
+    :errors="serverErrors"
   >
     <PasswordGroup
   /></EditPasswordModal>

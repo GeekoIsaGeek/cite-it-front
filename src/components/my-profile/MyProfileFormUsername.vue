@@ -8,8 +8,16 @@ import { useUserStore } from '@/stores/userStore.js'
 const userStore = useUserStore()
 const showUsernameInput = ref(false)
 const isSmallerDevice = computed(() => window.innerWidth < 640)
+const serverErrors = ref([])
 
-const handleUpdate = inject('handleUpdate')
+const updateHandler = inject('handleUpdate')
+const handleUpdate = async () => {
+  serverErrors.value = []
+  const errors = await updateHandler()
+  if (errors) {
+    serverErrors.value = errors
+  }
+}
 </script>
 
 <template>
@@ -43,6 +51,7 @@ const handleUpdate = inject('handleUpdate')
     v-if="showUsernameInput && isSmallerDevice"
     :modalCloser="() => (showUsernameInput = false)"
     :handleUpdate="handleUpdate"
+    :errors="serverErrors"
   >
     <BaseInput
       name="username"

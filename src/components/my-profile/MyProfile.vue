@@ -48,7 +48,9 @@ const handleSave = async () => {
     userStore.setUser({ ...currentUserData, ...response.data.user })
     userStore.clearUpdatableCredentials()
   } catch (error) {
-    serverErrors.value = getServerErrorMessages(error)
+    const errorMessages = getServerErrorMessages(error)
+    serverErrors.value = errorMessages
+    return errorMessages
   }
 }
 
