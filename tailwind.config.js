@@ -14,7 +14,9 @@ export default {
         redFail: '#E31221',
         blue: ' #0D6EFD',
         veryDarkPurple: '#191724',
-        blackishPurple: ' #11101A'
+        blackishPurple: ' #11101A',
+        inputGray: '#6C757D',
+        almostBlack: '#11101A'
       },
       padding: {
         13: '52px',

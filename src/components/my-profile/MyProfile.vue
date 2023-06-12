@@ -12,13 +12,17 @@ import request from '@/config/axiosInstance.js'
 import { useI18n } from 'vue-i18n'
 import { getServerErrorMessages } from '@/utils/getErrors.js'
 import ServerErrors from '@/components/shared/ServerErrors.vue'
+import { watch } from 'vue'
 
 const router = useRouter()
 const { locale } = useI18n()
 const userStore = useUserStore()
 const showSuccessMessage = ref(false)
 const serverErrors = ref([])
+const canUpdate = ref(false)
+
 provide('showSuccessMessage', showSuccessMessage)
+watch(userStore.updatableCredentials, () => (canUpdate.value = true))
 
 const handleCancel = () => {
   userStore.clearUpdatableCredentials()
@@ -75,7 +79,7 @@ provide('handleUpdate', handleSave)
         <ProfileForm />
         <ServerErrors class="hidden md:block" :errors="serverErrors" />
       </div>
-      <div class="hidden md:flex gap-6 mt-14 md:self-end">
+      <div class="hidden md:flex gap-6 mt-14 md:self-end" v-if="canUpdate">
         <button @click="handleCancel" class="hover:text-gray-400">
           {{ $t('my_profile.cancel') }}
         </button>

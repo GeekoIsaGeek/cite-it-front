@@ -57,7 +57,17 @@ export default {
   news_feed: {
     edit: 'პროფილის რედაქტირება',
     news_feed: 'ნიუს ფიდი',
-    movies: 'ჩემი ფილმები'
+    movies: 'ჩემი ფილმები',
+    search_by: 'მოძებნეთ',
+    write_new_quote: 'შექმენი ახალი პოსტი',
+    search_guide: 'ჩაწერე @ ფილმის მოსაძებნად, ჩაწერე # ციტატის მოძაძებნად',
+    post: 'გამოქვეყნება',
+    image_selected: 'სურათი არჩეულია',
+    remove: 'წაშლა',
+    choose_file: 'აირჩიეთ ფაილი',
+    drag_and_drop: 'ჩააგდეთ სურათი ან',
+    image_upload_error: 'ატვირთული სურათი არავალიდურია',
+    choose_movie: 'აირჩიეთ ფილმი'
   },
   my_profile: {
     my_profile: 'ჩემი პროფილი',

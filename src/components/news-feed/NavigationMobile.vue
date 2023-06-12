@@ -8,9 +8,11 @@ import { useGeneralStore } from '@/stores/generalStore'
 import useGetAvatar from '@/composables/useGetAvatar.js'
 import { useUserStore } from '@/stores/userStore.js'
 import { capitalize, computed } from 'vue'
+import { useRoute } from 'vue-router'
 
 const generalStore = useGeneralStore()
 const userStore = useUserStore()
+const route = useRoute()
 const avatar = useGetAvatar()
 const username = computed(() => capitalize(userStore.user?.username || ''))
 const closeNavigationMenu = () => generalStore.setShowMobileNavigation(false)
@@ -25,7 +27,9 @@ const closeNavigationMenu = () => generalStore.setShowMobileNavigation(false)
     <div class="flex items-center gap-6 ml-[-10px]">
       <img
         :src="avatar || avatarPlaceholder"
-        class="w-[50px] h-[50px] rounded-full border-2 border-redFail"
+        :class="`w-[50px] h-[50px] rounded-full ${
+          route.name === 'my-profile' && 'border-2 border-redFail'
+        }`"
         alt="avatar"
       />
       <div class="flex flex-col">
@@ -40,14 +44,17 @@ const closeNavigationMenu = () => generalStore.setShowMobileNavigation(false)
     </div>
 
     <div class="flex items-center gap-6">
-      <TheHomeIcon class="mb-[3px] w-6 h-6" />
-      <RouterLink to="" @click="closeNavigationMenu" class="text-lg">{{
+      <TheHomeIcon
+        class="mb-[3px] w-6 h-6"
+        :color="`${route.name === 'news-feed' ? 'red' : 'white'}`"
+      />
+      <RouterLink :to="{ name: 'news-feed' }" @click="closeNavigationMenu" class="text-lg">{{
         $t('news_feed.news_feed')
       }}</RouterLink>
     </div>
 
     <div class="flex items-center gap-6">
-      <TheCameraIcon class="mb-[3px] h-6 w-6" />
+      <TheCameraIcon class="mb-[3px] h-6 w-6" :color="`${route.name === '' ? 'red' : 'white'}`" />
       <RouterLink to="" @click="closeNavigationMenu" class="text-lg">{{
         $t('news_feed.movies')
       }}</RouterLink>
