@@ -51,7 +51,7 @@ export default {
     link_expired_message: 'Login link has expired, because you haven’t used it',
     request_another_link: 'Request another link',
     create_new_password: 'Create new password',
-    password_update_message: 'Your new password must be different from previous used passwords'
+    password_update_message: 'Your new password must be different from previously used passwords'
   },
   news_feed: {
     edit: 'Edit your profile',
@@ -71,6 +71,8 @@ export default {
     save_changes: 'Save changes',
     confirm: 'confirm',
     confirm_changes: 'Are you sure to make changes?',
-    profile_updated: 'Changes updated successfully'
+    profile_updated: 'Changes updated successfully',
+    email_changed: 'Your Email changed successfully',
+    success: 'Success'
   }
 }

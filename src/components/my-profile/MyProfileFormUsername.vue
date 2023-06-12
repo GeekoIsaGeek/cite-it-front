@@ -1,12 +1,23 @@
 <script setup>
 import BaseInput from '@/components/UI/BaseInput.vue'
 import MyProfileFormFakeInput from '@/components/my-profile/MyProfileFormFakeInput.vue'
+import { ref, computed, inject } from 'vue'
 import EditUsernameModal from '@/components/shared/EditFieldWrapper.vue'
+import { useUserStore } from '@/stores/userStore.js'
 
-import { ref } from 'vue'
-import { computed } from 'vue'
+const userStore = useUserStore()
 const showUsernameInput = ref(false)
 const isSmallerDevice = computed(() => window.innerWidth < 640)
+const serverErrors = ref([])
+
+const updateHandler = inject('handleUpdate')
+const handleUpdate = async () => {
+  serverErrors.value = []
+  const errors = await updateHandler()
+  if (errors) {
+    serverErrors.value = errors
+  }
+}
 </script>
 
 <template>
@@ -14,7 +25,7 @@ const isSmallerDevice = computed(() => window.innerWidth < 640)
     <MyProfileFormFakeInput
       :label="$t('my_profile.username')"
       type="text"
-      placeholder="Nino Tabagari"
+      :placeholder="userStore.user.username"
     />
     <button
       class="text-lightGray absolute right-0 md:left-[calc(100%+30px)] top-7 md:top-9"
@@ -31,6 +42,7 @@ const isSmallerDevice = computed(() => window.innerWidth < 640)
       :placeholder="$t('my_profile.username')"
       type="text"
       rules="required|min:3|only_lowercase"
+      :setValue="(username) => userStore.updateUsername(username)"
       v-if="showUsernameInput"
     />
   </div>
@@ -38,6 +50,8 @@ const isSmallerDevice = computed(() => window.innerWidth < 640)
   <EditUsernameModal
     v-if="showUsernameInput && isSmallerDevice"
     :modalCloser="() => (showUsernameInput = false)"
+    :handleUpdate="handleUpdate"
+    :errors="serverErrors"
   >
     <BaseInput
       name="username"
@@ -45,6 +59,7 @@ const isSmallerDevice = computed(() => window.innerWidth < 640)
       :placeholder="$t('my_profile.username')"
       type="text"
       rules="required|min:3|only_lowercase"
+      :setValue="(username) => userStore.updateUsername(username)"
     />
   </EditUsernameModal>
 </template>

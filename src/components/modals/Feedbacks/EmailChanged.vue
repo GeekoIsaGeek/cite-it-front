@@ -8,8 +8,8 @@ const router = useRouter()
 
 <template>
   <AuthFeedbackWrapper
-    :heading="$t('auth_feedback.thank_you')"
-    :message="$t('auth_feedback.activated')"
+    :heading="$t('my_profile.success')"
+    :message="$t('my_profile.email_changed')"
   >
     <template #image>
       <SuccessIcon />

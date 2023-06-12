@@ -4,16 +4,22 @@ import { useRouter } from 'vue-router'
 import AppHeader from '@/components/shared/header/AppHeader.vue'
 import ButtonEdit from '@/components/UI/RedButton.vue'
 import ConfirmMakingChanges from '@/components/modals/ConfirmMakingChanges.vue'
-import { onMounted, onBeforeUnmount, ref } from 'vue'
-
-onMounted(() => (document.body.style.overflow = 'hidden'))
-onBeforeUnmount(() => (document.body.style.overflow = 'auto'))
+import ServerErrors from '@/components/shared/ServerErrors.vue'
+import { ref } from 'vue'
 
 const showConfirmModal = ref(false)
 
 const props = defineProps({
   modalCloser: {
     type: Function,
+    required: true
+  },
+  handleUpdate: {
+    type: Function,
+    required: false
+  },
+  errors: {
+    type: Array,
     required: true
   }
 })
@@ -22,10 +28,6 @@ const router = useRouter()
 const handleCancelation = () => {
   router.push({ name: 'my-profile' })
   props.modalCloser()
-}
-
-const handleEdit = () => {
-  showConfirmModal.value = true
 }
 </script>
 
@@ -38,16 +40,20 @@ const handleEdit = () => {
       </div>
       <div class="bg-[#24222F] py-20 px-8">
         <slot />
+        <ServerErrors :errors="errors" />
       </div>
-      <div class="flex justify-between gap-6 mt-14 px-10">
+      <div class="flex justify-between gap-6 mt-14 px-10 pb-10">
         <button @click="handleCancelation" class="text-white hover:text-gray-400">
           {{ $t('my_profile.cancel') }}
         </button>
-        <ButtonEdit @click="handleEdit" class="px-4">{{ $t('my_profile.edit') }}</ButtonEdit>
+        <ButtonEdit @click="() => (showConfirmModal = true)" class="px-4">{{
+          $t('my_profile.edit')
+        }}</ButtonEdit>
       </div>
       <ConfirmMakingChanges
         v-if="showConfirmModal"
         :modalCloser="() => (showConfirmModal = false)"
+        :handleUpdate="handleUpdate"
       />
     </div>
   </Teleport>

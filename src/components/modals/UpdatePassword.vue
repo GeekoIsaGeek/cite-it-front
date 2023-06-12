@@ -4,13 +4,14 @@ import FormWrapper from '@/components/shared/FormWrapper.vue'
 import BaseInput from '@/components/UI/BaseInput.vue'
 import ResetButton from '@/components/UI/RedButton.vue'
 import GoBackIcon from '@/components/icons/TheGoBackIcon.vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { reactive } from 'vue'
 import axios from 'axios'
 import FormError from '@/components/shared/FormError.vue'
 import { ref } from 'vue'
 
 const route = useRoute()
+const router = useRouter()
 
 const credentials = reactive({
   token: route.query?.token,
@@ -26,6 +27,7 @@ const handlePasswordUpdate = async () => {
   try {
     axios.defaults.withCredentials = true
     await axios.post(url, credentials)
+    router.push({ name: 'verification-succeed' })
   } catch (error) {
     errorMessage.value = error.response.data.message
   }

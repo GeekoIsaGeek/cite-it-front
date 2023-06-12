@@ -5,8 +5,14 @@ import TheCameraIcon from '@/components/icons/TheCameraIcon.vue'
 import TheHomeIcon from '@/components/icons/TheHomeIcon.vue'
 import Close from '@/components/icons/TheCloseIcon.vue'
 import { useGeneralStore } from '@/stores/generalStore'
+import useGetAvatar from '@/composables/useGetAvatar.js'
+import { useUserStore } from '@/stores/userStore.js'
+import { capitalize, computed } from 'vue'
 
 const generalStore = useGeneralStore()
+const userStore = useUserStore()
+const avatar = useGetAvatar()
+const username = computed(() => capitalize(userStore.user?.username || ''))
 const closeNavigationMenu = () => generalStore.setShowMobileNavigation(false)
 </script>
 
@@ -18,12 +24,12 @@ const closeNavigationMenu = () => generalStore.setShowMobileNavigation(false)
     <Close class="block md:hidden" @click="closeNavigationMenu" />
     <div class="flex items-center gap-6 ml-[-10px]">
       <img
-        :src="avatarPlaceholder"
+        :src="avatar || avatarPlaceholder"
         class="w-[50px] h-[50px] rounded-full border-2 border-redFail"
         alt="avatar"
       />
       <div class="flex flex-col">
-        <h3 class="text-lg font-normal">Name Surname</h3>
+        <h3 class="text-lg font-normal">{{ username }}</h3>
         <RouterLink
           :to="{ name: 'my-profile' }"
           @click="closeNavigationMenu"

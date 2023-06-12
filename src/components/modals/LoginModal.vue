@@ -12,6 +12,7 @@ import request from '@/config/axiosInstance.js'
 import ServerErrors from '@/components/shared/ServerErrors.vue'
 import { useUserStore } from '@/stores/userStore.js'
 import { useRouter } from 'vue-router'
+import { getServerErrorMessages } from '@/utils/getErrors.js'
 
 const { locale } = useI18n()
 const router = useRouter()
@@ -25,28 +26,22 @@ const serverErrors = ref([])
 
 const handleLogin = async () => {
   try {
+    serverErrors.value = []
     const additionalHeaders = {
       'Accept-Language': locale.value
     }
-    await request.post(
-      '/api/login',
-      {
-        ...credentials,
-        username: credentials.usernameOrEmail
-      },
-      {
-        headers: additionalHeaders
-      }
-    )
+    const updatedCredentials = {
+      ...credentials,
+      username: credentials.usernameOrEmail
+    }
+    await request.post('/api/login', updatedCredentials, {
+      headers: additionalHeaders
+    })
     const response = await request.get('/api/user')
     setUser(response.data)
     router.push({ name: 'home' })
   } catch (error) {
-    if (error.response.data.error) {
-      serverErrors.value = [error.response.data.error]
-    } else {
-      serverErrors.value = Object.values(error.response.data.errors)?.map((error) => error[0])
-    }
+    serverErrors.value = getServerErrorMessages(error)
   }
 }
 </script>
@@ -85,6 +80,7 @@ const handleLogin = async () => {
           <SignInButton class="h-[38px]" :disabled="isTouched && !isValid" @click="handleLogin">{{
             $t('auth.sign_in')
           }}</SignInButton>
+
           <GoogleAuthButton :action="$t('auth.google_sign_in')" />
           <ServerErrors :errors="serverErrors" />
 
