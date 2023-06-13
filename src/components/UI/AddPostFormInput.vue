@@ -33,7 +33,7 @@ defineProps({
         v-if="isTextArea"
         v-bind="field"
         :placeholder="placeholder"
-        class="w-full bg-transparent h-full outline-none resize-none text-[22px] italic"
+        class="w-full bg-transparent h-full outline-none resize-none lg:text-[22px] italic"
       />
       <input
         v-else
@@ -42,7 +42,7 @@ defineProps({
         class="w-full bg-transparent h-full outline-none"
       />
     </Field>
-    <p class="ml-8 text-xl">{{ language }}</p>
+    <p class="ml-8 lg:text-xl">{{ language }}</p>
   </div>
   <ErrorMessage
     :name="name"

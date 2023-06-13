@@ -59,7 +59,7 @@ export default {
     movies: 'List of movies',
     search_by: 'Search by',
     write_new_quote: 'Write new quote',
-    search_guide: 'Enter @ to search movies, Enter # to search quotes ',
+    search_guide: "Enter {'@'} to search movies, Enter # to search quotes",
     post: 'Post',
     image_selected: 'Image has been selected',
     remove: 'Remove',
@@ -67,7 +67,11 @@ export default {
     drag_and_drop: 'Drag and drop an image here or',
     image_upload_error: 'Uploaded image is invalid',
     choose_movie: 'Choose movie',
-    write_comment: 'Write a comment'
+    write_comment: 'Write a comment',
+    upload_image: 'Upload image',
+    search: 'Search',
+    search_movies: "Enter {'@'} to search movies",
+    search_quotes: 'Enter # to search quotes'
   },
   my_profile: {
     my_profile: 'My Profile',

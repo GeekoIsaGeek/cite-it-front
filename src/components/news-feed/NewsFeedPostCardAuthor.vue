@@ -10,6 +10,6 @@ const avatar = useGetAvatar()
 <template>
   <div class="flex gap-4 items-center">
     <img :src="avatar || avatarPlaceholder" alt="avatar" class="w-[52px] h-[52px] rounded-full" />
-    <p class="text-xl font-medium">{{ capitalize(userStore.user.username) || '' }}</p>
+    <p class="lg:text-xl font-medium">{{ capitalize(userStore.user.username) || '' }}</p>
   </div>
 </template>

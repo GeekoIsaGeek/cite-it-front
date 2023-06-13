@@ -1,13 +1,19 @@
 <script setup>
 import Author from '@/components/news-feed/add-new-post-modal/TheAuthor.vue'
 import TopPanel from '@/components/news-feed/add-new-post-modal/ModalTopPanel.vue'
+import { onMounted, onBeforeUnmount } from 'vue'
+
+onMounted(() => (window.innerWidth > 960 ? (document.body.style.overflow = 'hidden') : ''))
+onBeforeUnmount(() => (document.body.style.overflow = 'auto'))
 </script>
 
 <template>
   <div
-    class="wrapper absolute top-[90px] left-0 w-full min-h-[calc(100vh+60px)] flex justify-center items-start"
+    class="wrapper absolute z-50 lg:z-auto top-0 lg:top-[86px] left-0 w-full lg:min-h-[calc(100vh+60px)] flex justify-center items-start"
   >
-    <div class="bg-almostBlack text-white rounded-xl w-[50vw] mt-5 py-10">
+    <div
+      class="dialog bg-almostBlack overflow-y-scroll text-white lg:rounded-xl w-full md:w-[50vw] lg:mt-5 pb-[50px] lg:pb-10 py-10"
+    >
       <TopPanel />
       <div class="px-8">
         <Author class="mb-8" />

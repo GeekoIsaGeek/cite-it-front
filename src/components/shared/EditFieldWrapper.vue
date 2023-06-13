@@ -35,7 +35,7 @@ const handleCancelation = () => {
   <Teleport to="body">
     <div class="block md:hidden fixed top-0 left-0 z-40 bg-veryDarkPurple min-h-screen w-full">
       <AppHeader :showNotifications="true" class="header" />
-      <div class="block md:hidden pl-10 py-6 bg-veryDarkPurple w-full self-start">
+      <div class="block md:hidden mt-[86px] pl-10 py-6 bg-veryDarkPurple w-full self-start">
         <TheGoBackIcon class="h-4 w-5 cursor-pointer" @click="handleCancelation" />
       </div>
       <div class="bg-[#24222F] py-20 px-8">

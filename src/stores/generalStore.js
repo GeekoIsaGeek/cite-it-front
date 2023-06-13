@@ -4,7 +4,8 @@ export const useGeneralStore = defineStore('general', {
   state: () => {
     return {
       showMobileNavigation: false,
-      showAddNewPostModal: false
+      showAddNewPostModal: false,
+      showSearchBar: false
     }
   },
   actions: {
@@ -13,6 +14,9 @@ export const useGeneralStore = defineStore('general', {
     },
     setShowAddNewPostModal(shouldShow) {
       this.showAddNewPostModal = shouldShow
+    },
+    setShowSearchBar(shouldShow) {
+      this.showSearchBar = shouldShow
     }
   }
 })

@@ -68,7 +68,11 @@ export default {
     drag_and_drop: 'ჩააგდეთ სურათი ან',
     image_upload_error: 'ატვირთული სურათი არავალიდურია',
     choose_movie: 'აირჩიეთ ფილმი',
-    write_comment: 'დაწერეთ კომენტარი'
+    write_comment: 'დაწერეთ კომენტარი',
+    upload_image: 'ატვირთვა',
+    search: 'ძებნა',
+    search_movies: 'მიუთითეთ @ ფილმის მოსაძებნად',
+    search_quotes: 'მიუთითეთ # ციტატის მოსაძებნად'
   },
   my_profile: {
     my_profile: 'ჩემი პროფილი',

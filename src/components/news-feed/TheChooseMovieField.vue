@@ -13,7 +13,7 @@ const movies = ['kai filmi', 'ufro kargi filmi', 'rac umfro kargs gaaketeben']
     @click="() => (showMovieList = !showMovieList)"
     class="bg-black flex justify-between px-[18px] relative py-6 cursor-pointer hover:bg-[#161423] rounded-[4px]"
   >
-    <div class="flex items-center gap-3 text-xl">
+    <div class="flex items-center gap-3 lg:text-xl">
       <CameraIcon color="white" class="mt-[-7px]" />
       {{ selectedMovie || $t('news_feed.choose_movie') }}
     </div>
@@ -27,7 +27,7 @@ const movies = ['kai filmi', 'ufro kargi filmi', 'rac umfro kargs gaaketeben']
         <li
           v-for="(movie, index) in movies"
           :key="index"
-          class="w-full px-4 text-xl py-4 hover:bg-[#1c192c]"
+          class="w-full px-4 lg:text-xl py-4 hover:bg-[#1c192c]"
           @click="(e) => (selectedMovie = e.target.innerText)"
         >
           {{ movie }}
