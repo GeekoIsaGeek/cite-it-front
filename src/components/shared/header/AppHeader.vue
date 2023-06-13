@@ -34,7 +34,7 @@ const handleLogout = async () => {
 
 <template>
   <header
-    class="bg-transparent flex justify-between items-center py-6 px-9 md:px-[40px] xl:px-[70px]"
+    class="fixed top-0 z-50 w-full bg-transparent h-[86px] flex justify-between items-center py-6 px-9 md:px-[40px] xl:px-[70px]"
   >
     <h3 class="hidden md:block text-sm text-offGold font-medium md:text-base">MOVIE QUOTES</h3>
     <HamburgerMenu

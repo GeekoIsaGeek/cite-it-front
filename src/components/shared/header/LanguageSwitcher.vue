@@ -30,7 +30,7 @@ const handleLocalization = (language) => {
     </button>
 
     <ul
-      class="flex flex-col absolute top-full right-0 bg-[#FEFBEC] py-3 text-darkBlue text-lg rounded"
+      class="flex flex-col z-50 absolute top-full right-0 bg-[#FEFBEC] py-3 text-darkBlue text-lg rounded"
       v-if="showLocales"
     >
       <li

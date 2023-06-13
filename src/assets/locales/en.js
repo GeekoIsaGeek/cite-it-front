@@ -56,7 +56,18 @@ export default {
   news_feed: {
     edit: 'Edit your profile',
     news_feed: 'News feed',
-    movies: 'List of movies'
+    movies: 'List of movies',
+    search_by: 'Search by',
+    write_new_quote: 'Write new quote',
+    search_guide: 'Enter @ to search movies, Enter # to search quotes ',
+    post: 'Post',
+    image_selected: 'Image has been selected',
+    remove: 'Remove',
+    choose_file: 'Choose file',
+    drag_and_drop: 'Drag and drop an image here or',
+    image_upload_error: 'Uploaded image is invalid',
+    choose_movie: 'Choose movie',
+    write_comment: 'Write a comment'
   },
   my_profile: {
     my_profile: 'My Profile',
