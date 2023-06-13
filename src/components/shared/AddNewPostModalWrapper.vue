@@ -7,7 +7,7 @@ import TopPanel from '@/components/news-feed/add-new-post-modal/ModalTopPanel.vu
   <div
     class="wrapper absolute top-[90px] left-0 w-full min-h-[calc(100vh+60px)] flex justify-center items-start"
   >
-    <div class="bg-almostBlack text-white rounded-xl w-[46vw] mt-5 py-10">
+    <div class="bg-almostBlack text-white rounded-xl w-[50vw] mt-5 py-10">
       <TopPanel />
       <div class="px-8">
         <Author class="mb-8" />

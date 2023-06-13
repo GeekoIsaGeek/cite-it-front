@@ -66,7 +66,8 @@ export default {
     choose_file: 'Choose file',
     drag_and_drop: 'Drag and drop an image here or',
     image_upload_error: 'Uploaded image is invalid',
-    choose_movie: 'Choose movie'
+    choose_movie: 'Choose movie',
+    write_comment: 'Write a comment'
   },
   my_profile: {
     my_profile: 'My Profile',

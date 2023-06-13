@@ -20,14 +20,14 @@ const movies = ['kai filmi', 'ufro kargi filmi', 'rac umfro kargs gaaketeben']
 
     <TheArrowDownIcon :class="`text-3xl ${showMovieList && 'rotate-180'}`" />
     <div
-      class="absolute top-full left-0 pb-4 bg-[#161423] w-full border-t border-t-[#9686e8]"
+      class="absolute top-full left-0 pb-4 bg-[#1c192c] w-full border-t border-t-[#9686e8]"
       v-if="showMovieList"
     >
       <ul class="rounded-b-[4px]">
         <li
           v-for="(movie, index) in movies"
           :key="index"
-          class="w-full px-4 text-xl py-4 hover:bg-[#12101d]"
+          class="w-full px-4 text-xl py-4 hover:bg-[#1c192c]"
           @click="(e) => (selectedMovie = e.target.innerText)"
         >
           {{ movie }}

@@ -10,10 +10,10 @@ const expandSearch = ref(false)
 </script>
 
 <template>
-  <div :class="`flex items-center self-start gap-6 w-full md:max-w-[44vw]`">
+  <div class="flex items-center self-start gap-6 w-full md:max-w-[46vw]">
     <div
       :class="{
-        'bg-[#24222F] hover:bg-[#2d2a3b] px-4 py-3 text-white  flex min-w-max items-center gap-4 rounded-lg cursor-pointer': true,
+        'bg-[#24222F] hover:bg-[#2d2a3b] px-4 py-3 text-white flex min-w-max items-center gap-4 rounded-lg cursor-pointer': true,
         'w-full': !expandSearch
       }"
       @click="() => setShowAddNewPostModal(true)"
@@ -23,10 +23,11 @@ const expandSearch = ref(false)
     </div>
     <div
       @click="() => (expandSearch = true)"
-      :class="{
-        'flex items-center gap-4 cursor-pointer hover:text-gray-300 min-w-max border-b border-b-transparent': true,
-        'w-full border-b-darkGray pb-4': expandSearch
-      }"
+      :class="`
+        flex items-center gap-4 cursor-pointer hover:text-gray-300 min-w-max border-b border-b-transparent ${
+          expandSearch && 'w-full border-b-[#6C757D] pb-4'
+        }
+      `"
     >
       <SearchIcon />
       <input
@@ -39,3 +40,5 @@ const expandSearch = ref(false)
     </div>
   </div>
 </template>
+
+<style scoped></style>

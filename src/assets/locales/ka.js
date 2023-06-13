@@ -67,7 +67,8 @@ export default {
     choose_file: 'აირჩიეთ ფაილი',
     drag_and_drop: 'ჩააგდეთ სურათი ან',
     image_upload_error: 'ატვირთული სურათი არავალიდურია',
-    choose_movie: 'აირჩიეთ ფილმი'
+    choose_movie: 'აირჩიეთ ფილმი',
+    write_comment: 'დაწერეთ კომენტარი'
   },
   my_profile: {
     my_profile: 'ჩემი პროფილი',

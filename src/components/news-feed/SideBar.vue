@@ -21,7 +21,7 @@ const avatar = useGetAvatar()
     <div class="flex items-center gap-4 xl:gap-6 ml-[-10px]">
       <img
         :src="avatar || avatarPlaceholder"
-        :class="`w-[50px] h-[50px] xl:w-[60px] xl:h-[60px] rounded-full  ${
+        :class="`w-[50px] h-[50px] xl:w-[60px] xl:h-[60px] rounded-full   ${
           route.name === 'my-profile' && 'border-2 border-redFail'
         }`"
         alt="avatar"

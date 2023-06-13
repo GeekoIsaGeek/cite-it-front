@@ -28,7 +28,7 @@ defineProps({
 
 <template>
   <div class="flex border border-inputGray rounded-[4px] px-3 py-2 break-words">
-    <Field v-slot="{ field, meta }" :rules="rules" :name="name">
+    <Field v-slot="{ field }" :rules="rules" :name="name">
       <textarea
         v-if="isTextArea"
         v-bind="field"
