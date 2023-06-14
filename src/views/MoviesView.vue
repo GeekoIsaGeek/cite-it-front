@@ -3,6 +3,9 @@ import Wrapper from '@/components/news-feed/NewsFeedWrapper.vue'
 import TopPanel from '@/components/movies/TheTopPanel.vue'
 import MovieCard from '@/components/movies/MovieCard.vue'
 import AddNewMovie from '@/components/modals/AddNewMovie.vue'
+import { useGeneralStore } from '@/stores/generalStore'
+
+const generalStore = useGeneralStore()
 </script>
 
 <template>
@@ -18,6 +21,6 @@ import AddNewMovie from '@/components/modals/AddNewMovie.vue'
         <MovieCard />
       </div>
     </div>
-    <AddNewMovie><h1>misha magari ar aris</h1></AddNewMovie>
+    <AddNewMovie v-if="generalStore.showAddMovieModal" />
   </Wrapper>
 </template>

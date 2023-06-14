@@ -33,16 +33,16 @@ defineProps({
         v-if="isTextArea"
         v-bind="field"
         :placeholder="placeholder"
-        class="w-full bg-transparent h-full outline-none resize-none lg:text-[22px] italic"
+        class="w-full bg-transparent h-full outline-none resize-none lg:text-[22px] italic placeholder-white"
       />
       <input
         v-else
         v-bind="field"
         :placeholder="placeholder"
-        class="w-full bg-transparent h-full outline-none"
+        class="w-full lg:text-xl bg-transparent h-full outline-none placeholder-white"
       />
     </Field>
-    <p class="ml-8 lg:text-xl">{{ language }}</p>
+    <p class="ml-8 lg:text-xl text-darkGray" v-if="language">{{ language }}</p>
   </div>
   <ErrorMessage
     :name="name"

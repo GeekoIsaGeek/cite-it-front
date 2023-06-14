@@ -3,24 +3,37 @@ import Author from '@/components/news-feed/add-new-post-modal/TheAuthor.vue'
 import TopPanel from '@/components/news-feed/add-new-post-modal/ModalTopPanel.vue'
 import { onMounted, onBeforeUnmount } from 'vue'
 
-onMounted(() => (window.innerWidth > 960 ? (document.body.style.overflow = 'hidden') : ''))
+onMounted(() => (document.body.style.overflow = 'hidden'))
 onBeforeUnmount(() => (document.body.style.overflow = 'auto'))
+
+defineProps({
+  heading: {
+    type: String,
+    required: true
+  },
+  handleClose: {
+    type: Function,
+    required: true
+  }
+})
 </script>
 
 <template>
-  <div
-    class="wrapper absolute z-50 lg:z-auto top-0 lg:top-[86px] left-0 w-full lg:min-h-[calc(100vh+60px)] flex justify-center items-start"
-  >
+  <Teleport to="body">
     <div
-      class="dialog bg-almostBlack overflow-y-scroll text-white lg:rounded-xl w-full md:w-[50vw] lg:mt-5 pb-[50px] lg:pb-10 py-10"
+      class="wrapper fixed z-50 lg:z-auto top-0 lg:top-[86px] h-full left-0 w-full lg:min-h-max flex justify-center items-start"
     >
-      <TopPanel />
-      <div class="px-8">
-        <Author class="mb-8" />
-        <slot />
+      <div
+        class="dialog bg-almostBlack overflow-y-scroll h-[82%] text-white lg:rounded-xl min-h-max w-full md:w-[50vw] lg:mt-5 pb-[50px] lg:pb-10 py-10"
+      >
+        <TopPanel :heading="heading" :handleClose="handleClose" />
+        <div class="px-8">
+          <Author class="mb-8" />
+          <slot />
+        </div>
       </div>
     </div>
-  </div>
+  </Teleport>
 </template>
 
 <style scoped>
