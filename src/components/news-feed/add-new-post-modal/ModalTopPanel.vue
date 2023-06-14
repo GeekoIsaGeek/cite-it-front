@@ -9,7 +9,7 @@ const { setShowAddNewPostModal } = useGeneralStore()
   <div class="flex items-center justify-center text-white px-8 relative">
     <p class="text-2xl">{{ $t('news_feed.write_new_quote') }}</p>
     <CloseIcon
-      class="text-xl text-white hover:text-gray-300 top-[2px] right-[32px]"
+      class="text-white hover:text-gray-300 top-[-2px] right-[32px]"
       @click="() => setShowAddNewPostModal(false)"
     />
   </div>

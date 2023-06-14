@@ -20,10 +20,12 @@ img {
   -webkit-user-select: none;
 }
 
-textarea {
+textarea,
+.dialog {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-textarea::-webkit-scrollbar {
+textarea::-webkit-scrollbar,
+.dialog::-webkit-scrollbar {
   display: none;
 }

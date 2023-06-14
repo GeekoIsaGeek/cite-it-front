@@ -1,8 +1,9 @@
 <script setup>
-import { ref } from 'vue'
 import CameraIcon from '@/components/icons/ThePhotoCameraIcon.vue'
+import { computed, ref } from 'vue'
 
 const uploadedImage = ref(null)
+const isDesktopDevice = computed(() => window.innerWidth > 960)
 
 const dragoverHandler = (e) => {
   e.preventDefault()
@@ -45,7 +46,8 @@ const clearImage = () => {
     >
       <input type="file" class="hidden" @change.prevent="fileInputChange" />
       <p v-if="!uploadedImage" class="flex items-center 2xl:text-xl">
-        <CameraIcon class="mr-5" /> {{ $t('news_feed.drag_and_drop') }}
+        <CameraIcon class="mr-5 w-7 h-7" />
+        {{ isDesktopDevice ? $t('news_feed.drag_and_drop') : $t('news_feed.upload_image') }}
         <button @click.prevent="chooseFile" class="ml-2 px-[10px] py-2 bg-[#9747FF66]">
           {{ $t('news_feed.choose_file') }}
         </button>
