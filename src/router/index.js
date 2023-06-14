@@ -5,6 +5,7 @@ import authRoutes from '@/router/authRoutes'
 import { useUserStore } from '@/stores/userStore'
 import MyProfile from '@/components/my-profile/MyProfile.vue'
 import EmailChanged from '@/components/modals/Feedbacks/EmailChanged.vue'
+import MoviesView from '@/views/MoviesView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,6 +37,11 @@ const router = createRouter({
         default: LandingView,
         overlay: EmailChanged
       }
+    },
+    {
+      path: '/movies',
+      name: 'movies',
+      component: MoviesView
     },
     {
       path: '/:catchAll(.*)',

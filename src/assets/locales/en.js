@@ -89,5 +89,10 @@ export default {
     profile_updated: 'Changes updated successfully',
     email_changed: 'Your Email changed successfully',
     success: 'Success'
+  },
+  movies: {
+    list_of_my_movies: 'List of my movies',
+    total: 'Total',
+    add_movie: 'Add movie'
   }
 }

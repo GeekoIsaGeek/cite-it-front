@@ -90,5 +90,10 @@ export default {
     profile_updated: 'პროფილი წარმატებით განახლდა',
     email_changed: 'თქვენი ელ-ფოსტა წარმატებით განახლდა',
     success: 'გილოცავთ'
+  },
+  movies: {
+    list_of_my_movies: 'ჩემი ფილმები',
+    total: 'სულ',
+    add_movie: 'დამატება'
   }
 }

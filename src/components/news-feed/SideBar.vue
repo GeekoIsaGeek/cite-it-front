@@ -43,8 +43,11 @@ const avatar = useGetAvatar()
       }}</RouterLink>
     </div>
     <div class="flex items-center gap-4">
-      <TheCameraIcon class="mb-[3px] h-6 w-6" :color="`${route.name === '' ? 'red' : 'white'}`" />
-      <RouterLink to="" class="text-xl lg:text-2xl hover:text-gray-400">{{
+      <TheCameraIcon
+        class="mb-[3px] h-6 w-6"
+        :color="`${route.name === 'movies' ? 'red' : 'white'}`"
+      />
+      <RouterLink :to="{ name: 'movies' }" class="text-xl lg:text-2xl hover:text-gray-400">{{
         $t('news_feed.movies')
       }}</RouterLink>
     </div>
