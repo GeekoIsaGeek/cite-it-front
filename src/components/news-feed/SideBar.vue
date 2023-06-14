@@ -16,7 +16,7 @@ const avatar = useGetAvatar()
 
 <template>
   <nav
-    class="hidden pr-[5vw] w-[40vw] xl:w-[25vw] lg:pr-[10vw] pl-12 md:pl-0 pt-0 h-[60vh] text-white rounded-lg md:flex flex-col gap-11 min-h-screen"
+    class="hidden pr-[5vw] w-[40vw] xl:w-[25vw] pl-12 md:pl-0 pt-0 h-[60vh] text-white rounded-lg md:flex flex-col gap-11 min-h-screen"
   >
     <div class="flex items-center gap-4 xl:gap-6 ml-[-10px]">
       <img
