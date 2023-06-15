@@ -61,8 +61,6 @@ export default {
     write_new_quote: 'Write new quote',
     search_guide: "Enter {'@'} to search movies, Enter # to search quotes",
     post: 'Post',
-    image_selected: 'Image has been selected',
-    remove: 'Remove',
     choose_file: 'Choose file',
     drag_and_drop: 'Drag and drop an image here or',
     image_upload_error: 'Uploaded image is invalid',
@@ -93,6 +91,7 @@ export default {
   movies: {
     list_of_my_movies: 'List of my movies',
     total: 'Total',
-    add_movie: 'Add movie'
+    add_movie: 'Add movie',
+    genre: 'Genre'
   }
 }

@@ -5,11 +5,9 @@ import AddMovieWrapper from '@/components/shared/AddNewPostModalWrapper.vue'
 import UploadImage from '@/components/UI/ImageUploader.vue'
 import AddButton from '@/components/UI/RedButton.vue'
 import { useGeneralStore } from '@/stores/generalStore.js'
-import GenreOption from '@/components/UI/GenreOption.vue'
+import MovieGenres from '@/components/movies/MovieGenres.vue'
 
 const { setShowAddMovieModal } = useGeneralStore()
-
-const handleRemove = (genre) => genre
 </script>
 
 <template>
@@ -20,10 +18,7 @@ const handleRemove = (genre) => genre
     <Form class="flex flex-col gap-6">
       <FormField name="movie_name" rules="" placeholder="Movie name" language="Eng" />
       <FormField name="movie_name_ka" rules="" placeholder="ფილმის სახელი" language="ქარ" />
-      <div class="flex border border-inputGray rounded-[4px] px-3 py-2 flex-wrap gap-1">
-        <GenreOption :handleRemove="handleRemove" genre="Drama" />
-        <GenreOption :handleRemove="handleRemove" genre="Thriller" />
-      </div>
+      <MovieGenres />
       <FormField name="year" rules="" placeholder="წელი/Year" />
       <FormField name="director" rules="" placeholder="Director" language="Eng" />
       <FormField name="director_ka" rules="" placeholder="რეჟისორი" language="ქარ" />
@@ -41,7 +36,7 @@ const handleRemove = (genre) => genre
         language="ქარ"
         isTextArea
       />
-      <UploadImage />
+      <UploadImage previewImage />
       <AddButton>Add</AddButton>
     </Form>
   </AddMovieWrapper>

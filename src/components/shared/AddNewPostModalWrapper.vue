@@ -24,7 +24,7 @@ defineProps({
       class="wrapper fixed z-50 lg:z-auto top-0 lg:top-[86px] h-full left-0 w-full lg:min-h-max flex justify-center items-start"
     >
       <div
-        class="dialog bg-almostBlack overflow-y-scroll h-[82%] text-white lg:rounded-xl min-h-max w-full md:w-[50vw] lg:mt-5 pb-[50px] lg:pb-10 py-10"
+        class="dialog bg-almostBlack overflow-y-scroll h-[100%] lg:h-[82%] text-white lg:rounded-xl min-h-max w-full md:w-[50vw] lg:mt-5 pb-[50px] lg:pb-10 py-10"
       >
         <TopPanel :heading="heading" :handleClose="handleClose" />
         <div class="px-8">

@@ -32,7 +32,7 @@ const { setShowAddNewPostModal } = useGeneralStore()
         name="quote_en"
         isTextArea
       />
-      <ImageUploader />
+      <ImageUploader previewImage />
       <ChooseMovie />
       <PostButton class="text-xl">{{ $t('news_feed.post') }}</PostButton>
     </Form>

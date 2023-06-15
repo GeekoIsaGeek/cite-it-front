@@ -62,8 +62,6 @@ export default {
     write_new_quote: 'შექმენი ახალი პოსტი',
     search_guide: 'ჩაწერე @ ფილმის მოსაძებნად, ჩაწერე # ციტატის მოძაძებნად',
     post: 'გამოქვეყნება',
-    image_selected: 'სურათი არჩეულია',
-    remove: 'წაშლა',
     choose_file: 'აირჩიეთ ფაილი',
     drag_and_drop: 'ჩააგდეთ სურათი ან',
     image_upload_error: 'ატვირთული სურათი არავალიდურია',
@@ -94,6 +92,7 @@ export default {
   movies: {
     list_of_my_movies: 'ჩემი ფილმები',
     total: 'სულ',
-    add_movie: 'დამატება'
+    add_movie: 'დამატება',
+    genre: 'ჟანრი'
   }
 }
