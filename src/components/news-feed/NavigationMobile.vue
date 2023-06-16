@@ -16,6 +16,7 @@ const route = useRoute()
 const avatar = useGetAvatar()
 const username = computed(() => capitalize(userStore.user?.username || ''))
 const closeNavigationMenu = () => generalStore.setShowMobileNavigation(false)
+const isMoviesRoute = computed(() => route.name === 'movies' || route.name === 'movie-details')
 </script>
 
 <template>
@@ -54,10 +55,7 @@ const closeNavigationMenu = () => generalStore.setShowMobileNavigation(false)
     </div>
 
     <div class="flex items-center gap-6">
-      <TheCameraIcon
-        class="mb-[3px] h-6 w-6"
-        :color="`${route.name === 'movies' ? 'red' : 'white'}`"
-      />
+      <TheCameraIcon class="mb-[3px] h-6 w-6" :color="`${isMoviesRoute ? 'red' : 'white'}`" />
       <RouterLink :to="{ name: 'movies' }" @click="closeNavigationMenu" class="text-lg">{{
         $t('news_feed.movies')
       }}</RouterLink>

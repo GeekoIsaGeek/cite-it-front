@@ -1,5 +1,15 @@
 <script setup>
 import ChatQuoteIcon from '@/components/icons/TheChatQuoteIcon.vue'
+import { RouterLink } from 'vue-router'
+import { ref } from 'vue'
+
+const id = ref(2)
+const destinationRoute = {
+  name: 'movie-details',
+  params: {
+    id: id.value
+  }
+}
 </script>
 
 <template>
@@ -9,7 +19,9 @@ import ChatQuoteIcon from '@/components/icons/TheChatQuoteIcon.vue'
       alt="movie image"
       class="rounded-xl object-cover h-full"
     />
-    <p class="text-2xl mt-4 mb-[18px]">Loki Mobius (2021)</p>
+    <RouterLink :to="destinationRoute" class="text-2xl mt-4 mb-[18px]"
+      >Liki Malibus (2021)</RouterLink
+    >
     <div class="flex items-center gap-3">
       <span class="text-xl">10</span>
       <ChatQuoteIcon />

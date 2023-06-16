@@ -12,11 +12,12 @@ const route = useRoute()
 const userStore = useUserStore()
 const username = computed(() => capitalize(userStore.user?.username || ''))
 const avatar = useGetAvatar()
+const isMoviesRoute = computed(() => route.name === 'movies' || route.name === 'movie-details')
 </script>
 
 <template>
   <nav
-    class="hidden pr-[5vw] w-[40vw] xl:w-[25vw] pl-12 md:pl-0 pt-0 h-[60vh] text-white rounded-lg md:flex flex-col gap-11 min-h-screen"
+    class="hidden pr-[5vw] lg:pr-[2vw] w-[40vw] xl:w-[20vw] pl-12 md:pl-0 pt-0 h-[60vh] text-white rounded-lg md:flex flex-col gap-11 min-h-screen"
   >
     <div class="flex items-center gap-4 xl:gap-6 ml-[-10px]">
       <img
@@ -43,10 +44,7 @@ const avatar = useGetAvatar()
       }}</RouterLink>
     </div>
     <div class="flex items-center gap-4">
-      <TheCameraIcon
-        class="mb-[3px] h-6 w-6"
-        :color="`${route.name === 'movies' ? 'red' : 'white'}`"
-      />
+      <TheCameraIcon class="mb-[3px] h-6 w-6" :color="`${isMoviesRoute ? 'red' : 'white'}`" />
       <RouterLink :to="{ name: 'movies' }" class="text-xl lg:text-2xl hover:text-gray-400">{{
         $t('news_feed.movies')
       }}</RouterLink>

@@ -94,5 +94,14 @@ export default {
     total: 'სულ',
     add_movie: 'დამატება',
     genre: 'ჟანრი'
+  },
+  movie_details: {
+    movie_description: 'ფილმის აღწერა',
+    director: 'რეჟისორი',
+    quotes: 'ციტატები',
+    add_qoute: 'დამატება',
+    view_quote: 'ციტატის ნახვა',
+    edit: 'შეცვლა',
+    delete: 'წაშლა'
   }
 }

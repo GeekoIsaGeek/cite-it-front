@@ -10,15 +10,16 @@ import { reactive } from 'vue'
 
 const { setShowAddMovieModal } = useGeneralStore()
 const movieDetails = reactive({
-  name: null,
-  name_ka: null,
-  genres: [],
-  year: null,
-  director: null,
-  director_ka: null,
-  description: null,
-  description_ka: null,
-  image: null
+  name: 'Pantheon',
+  name_ka: 'პანთეონი',
+  genres: ['Drama', 'Thriller'],
+  year: '2022',
+  director: 'I have no clue',
+  director_ka: 'წარმოდგენა არ მაქვს',
+  description: 'Uploaded Inteligence',
+  description_ka: 'ატვირთული ინტელექტი',
+  image:
+    'https://images.unsplash.com/photo-1481349518771-20055b2a7b24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cmFuZG9tfGVufDB8fDB8fHww&w=1000&q=80'
 })
 </script>
 
@@ -33,6 +34,7 @@ const movieDetails = reactive({
         rules="only_latin|required"
         placeholder="Movie name"
         language="Eng"
+        showLabel
         v-model="movieDetails.name"
       />
       <FormField
@@ -40,15 +42,23 @@ const movieDetails = reactive({
         rules="only_georgian|required"
         placeholder="ფილმის სახელი"
         language="ქარ"
+        showLabel
         v-model="movieDetails.name_ka"
       />
       <MovieGenres v-model="movieDetails.genres" />
-      <FormField name="year" rules="required" placeholder="წელი/Year" v-model="movieDetails.year" />
+      <FormField
+        name="year"
+        rules="required"
+        placeholder="წელი/Year"
+        v-model="movieDetails.year"
+        showLabel
+      />
       <FormField
         name="director"
         rules="only_latin|required"
         placeholder="Director"
         language="Eng"
+        showLabel
         v-model="movieDetails.director"
       />
       <FormField
@@ -56,6 +66,7 @@ const movieDetails = reactive({
         rules="only_georgian|required"
         placeholder="რეჟისორი"
         language="ქარ"
+        showLabel
         v-model="movieDetails.director_ka"
       />
       <FormField
@@ -64,6 +75,7 @@ const movieDetails = reactive({
         placeholder="Movie description"
         language="Eng"
         isTextArea
+        showLabel
         v-model="movieDetails.description"
       />
       <FormField
@@ -72,6 +84,7 @@ const movieDetails = reactive({
         placeholder="ფილმის აღწერა"
         language="ქარ"
         isTextArea
+        showLabel
         v-model="movieDetails.description_ka"
       />
       <UploadImage previewImage v-model="movieDetails.image" />

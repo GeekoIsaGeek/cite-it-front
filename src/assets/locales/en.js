@@ -93,5 +93,14 @@ export default {
     total: 'Total',
     add_movie: 'Add movie',
     genre: 'Genre'
+  },
+  movie_details: {
+    movie_description: 'Movie Description',
+    director: 'Director',
+    quotes: 'Quotes',
+    add_quote: 'Add quote',
+    view_quote: 'View quote',
+    edit: 'Edit',
+    delete: 'Delete'
   }
 }

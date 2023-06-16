@@ -20,6 +20,7 @@ defineRule('only_latin', (value) => {
 
 configure({
   validateOnInput: true,
+
   generateMessage: localize({
     en: {
       messages: {

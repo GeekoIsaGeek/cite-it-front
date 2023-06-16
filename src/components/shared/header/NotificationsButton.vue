@@ -1,6 +1,7 @@
 <script setup>
 import TheBellIcon from '@/components/icons/TheBellIcon.vue'
-const notificationCount = 2
+import { ref } from 'vue'
+const notificationCount = ref(0)
 </script>
 
 <template>

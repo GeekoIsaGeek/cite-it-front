@@ -18,7 +18,6 @@ const generalStore = useGeneralStore()
         <MovieCard />
         <MovieCard />
         <MovieCard />
-        <MovieCard />
       </div>
     </div>
     <AddNewMovie v-if="generalStore.showAddMovieModal" />

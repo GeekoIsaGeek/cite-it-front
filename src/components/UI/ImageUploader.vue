@@ -1,22 +1,25 @@
 <script setup>
 import CameraIcon from '@/components/icons/ThePhotoCameraIcon.vue'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 
 defineProps({
   previewImage: {
     type: Boolean,
     required: false
+  },
+  modelValue: {
+    type: String,
+    required: true
   }
 })
-
-const uploadedImage = ref(null)
+const emit = defineEmits(['update:modelValue'])
 const isDesktopDevice = computed(() => window.innerWidth > 960)
 
 const handleUpload = (file) => {
   if (file && file.type.startsWith('image/')) {
     const reader = new FileReader()
     reader.onload = (loadEvent) => {
-      uploadedImage.value = loadEvent.target.result
+      emit('update:modelValue', loadEvent.target.result)
     }
     reader.readAsDataURL(file)
   }
@@ -48,8 +51,8 @@ const fileInputChange = (e) => {
 <template>
   <div class="border border-inputGray rounded-[4px] px-[18px] py-5 flex items-center gap-16">
     <img
-      v-if="previewImage && uploadedImage"
-      :src="uploadedImage"
+      v-if="previewImage && modelValue"
+      :src="modelValue"
       alt="movie"
       class="min-w-[50%] h-36 object-contain"
     />
@@ -62,16 +65,13 @@ const fileInputChange = (e) => {
       <input type="file" class="hidden" @change.prevent="fileInputChange" />
       <p
         :class="`flex items-center flex-wrap justify-${
-          uploadedImage ? 'center' : 'start'
+          modelValue ? 'center' : 'start'
         } gap-4 2xl:text-xl`"
       >
-        <span
-          class="font-bold text-[#DDCCAA] cursor-pointer"
-          @click="chooseFile"
-          v-if="uploadedImage"
+        <span class="font-bold text-[#DDCCAA] cursor-pointer" @click="chooseFile" v-if="modelValue"
           >Replace photo</span
         >
-        <span :class="`flex gap-${uploadedImage ? '2' : '5'}`">
+        <span :class="`flex gap-${modelValue ? '2' : '5'}`">
           <CameraIcon class="w-7 h-7" />
           {{ isDesktopDevice ? $t('news_feed.drag_and_drop') : $t('news_feed.upload_image') }}
         </span>

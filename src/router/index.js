@@ -6,6 +6,7 @@ import { useUserStore } from '@/stores/userStore'
 import MyProfile from '@/components/my-profile/MyProfile.vue'
 import EmailChanged from '@/components/modals/Feedbacks/EmailChanged.vue'
 import MoviesView from '@/views/MoviesView.vue'
+import MovieDetails from '@/views/MovieDetailsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -42,6 +43,11 @@ const router = createRouter({
       path: '/movies',
       name: 'movies',
       component: MoviesView
+    },
+    {
+      path: '/movie/:id',
+      name: 'movie-details',
+      component: MovieDetails
     },
     {
       path: '/:catchAll(.*)',

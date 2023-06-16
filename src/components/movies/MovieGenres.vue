@@ -2,16 +2,25 @@
 import GenreOption from '@/components/UI/GenreOption.vue'
 import PlusIcon from '@/components/icons/ThePlusIcon.vue'
 import genresList from '@/stores/genres.js'
-import { ref } from 'vue'
+import { ref, toRef } from 'vue'
 import { useI18n } from 'vue-i18n'
 
+const props = defineProps({
+  modelValue: {
+    type: String,
+    required: true
+  }
+})
+
+const selectedGenres = toRef(props.modelValue)
+const emit = defineEmits(['update:modelValue'])
 const { locale } = useI18n()
 const genres = ref(genresList[locale.value])
-const selectedGenres = ref([])
 const showGenres = ref(false)
 
 const handleRemove = (genreToBeDeleted) => {
   selectedGenres.value = selectedGenres.value.filter((genre) => genre !== genreToBeDeleted)
+  emit('update:modelValue', selectedGenres.value)
 }
 
 const handleSelect = (genre) => {
@@ -19,6 +28,7 @@ const handleSelect = (genre) => {
   if (isNotAdded) {
     showGenres.value = false
     selectedGenres.value.push(genre)
+    emit('update:modelValue', selectedGenres.value)
   }
 }
 </script>
@@ -27,10 +37,10 @@ const handleSelect = (genre) => {
   <div class="flex gap-3 border border-inputGray rounded-[4px] px-3 py-2 relative">
     <ul class="flex gap-1 flex-wrap" v-if="selectedGenres.length > 0">
       <GenreOption
-        :handleRemove="handleRemove"
         v-for="genre in selectedGenres"
         :genre="genre"
         :key="genre"
+        :handleRemove="() => handleRemove(genre)"
       />
     </ul>
     <div class="lg:text-xl cursor-pointer flex items-center gap-2">
