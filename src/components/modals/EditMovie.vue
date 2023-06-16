@@ -10,16 +10,15 @@ import { reactive } from 'vue'
 
 const { setShowAddMovieModal } = useGeneralStore()
 const movieDetails = reactive({
-  name: 'Pantheon',
-  name_ka: 'პანთეონი',
-  genres: ['Drama', 'Thriller'],
-  year: '2022',
-  director: 'I have no clue',
-  director_ka: 'წარმოდგენა არ მაქვს',
-  description: 'Uploaded Inteligence',
-  description_ka: 'ატვირთული ინტელექტი',
-  image:
-    'https://images.unsplash.com/photo-1481349518771-20055b2a7b24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cmFuZG9tfGVufDB8fDB8fHww&w=1000&q=80'
+  name: null,
+  name_ka: null,
+  genres: [],
+  year: null,
+  director: null,
+  director_ka: null,
+  description: null,
+  description_ka: null,
+  image: null
 })
 </script>
 
