@@ -8,6 +8,7 @@ import Notifications from '@/components/shared/header/NotificationsButton.vue'
 import HamburgerMenu from '@/components/icons/TheHamburgerMenuIcon.vue'
 import { useGeneralStore } from '@/stores/generalStore'
 import SearchIcon from '@/components/icons/TheSearchIcon.vue'
+import { useRoute } from 'vue-router'
 
 defineProps({
   showNotifications: {
@@ -18,6 +19,7 @@ defineProps({
 
 const generalStore = useGeneralStore()
 const userStore = useUserStore()
+const { name: routeName } = useRoute()
 userStore.fetchUser()
 const { clearUser } = userStore
 
@@ -47,6 +49,7 @@ const handleLogout = async () => {
         class="lg:hidden cursor-pointer mr-5 h-6 w-6"
         color="white"
         @click="() => generalStore.setShowSearchBar(true)"
+        v-if="routeName === 'news-feed'"
       />
       <Notifications v-if="showNotifications" />
       <LanguageSwitcher />

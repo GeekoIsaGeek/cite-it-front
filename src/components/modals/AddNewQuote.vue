@@ -5,10 +5,16 @@ import { Form } from 'vee-validate'
 import PostButton from '@/components/UI/RedButton.vue'
 import ImageUploader from '@/components/UI/ImageUploader.vue'
 import ChooseMovie from '@/components/news-feed/TheChooseMovieField.vue'
+import { useGeneralStore } from '@/stores/generalStore.js'
+
+const { setShowAddNewPostModal } = useGeneralStore()
 </script>
 
 <template>
-  <AddNewPostModalWrapper>
+  <AddNewPostModalWrapper
+    :heading="$t('news_feed.write_new_quote')"
+    :handleClose="() => setShowAddNewPostModal(false)"
+  >
     <Form class="flex flex-col gap-6 w-full">
       <FormField
         rules="required|only_latin"
@@ -26,7 +32,7 @@ import ChooseMovie from '@/components/news-feed/TheChooseMovieField.vue'
         name="quote_en"
         isTextArea
       />
-      <ImageUploader />
+      <ImageUploader previewImage />
       <ChooseMovie />
       <PostButton class="text-xl">{{ $t('news_feed.post') }}</PostButton>
     </Form>

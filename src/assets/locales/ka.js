@@ -62,8 +62,6 @@ export default {
     write_new_quote: 'შექმენი ახალი პოსტი',
     search_guide: 'ჩაწერე @ ფილმის მოსაძებნად, ჩაწერე # ციტატის მოძაძებნად',
     post: 'გამოქვეყნება',
-    image_selected: 'სურათი არჩეულია',
-    remove: 'წაშლა',
     choose_file: 'აირჩიეთ ფაილი',
     drag_and_drop: 'ჩააგდეთ სურათი ან',
     image_upload_error: 'ატვირთული სურათი არავალიდურია',
@@ -90,5 +88,20 @@ export default {
     profile_updated: 'პროფილი წარმატებით განახლდა',
     email_changed: 'თქვენი ელ-ფოსტა წარმატებით განახლდა',
     success: 'გილოცავთ'
+  },
+  movies: {
+    list_of_my_movies: 'ჩემი ფილმები',
+    total: 'სულ',
+    add_movie: 'დამატება',
+    genre: 'ჟანრი'
+  },
+  movie_details: {
+    movie_description: 'ფილმის აღწერა',
+    director: 'რეჟისორი',
+    quotes: 'ციტატები',
+    add_qoute: 'დამატება',
+    view_quote: 'ციტატის ნახვა',
+    edit: 'შეცვლა',
+    delete: 'წაშლა'
   }
 }

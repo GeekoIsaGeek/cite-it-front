@@ -16,12 +16,13 @@ const route = useRoute()
 const avatar = useGetAvatar()
 const username = computed(() => capitalize(userStore.user?.username || ''))
 const closeNavigationMenu = () => generalStore.setShowMobileNavigation(false)
+const isMoviesRoute = computed(() => route.name === 'movies' || route.name === 'movie-details')
 </script>
 
 <template>
   <nav
     v-if="generalStore.showMobileNavigation"
-    class="left-0 top-0 bg-veryDarkPurple absolute z-50 md:hidden pr-[10vw] pl-12 pt-12 h-[60vh] w-[90vw] text-white rounded-lg flex flex-col gap-11"
+    class="left-0 top-0 bg-veryDarkPurple fixed z-[100] md:hidden pr-[10vw] pl-12 pt-12 h-[60vh] w-[90vw] text-white rounded-lg flex flex-col gap-11"
   >
     <Close class="block md:hidden" @click="closeNavigationMenu" />
     <div class="flex items-center gap-6 ml-[-10px]">
@@ -54,8 +55,8 @@ const closeNavigationMenu = () => generalStore.setShowMobileNavigation(false)
     </div>
 
     <div class="flex items-center gap-6">
-      <TheCameraIcon class="mb-[3px] h-6 w-6" :color="`${route.name === '' ? 'red' : 'white'}`" />
-      <RouterLink to="" @click="closeNavigationMenu" class="text-lg">{{
+      <TheCameraIcon class="mb-[3px] h-6 w-6" :color="`${isMoviesRoute ? 'red' : 'white'}`" />
+      <RouterLink :to="{ name: 'movies' }" @click="closeNavigationMenu" class="text-lg">{{
         $t('news_feed.movies')
       }}</RouterLink>
     </div>

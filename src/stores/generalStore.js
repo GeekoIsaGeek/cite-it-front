@@ -5,7 +5,8 @@ export const useGeneralStore = defineStore('general', {
     return {
       showMobileNavigation: false,
       showAddNewPostModal: false,
-      showSearchBar: false
+      showSearchBar: false,
+      showAddMovieModal: false
     }
   },
   actions: {
@@ -17,6 +18,9 @@ export const useGeneralStore = defineStore('general', {
     },
     setShowSearchBar(shouldShow) {
       this.showSearchBar = shouldShow
+    },
+    setShowAddMovieModal(shouldShow) {
+      this.showAddMovieModal = shouldShow
     }
   }
 })
