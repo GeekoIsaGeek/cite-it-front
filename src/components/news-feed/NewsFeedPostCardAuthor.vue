@@ -2,10 +2,10 @@
 import { useUserStore } from '@/stores/userStore.js'
 import useGetAvatar from '@/composables/useGetAvatar.js'
 import avatarPlaceholder from '@/assets/images/Profile_avatar_placeholder_large.png'
-import { capitalize } from 'vue'
-import { computed } from 'vue'
+import { capitalize, computed } from 'vue'
 
 const userStore = useUserStore()
+const username = computed(() => capitalize(userStore.user.username || ''))
 const avatar = useGetAvatar()
 const username = computed(() => capitalize(userStore.user.username || ''))
 </script>

@@ -46,7 +46,7 @@ const handleLogout = async () => {
     />
     <div class="flex items-center gap-3">
       <SearchIcon
-        class="md:hidden cursor-pointer mr-5 h-6 w-6"
+        class="lg:hidden cursor-pointer mr-5 h-6 w-6"
         color="white"
         @click="() => generalStore.setShowSearchBar(true)"
         v-if="routeName === 'news-feed'"

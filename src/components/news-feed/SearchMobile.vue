@@ -6,7 +6,7 @@ const generalStore = useGeneralStore()
 </script>
 
 <template>
-  <div class="md:hidden absolute z-50 w-full top-0 left-0 bg-almostBlack min-h-[70vh]">
+  <div class="lg:hidden absolute z-50 w-full top-0 left-0 bg-almostBlack min-h-[70vh]">
     <div class="py-6 px-8 flex items-center gap-6 border-b border-b-gray-400">
       <GoBackIcon @click="() => generalStore.setShowSearchBar(false)" />
       <input
