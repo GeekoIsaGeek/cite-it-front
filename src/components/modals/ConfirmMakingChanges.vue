@@ -23,7 +23,7 @@ const handleConfirm = async () => {
 <template>
   <Teleport to="body">
     <div
-      class="wrapper md:hidden fixed text-white h-screen px-[5vw] w-full top-0 left-0 z-50 backdrop-blur-[2px]"
+      class="modal-bg-gradient md:hidden fixed text-white h-screen px-[5vw] w-full top-0 left-0 z-50 backdrop-blur-[2px]"
     >
       <div
         class="rounded-lg mt-32 bg-[#24222F] shadow-md bg-gradient-to-br from-veryDarkPurple via-darkPurple to-[#EFEFEF0D]"
@@ -44,9 +44,3 @@ const handleConfirm = async () => {
     </div>
   </Teleport>
 </template>
-
-<style scoped>
-.wrapper {
-  background: linear-gradient(187.16deg, #181623f0 0.07%, #191725eb 51.65%, #0d0b14f1 98.75%);
-}
-</style>
