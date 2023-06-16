@@ -1,8 +1,7 @@
 <script setup>
 import TheMoreIcon from '@/components/icons/TheMoreIcon.vue'
-import TheHeartIcon from '@/components/icons/TheHeartIcon.vue'
-import TheCommentIcon from '@/components/icons/TheCommentIcon.vue'
 import QuoteCardMoreOptions from '@/components/movie-details/QuoteCardMoreOptions.vue'
+import PostStatistics from '@/components/shared/PostStatistics.vue'
 import { ref } from 'vue'
 
 const showDropdown = ref(false)
@@ -24,10 +23,7 @@ const showDropdown = ref(false)
         <h1 class="text-2xl italic mt-7">"Frankly, my dear, I don't give a damn."</h1>
       </div>
     </div>
-    <div class="py-6 flex gap-8 items-center">
-      <p class="flex items-center gap-4">10 <TheCommentIcon class="cursor-pointer" /></p>
-      <p class="flex items-center gap-4">3 <TheHeartIcon class="cursor-pointer" /></p>
-    </div>
+    <PostStatistics />
     <QuoteCardMoreOptions v-if="showDropdown" class="absolute top-14 left-[92%]" />
   </div>
 </template>

@@ -4,6 +4,10 @@ import MainSection from '@/components/movie-details/MainSection.vue'
 import AddButton from '@/components/UI/RedButton.vue'
 import PlusIcon from '@/components/icons/ThePlusIcon.vue'
 import QuoteCard from '@/components/movie-details/QuoteCard.vue'
+import ViewQuote from '@/components/modals/ViewQuote.vue'
+import { useGeneralStore } from '@/stores/generalStore.js'
+
+const generalStore = useGeneralStore()
 </script>
 
 <template>
@@ -25,5 +29,6 @@ import QuoteCard from '@/components/movie-details/QuoteCard.vue'
         <QuoteCard />
       </ul>
     </div>
+    <ViewQuote v-if="generalStore.showQuoteViewModal" />
   </Wrapper>
 </template>

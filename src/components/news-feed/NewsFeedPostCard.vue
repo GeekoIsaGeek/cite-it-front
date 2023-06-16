@@ -1,7 +1,7 @@
 <script setup>
 import PostAuthor from '@/components/news-feed/NewsFeedPostCardAuthor.vue'
-import CommentIcon from '@/components/icons/TheCommentIcon.vue'
-import HeartIcon from '@/components/icons/TheHeartIcon.vue'
+import PostStatistics from '@/components/shared/PostStatistics.vue'
+
 import PostComments from '@/components/news-feed/NewsFeedPostCardComments.vue'
 </script>
 
@@ -17,10 +17,7 @@ import PostComments from '@/components/news-feed/NewsFeedPostCardComments.vue'
       alt="image from the movie"
       class="w-full h-[200px] xl:h-[500px] rounded-[10px] object-cover"
     />
-    <div class="py-6 mb-6 flex items-center gap-6 text-xl border-b border-b-[#EFEFEF4D]">
-      <div class="flex gap-4 items-center">9 <CommentIcon class="cursor-pointer" /></div>
-      <div class="flex gap-4 items-center">12 <HeartIcon class="cursor-pointer" /></div>
-    </div>
+    <PostStatistics class="text-xl" />
     <PostComments />
   </div>
 </template>
