@@ -53,7 +53,7 @@ const router = createRouter({
     },
     {
       path: '/quote/:id/edit',
-      name: 'quote-edit',
+      name: 'edit-quote',
       components: {
         default: NewsFeedWrapper,
         overlay: EditQuote

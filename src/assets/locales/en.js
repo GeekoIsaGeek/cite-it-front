@@ -102,5 +102,14 @@ export default {
     view_quote: 'View Quote',
     edit: 'Edit',
     delete: 'Delete'
+  },
+  notifications: {
+    notifications: 'Notifications',
+    mark_as_all_read: 'Mark as all read',
+    commented: 'Commented to your movie quote',
+    reacted: 'Reacted to your quote',
+    new: 'New',
+    mins_ago: 'mins ago',
+    days_ago: 'days ago'
   }
 }

@@ -4,11 +4,9 @@ import TopPanel from '@/components/movie-details/view-quote/TheTopPanel.vue'
 import Author from '@/components/news-feed/add-new-post-modal/TheAuthor.vue'
 import FormField from '@/components/UI/AddPostFormInput.vue'
 import SaveButton from '@/components/UI/RedButton.vue'
-import { useRouter } from 'vue-router'
 import { Form } from 'vee-validate'
 import { ref } from 'vue'
 
-const router = useRouter()
 const quote = ref(null)
 const quote_ka = ref(null)
 </script>

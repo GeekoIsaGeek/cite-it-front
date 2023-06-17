@@ -4,8 +4,20 @@ import MainSection from '@/components/movie-details/MainSection.vue'
 import AddButton from '@/components/UI/RedButton.vue'
 import PlusIcon from '@/components/icons/ThePlusIcon.vue'
 import QuoteCard from '@/components/movie-details/QuoteCard.vue'
-import ViewQuote from '@/components/modals/ViewQuote.vue'
-import EditQuote from '@/components/modals/EditQuote.vue'
+import { useRouter } from 'vue-router'
+import { computed } from 'vue'
+
+const router = useRouter()
+const movieId = computed(() => router.currentRoute.value.params.id)
+
+const navigateToAddQuoteModal = () => {
+  router.push({
+    name: 'add-quote',
+    params: {
+      id: movieId.value
+    }
+  })
+}
 </script>
 
 <template>
@@ -18,16 +30,14 @@ import EditQuote from '@/components/modals/EditQuote.vue'
           <p>{{ $t('movie_details.quotes') }}</p>
           <p>({{ $t('movies.total') }} 25)</p>
         </div>
-        <AddButton class="px-4 text-xl flex items-center gap-2">
+        <AddButton class="px-4 text-xl flex items-center gap-2" @click="navigateToAddQuoteModal">
           <PlusIcon />
-          {{ $t('movie_details.add_quote') }}</AddButton
-        >
+          {{ $t('movie_details.add_quote') }}
+        </AddButton>
       </div>
       <ul class="mt-14">
         <QuoteCard />
       </ul>
     </div>
-    <!-- <ViewQuote /> -->
-    <!-- <EditQuote /> -->
   </Wrapper>
 </template>

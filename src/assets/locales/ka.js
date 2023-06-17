@@ -99,9 +99,18 @@ export default {
     movie_description: 'ფილმის აღწერა',
     director: 'რეჟისორი',
     quotes: 'ციტატები',
-    add_qoute: 'დამატება',
+    add_quote: 'დამატება',
     view_quote: 'ციტატის ნახვა',
     edit: 'შეცვლა',
     delete: 'წაშლა'
+  },
+  notifications: {
+    notifications: 'შეტყობინებები',
+    mark_as_all_read: 'მონიშნე ყველა წაკითხულად',
+    commented: 'დატოვა კომენტარი თქვენს ციტატაზე',
+    reacted: 'ჰქონდა რეაქცია თქვენს ციტატაზე',
+    new: 'ახალი',
+    mins_ago: 'წუთის წინ',
+    days_ago: 'დღის წინ'
   }
 }
