@@ -5,9 +5,7 @@ import AddButton from '@/components/UI/RedButton.vue'
 import PlusIcon from '@/components/icons/ThePlusIcon.vue'
 import QuoteCard from '@/components/movie-details/QuoteCard.vue'
 import ViewQuote from '@/components/modals/ViewQuote.vue'
-import { useGeneralStore } from '@/stores/generalStore.js'
-
-const generalStore = useGeneralStore()
+import EditQuote from '@/components/modals/EditQuote.vue'
 </script>
 
 <template>
@@ -29,6 +27,7 @@ const generalStore = useGeneralStore()
         <QuoteCard />
       </ul>
     </div>
-    <ViewQuote v-if="generalStore.showQuoteViewModal" />
+    <!-- <ViewQuote /> -->
+    <!-- <EditQuote /> -->
   </Wrapper>
 </template>

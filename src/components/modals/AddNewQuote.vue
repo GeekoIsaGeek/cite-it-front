@@ -6,8 +6,10 @@ import PostButton from '@/components/UI/RedButton.vue'
 import ImageUploader from '@/components/UI/ImageUploader.vue'
 import ChooseMovie from '@/components/news-feed/TheChooseMovieField.vue'
 import { useGeneralStore } from '@/stores/generalStore.js'
+import { ref } from 'vue'
 
 const { setShowAddNewPostModal } = useGeneralStore()
+const image = ref(null)
 </script>
 
 <template>
@@ -32,7 +34,7 @@ const { setShowAddNewPostModal } = useGeneralStore()
         name="quote_en"
         isTextArea
       />
-      <ImageUploader previewImage />
+      <ImageUploader previewImage v-model="image" />
       <ChooseMovie />
       <PostButton class="text-xl">{{ $t('news_feed.post') }}</PostButton>
     </Form>

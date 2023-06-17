@@ -7,6 +7,10 @@ import MyProfile from '@/components/my-profile/MyProfile.vue'
 import EmailChanged from '@/components/modals/Feedbacks/EmailChanged.vue'
 import MoviesView from '@/views/MoviesView.vue'
 import MovieDetails from '@/views/MovieDetailsView.vue'
+import ViewQuote from '@/components/modals/ViewQuote.vue'
+import NewsFeedWrapper from '@/components/news-feed/NewsFeedWrapper.vue'
+import EditQuote from '@/components/modals/EditQuote.vue'
+import AddNewQuote from '@/components/modals/AddQuoteFromMovie.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,6 +44,22 @@ const router = createRouter({
       }
     },
     {
+      path: '/quote/:id',
+      name: 'view-quote',
+      components: {
+        default: NewsFeedWrapper,
+        overlay: ViewQuote
+      }
+    },
+    {
+      path: '/quote/:id/edit',
+      name: 'quote-edit',
+      components: {
+        default: NewsFeedWrapper,
+        overlay: EditQuote
+      }
+    },
+    {
       path: '/movies',
       name: 'movies',
       component: MoviesView
@@ -48,6 +68,14 @@ const router = createRouter({
       path: '/movie/:id',
       name: 'movie-details',
       component: MovieDetails
+    },
+    {
+      path: '/movie/:id/add-quote',
+      name: 'add-quote',
+      components: {
+        default: NewsFeedWrapper,
+        overlay: AddNewQuote
+      }
     },
     {
       path: '/:catchAll(.*)',

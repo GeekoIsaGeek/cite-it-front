@@ -98,8 +98,8 @@ export default {
     movie_description: 'Movie Description',
     director: 'Director',
     quotes: 'Quotes',
-    add_quote: 'Add quote',
-    view_quote: 'View quote',
+    add_quote: 'Add Quote',
+    view_quote: 'View Quote',
     edit: 'Edit',
     delete: 'Delete'
   }
