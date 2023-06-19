@@ -7,7 +7,7 @@ onBeforeUnmount(() => (document.body.style.overflow = 'auto'))
 <template>
   <Teleport to="body">
     <div
-      class="fixed top-0 left-0 h-screen w-full pt-20 flex justify-center modal-bg-gradient z-50"
+      class="fixed top-0 left-0 h-screen w-full lg:pt-20 flex justify-center modal-bg-gradient z-50"
     >
       <slot />
     </div>

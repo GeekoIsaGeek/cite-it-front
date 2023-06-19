@@ -49,7 +49,9 @@ const fileInputChange = (e) => {
 </script>
 
 <template>
-  <div class="border border-inputGray rounded-[4px] px-[18px] py-5 flex items-center gap-16">
+  <div
+    class="border border-inputGray rounded-[4px] px-4 lg:px-[18px] py-5 flex items-center gap-4 lg:gap-16"
+  >
     <img
       v-if="previewImage && modelValue"
       :src="modelValue"
@@ -66,13 +68,13 @@ const fileInputChange = (e) => {
       <p
         :class="`flex items-center flex-wrap justify-${
           modelValue ? 'center' : 'start'
-        } gap-4 2xl:text-xl`"
+        }  gap-2 lg:gap-4 2xl:text-xl`"
       >
         <span class="font-bold text-[#DDCCAA] cursor-pointer" @click="chooseFile" v-if="modelValue"
           >Replace photo</span
         >
-        <span :class="`flex gap-${modelValue ? '2' : '5'}`">
-          <CameraIcon class="w-7 h-7" />
+        <span :class="`flex gap-${modelValue ? '2' : '4'}`">
+          <CameraIcon class="w-6 h-6 lg:w-7 lg:h-7" />
           {{ isDesktopDevice ? $t('news_feed.drag_and_drop') : $t('news_feed.upload_image') }}
         </span>
         <button
