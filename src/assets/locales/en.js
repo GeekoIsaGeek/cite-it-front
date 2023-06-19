@@ -100,8 +100,10 @@ export default {
     quotes: 'Quotes',
     add_quote: 'Add Quote',
     view_quote: 'View Quote',
+    edit_quote: 'Edit Quote',
     edit: 'Edit',
-    delete: 'Delete'
+    delete: 'Delete',
+    change_photo: 'Change Photo'
   },
   notifications: {
     notifications: 'Notifications',

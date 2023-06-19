@@ -4,8 +4,8 @@ import MainSectionGenres from '@/components/movie-details/MainSectionGenres.vue'
 </script>
 
 <template>
-  <div class="flex items-start gap-5 mt-8 w-full">
-    <div class="w-full full h-[440px]">
+  <div class="flex items-start flex-col lg:flex-row gap-5 mt-8 w-full px-9 lg:px-0">
+    <div class="w-full full h-[300px] lg:h-[440px]">
       <img
         src="https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1159&q=80"
         alt="movie"

@@ -101,8 +101,10 @@ export default {
     quotes: 'ციტატები',
     add_quote: 'დამატება',
     view_quote: 'ციტატის ნახვა',
+    edit_quote: 'ციტატის რედაქტირება',
     edit: 'შეცვლა',
-    delete: 'წაშლა'
+    delete: 'წაშლა',
+    change_photo: 'ფოტოს შეცვლა'
   },
   notifications: {
     notifications: 'შეტყობინებები',

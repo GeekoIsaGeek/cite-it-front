@@ -11,6 +11,7 @@ import SearchIcon from '@/components/icons/TheSearchIcon.vue'
 import Notifications from '@/components/notifications/NotificationsWrapper.vue'
 import { useRoute } from 'vue-router'
 import { ref } from 'vue'
+import { computed } from 'vue'
 
 defineProps({
   showNotificationsButton: {
@@ -24,9 +25,10 @@ const userStore = useUserStore()
 const { name: routeName } = useRoute()
 userStore.fetchUser()
 const { clearUser } = userStore
-const showNotifications = ref(true)
+const showNotifications = ref(false)
 
 const router = useRouter()
+const currentRoute = computed(() => router.currentRoute.value.path)
 const handleLogout = async () => {
   try {
     await request.post('/api/logout')
@@ -79,7 +81,9 @@ const handleLogout = async () => {
       >
         {{ $t('landing.logout') }}
       </button>
-      <Notifications v-if="showNotifications" />
+      <Notifications
+        v-if="showNotifications && !currentRoute.startsWith('/auth') && currentRoute !== '/'"
+      />
     </div>
   </header>
 </template>

@@ -10,7 +10,7 @@ import TopPanel from '@/components/movie-details/view-quote/TheTopPanel.vue'
 <template>
   <QuoteModalWrapper>
     <div class="dialog bg-almostBlack w-1/2 pt-10 pb-8 overflow-y-scroll rounded-xl">
-      <TopPanel />
+      <TopPanel :heading="$t('movie_details.view_quote')" />
       <div class="flex flex-col px-8 gap-11">
         <QuoteAuthor class="text-white mt-8" />
         <Quotes />

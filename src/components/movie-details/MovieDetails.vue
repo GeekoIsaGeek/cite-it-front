@@ -23,13 +23,16 @@ const navigateToAddQuoteModal = () => {
 <template>
   <Wrapper>
     <div class="flex flex-col w-full">
-      <h2 class="text-2xl">{{ $t('movie_details.movie_description') }}</h2>
+      <h2 class="hidden lg:block text-2xl">{{ $t('movie_details.movie_description') }}</h2>
       <MainSection />
-      <div class="flex items-center mt-11 gap-4">
-        <div class="lg:flex gap-2 text-2xl border-r border-darkGray pr-4">
+      <div
+        class="flex items-start px-9 lg:px-0 lg:items-center flex-col-reverse lg:flex-row mt-11 gap-9 lg:gap-4"
+      >
+        <div class="lg:flex gap-2 text-2xl lg:border-r border-darkGray pr-4">
           <p>{{ $t('movie_details.quotes') }}</p>
           <p>({{ $t('movies.total') }} 25)</p>
         </div>
+        <div class="lg:hidden w-full h-[1px] bg-[#54535A]"></div>
         <AddButton class="px-4 text-xl flex items-center gap-2" @click="navigateToAddQuoteModal">
           <PlusIcon />
           {{ $t('movie_details.add_quote') }}
