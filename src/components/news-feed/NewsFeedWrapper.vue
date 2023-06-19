@@ -6,7 +6,7 @@ import NavigationMobile from '@/components/news-feed/NavigationMobile.vue'
 
 <template>
   <div class="bg-[#181624] min-h-screen">
-    <AppHeader class="header" :showNotifications="true" />
+    <AppHeader class="header" :showNotificationsButton="true" />
     <main
       class="md:px-[40px] mt-[86px] xl:px-[70px] pb-8 md:py-8 text-white md:bg-veryDarkPurple flex"
     >

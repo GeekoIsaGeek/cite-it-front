@@ -98,9 +98,20 @@ export default {
     movie_description: 'Movie Description',
     director: 'Director',
     quotes: 'Quotes',
-    add_quote: 'Add quote',
-    view_quote: 'View quote',
+    add_quote: 'Add Quote',
+    view_quote: 'View Quote',
+    edit_quote: 'Edit Quote',
     edit: 'Edit',
-    delete: 'Delete'
+    delete: 'Delete',
+    change_photo: 'Change Photo'
+  },
+  notifications: {
+    notifications: 'Notifications',
+    mark_as_all_read: 'Mark as all read',
+    commented: 'Commented to your movie quote',
+    reacted: 'Reacted to your quote',
+    new: 'New',
+    mins_ago: 'mins ago',
+    days_ago: 'days ago'
   }
 }

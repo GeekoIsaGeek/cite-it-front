@@ -77,7 +77,7 @@ const fileInputChange = (e) => {
         </span>
         <button
           @click.prevent="chooseFile"
-          class="ml-2 px-[10px] py-2 bg-[#9747FF66] hover:bg-[#392457]"
+          class="ml-2 px-[10px] py-2 bg-[#9747FF66] hover:bg-[#392457] rounded-sm"
         >
           {{ $t('news_feed.choose_file') }}
         </button>

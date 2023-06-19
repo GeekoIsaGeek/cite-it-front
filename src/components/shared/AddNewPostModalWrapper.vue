@@ -21,7 +21,7 @@ defineProps({
 <template>
   <Teleport to="body">
     <div
-      class="wrapper fixed z-50 lg:z-auto top-0 lg:top-[86px] h-full left-0 w-full lg:min-h-max flex justify-center items-start"
+      class="modal-bg-gradient fixed z-50 lg:z-auto top-0 lg:top-[86px] h-full left-0 w-full lg:min-h-max flex justify-center items-start"
     >
       <div
         class="dialog bg-almostBlack overflow-y-scroll h-[100%] lg:h-[82%] text-white lg:rounded-xl min-h-max w-full md:w-[50vw] lg:mt-5 pb-[50px] lg:pb-10 py-10"
@@ -35,9 +35,3 @@ defineProps({
     </div>
   </Teleport>
 </template>
-
-<style scoped>
-.wrapper {
-  background: linear-gradient(187.16deg, #181623b3 0.07%, #191725b3 51.65%, #0d0b14bd 98.75%);
-}
-</style>

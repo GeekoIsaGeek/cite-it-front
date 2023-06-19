@@ -7,7 +7,6 @@ import { capitalize, computed } from 'vue'
 const userStore = useUserStore()
 const username = computed(() => capitalize(userStore.user.username || ''))
 const avatar = useGetAvatar()
-const username = computed(() => capitalize(userStore.user.username || ''))
 </script>
 <template>
   <div class="flex gap-4 items-center">
