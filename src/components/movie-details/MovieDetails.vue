@@ -6,9 +6,13 @@ import PlusIcon from '@/components/icons/ThePlusIcon.vue'
 import QuoteCard from '@/components/movie-details/QuoteCard.vue'
 import { useRouter } from 'vue-router'
 import { computed } from 'vue'
+import { useMovieStore } from '@/stores/movieStore'
+import { provide } from 'vue'
 
 const router = useRouter()
 const movieId = computed(() => router.currentRoute.value.params.id)
+const movieStore = useMovieStore()
+const movie = movieStore.movies[movieId.value]
 
 const navigateToAddQuoteModal = () => {
   router.push({
@@ -18,6 +22,7 @@ const navigateToAddQuoteModal = () => {
     }
   })
 }
+provide('movie', movie)
 </script>
 
 <template>
@@ -30,7 +35,7 @@ const navigateToAddQuoteModal = () => {
       >
         <div class="lg:flex gap-2 text-2xl lg:border-r border-darkGray pr-4">
           <p>{{ $t('movie_details.quotes') }}</p>
-          <p>({{ $t('movies.total') }} 25)</p>
+          <p>({{ $t('movies.total') }} {{ movieStore.count }})</p>
         </div>
         <div class="lg:hidden w-full h-[1px] bg-[#54535A]"></div>
         <AddButton class="px-4 text-xl flex items-center gap-2" @click="navigateToAddQuoteModal">

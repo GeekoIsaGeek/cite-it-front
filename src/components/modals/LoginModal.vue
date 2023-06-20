@@ -16,7 +16,7 @@ import { getServerErrorMessages } from '@/utils/getErrors.js'
 
 const { locale } = useI18n()
 const router = useRouter()
-const { setUser } = useUserStore()
+const { fetchUser } = useUserStore()
 const credentials = reactive({
   usernameOrEmail: null,
   password: null,
@@ -37,9 +37,9 @@ const handleLogin = async () => {
     await request.post('/api/login', updatedCredentials, {
       headers: additionalHeaders
     })
-    const response = await request.get('/api/user')
-    setUser(response.data)
-    router.push({ name: 'home' })
+    await request.get('/api/user')
+    fetchUser()
+    router.push({ name: 'news-feed' })
   } catch (error) {
     serverErrors.value = getServerErrorMessages(error)
   }
