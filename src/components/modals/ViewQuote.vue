@@ -9,7 +9,7 @@ import TopPanel from '@/components/movie-details/view-quote/TheTopPanel.vue'
 
 <template>
   <QuoteModalWrapper>
-    <div class="dialog bg-almostBlack w-1/2 pt-10 pb-8 overflow-y-scroll rounded-xl">
+    <div class="dialog bg-almostBlack lg:w-1/2 pt-10 pb-8 overflow-y-scroll rounded-xl">
       <TopPanel :heading="$t('movie_details.view_quote')" />
       <div class="flex flex-col px-8 gap-11">
         <QuoteAuthor class="text-white mt-8" />
@@ -17,7 +17,7 @@ import TopPanel from '@/components/movie-details/view-quote/TheTopPanel.vue'
         <img
           src="https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
           alt="movie"
-          class="rounded-[10px] w-full h-[30vw]"
+          class="rounded-[10px] w-full h-[300px] lg:h-[30vw] object-cover"
         />
         <PostStatistics class="text-white text-xl py-0" />
         <Comments class="text-white" />

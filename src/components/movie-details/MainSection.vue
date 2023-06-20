@@ -1,6 +1,11 @@
 <script setup>
 import MainSectionHeading from '@/components/movie-details/MainSectionHeading.vue'
 import MainSectionGenres from '@/components/movie-details/MainSectionGenres.vue'
+import { useI18n } from 'vue-i18n'
+import { inject } from 'vue'
+
+const movie = inject('movie')
+const { locale } = useI18n()
 </script>
 
 <template>
@@ -16,12 +21,11 @@ import MainSectionGenres from '@/components/movie-details/MainSectionGenres.vue'
       <MainSectionHeading />
       <MainSectionGenres />
       <p class="text-lg font-bold">
-        {{ $t('movie_details.director') }}: <span class="text-white font-medium">Spielberg</span>
+        {{ $t('movie_details.director') }}:
+        <span class="text-white font-medium">{{ movie.director[locale] }}</span>
       </p>
       <p class="text-lg">
-        In a nursing home, resident Duke reads a romance story to an old woman who has senile
-        dementia with memory loss. In the late 1930s, wealthy seventeen year-old Allie Hamilton is
-        spending summer vacation in Seabrook. Local worker Noah Calhoun meets Allie at a carnival
+        {{ movie.description[locale] }}
       </p>
     </div>
   </div>

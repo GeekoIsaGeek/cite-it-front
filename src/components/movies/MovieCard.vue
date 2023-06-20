@@ -1,27 +1,30 @@
 <script setup>
 import ChatQuoteIcon from '@/components/icons/TheChatQuoteIcon.vue'
 import { RouterLink } from 'vue-router'
-import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-const id = ref(2)
+const props = defineProps({
+  movie: {
+    type: Object,
+    required: true
+  }
+})
+
+const { locale } = useI18n()
 const destinationRoute = {
   name: 'movie-details',
   params: {
-    id: id.value
+    id: props.movie.id
   }
 }
 </script>
 
 <template>
   <div class="w-[calc(100%-32px)] justify-items-center">
-    <img
-      src="https://images4.fanpop.com/image/polls/769000/769993_1310246958714_full.jpg?v=1310247861"
-      alt="movie image"
-      class="rounded-xl object-cover h-full mb-4"
-    />
-    <RouterLink :to="destinationRoute" class="text-2xl mt-4 mb-[18px] hover:text-[#cbbbff]"
-      >Liki Malibus (2021)</RouterLink
-    >
+    <img :src="props.movie.poster" alt="movie image" class="rounded-xl object-cover mb-4" />
+    <RouterLink :to="destinationRoute" class="text-2xl mt-4 mb-[18px] hover:text-[#cbbbff]">
+      {{ props.movie.name[locale] }}
+    </RouterLink>
     <div class="flex items-center gap-3">
       <span class="text-xl">10</span>
       <ChatQuoteIcon />

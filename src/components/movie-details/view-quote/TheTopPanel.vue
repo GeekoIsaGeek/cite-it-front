@@ -33,7 +33,7 @@ const handleClose = () => {
     <button class="flex items-center gap-2" v-else>
       <TheDeleteIcon />{{ $t('movie_details.delete') }}
     </button>
-    <h2 class="text-2xl text-white">{{ heading }}</h2>
+    <h2 class="hidden lg:block text-2xl text-white">{{ heading }}</h2>
     <TheCloselIcon class="relative text-white top-[0]" @click="handleClose" />
   </div>
 </template>
