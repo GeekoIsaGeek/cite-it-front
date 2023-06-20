@@ -10,9 +10,9 @@ import { useMovieStore } from '@/stores/movieStore'
 import { provide } from 'vue'
 
 const router = useRouter()
-const movieId = computed(() => router.currentRoute.value.params.id)
 const movieStore = useMovieStore()
-const movie = movieStore.movies[movieId.value]
+const movieId = computed(() => router.currentRoute.value.params.id)
+const movie = movieStore.movies[movieId.value - 1]
 
 const navigateToAddQuoteModal = () => {
   router.push({
