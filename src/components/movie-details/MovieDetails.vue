@@ -12,7 +12,7 @@ import { provide } from 'vue'
 const router = useRouter()
 const movieStore = useMovieStore()
 const movieId = computed(() => router.currentRoute.value.params.id)
-const movie = movieStore.movies[movieId.value - 1]
+const movie = movieStore.movies.find((el) => parseInt(movieId.value) === el.id)
 
 const navigateToAddQuoteModal = () => {
   router.push({

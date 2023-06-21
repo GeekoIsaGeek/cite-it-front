@@ -1,13 +1,15 @@
 <script setup>
 import { Form } from 'vee-validate'
 import FormField from '@/components/UI/AddPostFormInput.vue'
-import AddMovieWrapper from '@/components/shared/AddNewPostModalWrapper.vue'
+import ModalWrapper from '@/components/shared/AddNewPostModalWrapper.vue'
 import UploadImage from '@/components/UI/ImageUploader.vue'
 import AddButton from '@/components/UI/RedButton.vue'
 import { useGeneralStore } from '@/stores/generalStore.js'
 import MovieGenres from '@/components/movies/MovieGenres.vue'
 import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const { setShowAddMovieModal } = useGeneralStore()
 const movieDetails = reactive({
   name: null,
@@ -23,9 +25,9 @@ const movieDetails = reactive({
 </script>
 
 <template>
-  <AddMovieWrapper
+  <ModalWrapper
     :heading="$t('movies.add_movie')"
-    :handleClose="() => setShowAddMovieModal(false)"
+    :handleClose="() => router.push({ name: 'movies' })"
   >
     <Form class="flex flex-col gap-6">
       <FormField
@@ -89,5 +91,5 @@ const movieDetails = reactive({
       <UploadImage previewImage v-model="movieDetails.image" />
       <AddButton>Add</AddButton>
     </Form>
-  </AddMovieWrapper>
+  </ModalWrapper>
 </template>

@@ -1,11 +1,11 @@
 <script setup>
 import AvatarPlaceholder from '@/assets/images/Profile_avatar_placeholder_large.png'
 import { useUserStore } from '@/stores/userStore'
-import useGetAvatar from '@/composables/useGetAvatar'
+import useGetImagePath from '@/composables/useGetImagePath.js'
 import { ref } from 'vue'
 
 const userStore = useUserStore()
-const avatar = ref(useGetAvatar())
+const avatar = ref(useGetImagePath(userStore.user.profile_picture))
 
 const uploadImage = (event) => {
   const image = event.target.files[0]

@@ -5,7 +5,7 @@ import TheCameraIcon from '@/components/icons/TheCameraIcon.vue'
 import TheHomeIcon from '@/components/icons/TheHomeIcon.vue'
 import Close from '@/components/icons/TheCloseIcon.vue'
 import { useGeneralStore } from '@/stores/generalStore'
-import useGetAvatar from '@/composables/useGetAvatar.js'
+import useGetImagePath from '@/composables/useGetImagePath.js'
 import { useUserStore } from '@/stores/userStore.js'
 import { capitalize, computed } from 'vue'
 import { useRoute } from 'vue-router'
@@ -13,7 +13,7 @@ import { useRoute } from 'vue-router'
 const generalStore = useGeneralStore()
 const userStore = useUserStore()
 const route = useRoute()
-const avatar = useGetAvatar()
+const avatar = useGetImagePath(userStore.user.profile_picture)
 const username = computed(() => capitalize(userStore.user?.username || ''))
 const closeNavigationMenu = () => generalStore.setShowMobileNavigation(false)
 const isMoviesRoute = computed(() => route.name === 'movies' || route.name === 'movie-details')

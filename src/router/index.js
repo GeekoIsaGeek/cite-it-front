@@ -11,6 +11,7 @@ import ViewQuote from '@/components/modals/ViewQuote.vue'
 import NewsFeedWrapper from '@/components/news-feed/NewsFeedWrapper.vue'
 import EditQuote from '@/components/modals/EditQuote.vue'
 import AddNewQuote from '@/components/modals/AddQuoteFromMovie.vue'
+import EditMovie from '@/components/modals/EditMovie.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -68,6 +69,14 @@ const router = createRouter({
       path: '/movie/:id',
       name: 'movie-details',
       component: MovieDetails
+    },
+    {
+      path: '/movie/:id/edit',
+      name: 'edit-movie',
+      components: {
+        overlay: EditMovie,
+        default: MoviesView
+      }
     },
     {
       path: '/movie/:id/add-quote',

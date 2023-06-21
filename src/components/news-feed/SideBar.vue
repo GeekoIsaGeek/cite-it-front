@@ -5,13 +5,13 @@ import TheCameraIcon from '@/components/icons/TheCameraIcon.vue'
 import TheHomeIcon from '@/components/icons/TheHomeIcon.vue'
 import { useUserStore } from '@/stores/userStore.js'
 import { capitalize, computed } from 'vue'
-import useGetAvatar from '@/composables/useGetAvatar'
+import useGetImagePath from '@/composables/useGetImagePath.js'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const userStore = useUserStore()
 const username = computed(() => capitalize(userStore.user?.username || ''))
-const avatar = useGetAvatar()
+const avatar = useGetImagePath(userStore.user.profile_picture)
 const isMoviesRoute = computed(() => route.name === 'movies' || route.name === 'movie-details')
 </script>
 

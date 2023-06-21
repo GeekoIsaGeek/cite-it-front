@@ -8,7 +8,7 @@ import ThePhotoCameraIcon from '@/components/icons/ThePhotoCameraIcon.vue'
 import { Form } from 'vee-validate'
 import { ref } from 'vue'
 
-const handleImageChange = (event) => {}
+const handleImageChange = () => {}
 
 const quote = ref(null)
 const quote_ka = ref(null)

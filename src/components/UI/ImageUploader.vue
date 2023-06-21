@@ -1,5 +1,6 @@
 <script setup>
 import CameraIcon from '@/components/icons/ThePhotoCameraIcon.vue'
+import { ref } from 'vue'
 import { computed } from 'vue'
 
 defineProps({
@@ -13,13 +14,15 @@ defineProps({
   }
 })
 const emit = defineEmits(['update:modelValue'])
+const binaryString = ref(null)
 const isDesktopDevice = computed(() => window.innerWidth > 960)
 
 const handleUpload = (file) => {
   if (file && file.type.startsWith('image/')) {
+    emit('update:modelValue', file)
     const reader = new FileReader()
     reader.onload = (loadEvent) => {
-      emit('update:modelValue', loadEvent.target.result)
+      binaryString.value = loadEvent.target.result
     }
     reader.readAsDataURL(file)
   }
@@ -54,7 +57,7 @@ const fileInputChange = (e) => {
   >
     <img
       v-if="previewImage && modelValue"
-      :src="modelValue"
+      :src="binaryString"
       alt="movie"
       class="min-w-[50%] h-36 object-contain"
     />
