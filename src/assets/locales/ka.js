@@ -119,6 +119,7 @@ export default {
 
   // Error Messages and General Responses
   messages: {
-    changes_are_not_bilingual: 'აუცილებელია დაარედაქტიროთ ორივე ენაზე'
+    changes_are_not_bilingual: 'აუცილებელია დაარედაქტიროთ ორივე ენაზე',
+    invalid_form: 'დარწმუნდით, რომ ყველა ველი ვალიდურია'
   }
 }
