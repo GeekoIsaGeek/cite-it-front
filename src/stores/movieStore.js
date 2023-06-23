@@ -19,6 +19,15 @@ export const useMovieStore = defineStore('movie', {
     addNewMovie(movie) {
       this.movies.push(movie)
     },
+    updateMovies(updateMovie) {
+      const movieId = updateMovie.id
+      this.movies = this.movies.map((movie) => {
+        if (movie.id === movieId) {
+          return updateMovie
+        }
+        return movie
+      })
+    },
     async fetchMovies() {
       const response = await request.get('/api/movies')
       this.movies = response.data

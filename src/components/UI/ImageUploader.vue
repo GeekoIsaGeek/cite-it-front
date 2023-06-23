@@ -2,8 +2,9 @@
 import CameraIcon from '@/components/icons/ThePhotoCameraIcon.vue'
 import { ref } from 'vue'
 import { computed } from 'vue'
+import useGetImagePath from '@/composables/useGetImagePath.js'
 
-defineProps({
+const props = defineProps({
   previewImage: {
     type: Boolean,
     required: false
@@ -14,15 +15,23 @@ defineProps({
   }
 })
 const emit = defineEmits(['update:modelValue'])
-const binaryString = ref(null)
+const imageAsbinaryString = ref(null)
 const isDesktopDevice = computed(() => window.innerWidth > 960)
+
+const imageSource = computed(() => {
+  const source = props.modelValue
+  if (typeof source === 'string') {
+    return useGetImagePath(source)
+  }
+  return imageAsbinaryString.value
+})
 
 const handleUpload = (file) => {
   if (file && file.type.startsWith('image/')) {
     emit('update:modelValue', file)
     const reader = new FileReader()
     reader.onload = (loadEvent) => {
-      binaryString.value = loadEvent.target.result
+      imageAsbinaryString.value = loadEvent.target.result
     }
     reader.readAsDataURL(file)
   }
@@ -57,7 +66,7 @@ const fileInputChange = (e) => {
   >
     <img
       v-if="previewImage && modelValue"
-      :src="binaryString"
+      :src="imageSource"
       alt="movie"
       class="min-w-[50%] h-36 object-contain"
     />

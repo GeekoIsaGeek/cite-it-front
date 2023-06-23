@@ -33,7 +33,10 @@ const movieDetails = reactive({
 const handleAdd = async ({ valid, touched }) => {
   const isFormValid = valid && touched && movieDetails.genre.length > 0 && movieDetails.poster
   const formData = new FormData()
-  Object.entries(movieDetails).forEach((field) => formData.append(field[0], field[1]))
+  formData.append('genre', movieDetails.genre)
+  Object.entries(movieDetails).forEach((field) => {
+    if (field[0] !== 'genre') formData.append(field[0], field[1])
+  })
 
   try {
     if (isFormValid) {

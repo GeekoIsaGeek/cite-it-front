@@ -1,4 +1,4 @@
-const useGetImagePath = (picture) => {
+export default (picture) => {
   const serverUrl = import.meta.env.VITE_SERVER_URL
 
   if (!picture) return null
@@ -8,5 +8,3 @@ const useGetImagePath = (picture) => {
     return picture
   }
 }
-
-export default useGetImagePath

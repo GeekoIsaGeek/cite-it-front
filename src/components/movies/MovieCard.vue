@@ -22,7 +22,11 @@ const destinationRoute = {
 
 <template>
   <div class="w-[calc(100%-32px)] justify-items-center">
-    <img :src="image" alt="movie image" class="rounded-xl object-cover mb-4 w-[440px] h-[370px]" />
+    <img
+      :src="image"
+      alt="movie image"
+      class="rounded-xl object-cover mb-4 w-[358px] h-[302px] md:w-[440px] md:h-[370px]"
+    />
     <RouterLink :to="destinationRoute" class="text-2xl mt-4 mb-[18px] hover:text-[#cbbbff]">
       {{ props.movie.name[locale] }}
     </RouterLink>

@@ -2,7 +2,7 @@
 import GenreOption from '@/components/UI/GenreOption.vue'
 import PlusIcon from '@/components/icons/ThePlusIcon.vue'
 import genresList from '@/stores/genres.js'
-import { ref, toRef } from 'vue'
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const props = defineProps({
@@ -12,11 +12,17 @@ const props = defineProps({
   }
 })
 
-const selectedGenres = toRef(props.modelValue)
+const selectedGenres = ref(props.modelValue)
 const emit = defineEmits(['update:modelValue'])
 const { locale } = useI18n()
 const genres = ref(genresList[locale.value])
 const showGenres = ref(false)
+
+if (selectedGenres.value.length > 0) {
+  selectedGenres.value = selectedGenres.value.map(
+    (genre, index) => Object.values(genres.value)[index]
+  )
+}
 
 const handleRemove = (genreToBeDeleted) => {
   selectedGenres.value = selectedGenres.value.filter((genre) => genre !== genreToBeDeleted)
