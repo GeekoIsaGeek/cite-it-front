@@ -62,7 +62,6 @@ const handleFormSubmit = async () => {
         'Content-Type': 'multipart/form-data'
       }
     })
-    console.log(typeof updateMovies)
     movieStore.updateMovies(response.data)
     router.push({ name: 'movies' })
   } catch (error) {

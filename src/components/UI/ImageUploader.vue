@@ -15,7 +15,7 @@ const props = defineProps({
   }
 })
 const emit = defineEmits(['update:modelValue'])
-const imageAsbinaryString = ref(null)
+const imageAsBinaryString = ref(null)
 const isDesktopDevice = computed(() => window.innerWidth > 960)
 
 const imageSource = computed(() => {
@@ -23,7 +23,7 @@ const imageSource = computed(() => {
   if (typeof source === 'string') {
     return useGetImagePath(source)
   }
-  return imageAsbinaryString.value
+  return imageAsBinaryString.value
 })
 
 const handleUpload = (file) => {
@@ -31,7 +31,7 @@ const handleUpload = (file) => {
     emit('update:modelValue', file)
     const reader = new FileReader()
     reader.onload = (loadEvent) => {
-      imageAsbinaryString.value = loadEvent.target.result
+      imageAsBinaryString.value = loadEvent.target.result
     }
     reader.readAsDataURL(file)
   }
