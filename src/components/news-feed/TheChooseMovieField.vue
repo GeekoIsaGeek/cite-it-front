@@ -2,10 +2,28 @@
 import CameraIcon from '@/components/icons/TheCameraIcon.vue'
 import TheArrowDownIcon from '@/components/icons/TheArrowDownIcon.vue'
 import { ref } from 'vue'
+import { useMovieStore } from '@/stores/movieStore.js'
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
+const props = defineProps({
+  setMovie: {
+    type: Function,
+    required: true
+  }
+})
 const showMovieList = ref(false)
 const selectedMovie = ref(null)
-const movies = ['kai filmi', 'ufro kargi filmi', 'rac umfro kargs gaaketeben']
+const movieStore = useMovieStore()
+const { locale } = useI18n()
+
+const handleSelect = (selectedMovieName) => {
+  selectedMovie.value = selectedMovieName
+  props.setMovie(selectedMovieName)
+}
+const movieNames = computed(() => {
+  return Object.values(movieStore.movies).map((movie) => movie.name[locale.value])
+})
 </script>
 
 <template>
@@ -25,10 +43,10 @@ const movies = ['kai filmi', 'ufro kargi filmi', 'rac umfro kargs gaaketeben']
     >
       <ul class="rounded-b-[4px]">
         <li
-          v-for="(movie, index) in movies"
+          v-for="(movie, index) in movieNames"
           :key="index"
           class="w-full px-4 lg:text-xl py-4 hover:bg-[#1c192c]"
-          @click="(e) => (selectedMovie = e.target.innerText)"
+          @click="(e) => handleSelect(e.target.innerText)"
         >
           {{ movie }}
         </li>

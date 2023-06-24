@@ -8,10 +8,13 @@ import { useMovieStore } from '@/stores/movieStore'
 import { ref } from 'vue'
 import { watch } from 'vue'
 import { storeToRefs } from 'pinia'
+import NothingFoundMessage from '@/components/shared/NothingFoundMessage.vue'
 
 const { searchString, showAddMovieModal } = storeToRefs(useGeneralStore())
 const { movies: movieList } = storeToRefs(useMovieStore())
 const movies = ref([...movieList.value])
+
+watch(movieList.value, (updatedList) => (movies.value = updatedList))
 
 watch(searchString, (updatedSearchString) => {
   if (updatedSearchString === '') {
@@ -32,9 +35,11 @@ watch(searchString, (updatedSearchString) => {
       <TopPanel />
       <div
         class="grid grid-auto-fill-sm lg:grid-auto-fill justify-items-center gap-y-10 gap-x-[10px]"
+        v-if="movies.length > 0"
       >
         <MovieCard v-for="movie in movies" :key="movie.id" :movie="movie" />
       </div>
+      <NothingFoundMessage class="pl-5" v-else />
     </div>
     <AddNewMovie v-if="showAddMovieModal" />
   </Wrapper>

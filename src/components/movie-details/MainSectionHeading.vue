@@ -16,15 +16,17 @@ const navigateToEditMoviePage = () => {
   router.push({
     name: 'edit-movie',
     params: {
-      id: movie.id
+      id: movie.value.id
     }
   })
 }
 
 const handleDelete = async () => {
-  const response = await request.delete(`/api/movies/${movie.id}`)
+  const response = await request.delete(`/api/movies/${movie.value.id}`)
   if (response.status === 200) {
-    const updatedMovies = movieStore.movies.filter((currentMovie) => currentMovie.id !== movie.id)
+    const updatedMovies = movieStore.movies.filter(
+      (currentMovie) => currentMovie.id !== movie.value.id
+    )
     movieStore.setMovies(updatedMovies)
     router.push({ name: 'movies' })
   }

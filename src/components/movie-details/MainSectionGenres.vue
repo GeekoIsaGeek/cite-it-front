@@ -10,7 +10,7 @@ const { locale } = useI18n()
 const genres = ref([])
 
 watchEffect(() => {
-  genres.value = getLocalizedGenres(movie.genre.split(','), locale.value)
+  genres.value = getLocalizedGenres(movie.value.genre.split(','), locale.value)
 }, locale.value)
 </script>
 

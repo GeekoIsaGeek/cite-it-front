@@ -6,7 +6,3 @@ export const validatePassword = (password) => {
   const max15LowerCaseChars = hasLowerCaseCharsOnly && charCount <= 15
   return { min8Chars, max15LowerCaseChars }
 }
-
-export const getSlug = (str) => {
-  return str.replace(/\s+/g, '-').toLowerCase()
-}

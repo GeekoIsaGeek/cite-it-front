@@ -6,7 +6,7 @@ import { useI18n } from 'vue-i18n'
 import { inject } from 'vue'
 
 const movie = inject('movie')
-const image = useGetImagePath(movie.poster)
+const image = useGetImagePath(movie.value.poster)
 const { locale } = useI18n()
 </script>
 

@@ -12,8 +12,6 @@ const props = defineProps({
   }
 })
 const imageSource = computed(() => useGetImagePath(props.movie.poster))
-const name = computed(() => props.movie.name[locale.value])
-const director = computed(() => props.movie.director[locale.value])
 
 const genres = computed(() => {
   const genres = props.movie.genre.split(',')
@@ -27,7 +25,7 @@ const genres = computed(() => {
       <img :src="imageSource" alt="movie" class="rounded-xl h-full w-full object-cover" />
     </div>
     <div class="flex flex-col gap-2 lg:gap-5">
-      <h2 class="text-[#DDCCAA] lg:text-2xl font-bold">{{ name }}</h2>
+      <h2 class="text-[#DDCCAA] lg:text-2xl font-bold">{{ movie.name[locale] }}</h2>
       <ul class="flex items-center gap-2 flex-wrap">
         <li
           v-for="genre in genres"
@@ -41,7 +39,7 @@ const genres = computed(() => {
         <span class="text-lightGray lg:text-lg font-bold"
           >{{ $t('movie_details.director') }}:
         </span>
-        {{ director }}
+        {{ movie.director[locale] }}
       </p>
     </div>
   </div>

@@ -5,6 +5,13 @@ import TheThrashIcon from '@/components/icons/TheTrashIcon.vue'
 import { useRouter } from 'vue-router'
 import { computed } from 'vue'
 
+defineProps({
+  handleDelete: {
+    type: Function,
+    required: true
+  }
+})
+
 const router = useRouter()
 const postId = computed(() => router.currentRoute.value.params.id)
 
@@ -43,7 +50,7 @@ const navigateToEditQuoteModal = () => {
     </div>
     <div class="flex items-center gap-5">
       <TheThrashIcon />
-      <button class="hover:text-gray-400">
+      <button class="hover:text-gray-400" @click="handleDelete">
         {{ $t('movie_details.delete') }}
       </button>
     </div>
