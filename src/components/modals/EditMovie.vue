@@ -1,35 +1,83 @@
 <script setup>
 import { Form } from 'vee-validate'
 import FormField from '@/components/UI/AddPostFormInput.vue'
-import AddMovieWrapper from '@/components/shared/AddNewPostModalWrapper.vue'
+import ModalWrapper from '@/components/shared/AddNewPostModalWrapper.vue'
 import UploadImage from '@/components/UI/ImageUploader.vue'
-import AddButton from '@/components/UI/RedButton.vue'
-import { useGeneralStore } from '@/stores/generalStore.js'
+import EditButton from '@/components/UI/RedButton.vue'
 import MovieGenres from '@/components/movies/MovieGenres.vue'
 import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
+import { computed } from 'vue'
+import { useMovieStore } from '@/stores/movieStore.js'
+import request from '@/config/axiosInstance.js'
+import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { editsAreMadeInBothLanguages } from '@/utils/validations.js'
+import { getServerErrorMessages } from '@/utils/getErrors.js'
+import { storeToRefs } from 'pinia'
 
-const { setShowAddMovieModal } = useGeneralStore()
+const router = useRouter()
+const { t } = useI18n()
+const { movies } = storeToRefs(useMovieStore())
+const movieStore = useMovieStore()
+const movieId = computed(() => router.currentRoute.value.params.id)
+const movie = movies.value.find((el) => parseInt(movieId.value) === el.id)
+
 const movieDetails = reactive({
-  name: null,
-  name_ka: null,
-  genres: [],
-  year: null,
-  director: null,
-  director_ka: null,
-  description: null,
-  description_ka: null,
-  image: null
+  name: movie.name.en,
+  name_ka: movie.name.ka,
+  genre: movie.genre.split(','),
+  release_date: movie.release_date,
+  director: movie.director.en,
+  director_ka: movie.director.ka,
+  description: movie.description.en,
+  description_ka: movie.description.ka,
+  poster: movie.poster
 })
+const errorMessage = ref(null)
+const initialValues = { ...movieDetails }
+
+const handleFormSubmit = async () => {
+  const data = {}
+  for (const key in movieDetails) {
+    if (movieDetails[key] !== initialValues[key]) {
+      data[key] = movieDetails[key]
+    }
+  }
+
+  try {
+    errorMessage.value = null
+    // User must not be able to make a request if changes are not made in both language fields
+    if (
+      editsAreMadeInBothLanguages(data, 'name', 'name_ka') === false ||
+      editsAreMadeInBothLanguages(data, 'director', 'director_ka') === false ||
+      editsAreMadeInBothLanguages(data, 'description', 'description_ka') === false
+    ) {
+      throw new Error(t('messages.changes_are_not_bilingual'))
+    }
+    const formData = new FormData()
+    Object.entries(data).forEach((field) => formData.append(field[0], field[1]))
+    const response = await request.post(`/api/movies/${movie.id}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    movieStore.updateMovies(response.data)
+    router.push({ name: 'movies' })
+  } catch (error) {
+    errorMessage.value = error.message || getServerErrorMessages(error)
+  }
+}
 </script>
 
 <template>
-  <AddMovieWrapper
-    :heading="$t('movies.add_movie')"
-    :handleClose="() => setShowAddMovieModal(false)"
+  <ModalWrapper
+    :heading="$t('movies.edit_movie')"
+    :handleClose="() => router.push({ name: 'movies' })"
   >
-    <Form class="flex flex-col gap-6">
+    <Form class="flex flex-col gap-6" :initial-values="initialValues">
       <FormField
-        name="movie_name"
+        name="name"
         rules="only_latin|required"
         placeholder="Movie name"
         language="Eng"
@@ -37,19 +85,19 @@ const movieDetails = reactive({
         v-model="movieDetails.name"
       />
       <FormField
-        name="movie_name_ka"
+        name="name_ka"
         rules="only_georgian|required"
         placeholder="ფილმის სახელი"
         language="ქარ"
         showLabel
         v-model="movieDetails.name_ka"
       />
-      <MovieGenres v-model="movieDetails.genres" />
+      <MovieGenres v-model="movieDetails.genre" />
       <FormField
-        name="year"
+        name="release_date"
         rules="required"
         placeholder="წელი/Year"
-        v-model="movieDetails.year"
+        v-model="movieDetails.release_date"
         showLabel
       />
       <FormField
@@ -86,8 +134,9 @@ const movieDetails = reactive({
         showLabel
         v-model="movieDetails.description_ka"
       />
-      <UploadImage previewImage v-model="movieDetails.image" />
-      <AddButton>Add</AddButton>
+      <UploadImage previewImage v-model="movieDetails.poster" />
+      <p v-if="errorMessage" class="text-redFail text-lg">{{ errorMessage }}</p>
+      <EditButton @click="handleFormSubmit">{{ $t('movies.edit_movie') }}</EditButton>
     </Form>
-  </AddMovieWrapper>
+  </ModalWrapper>
 </template>

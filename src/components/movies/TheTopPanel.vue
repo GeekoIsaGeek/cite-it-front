@@ -8,6 +8,7 @@ import { useMovieStore } from '@/stores/movieStore'
 
 const { setShowAddMovieModal } = useGeneralStore()
 const movieStore = useMovieStore()
+const generalStore = useGeneralStore()
 
 const movieCount = computed(() => movieStore.movies.length)
 </script>
@@ -25,6 +26,7 @@ const movieCount = computed(() => movieStore.movies.length)
           type="text"
           class="bg-transparent outline-none text-xl w-16 focus:w-36 transition-width duration-300 ease-out"
           :placeholder="$t('news_feed.search')"
+          @input="(e) => generalStore.setSearchString(e.target.value)"
         />
       </div>
       <AddButton

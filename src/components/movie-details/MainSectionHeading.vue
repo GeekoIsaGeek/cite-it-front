@@ -3,10 +3,32 @@ import TrashIcon from '@/components/icons/TheTrashIcon.vue'
 import PencilIcon from '@/components/icons/TheEditIcon.vue'
 import { inject } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
+import request from '@/config/axiosInstance.js'
+import { useMovieStore } from '@/stores/movieStore.js'
 
+const router = useRouter()
 const { locale } = useI18n()
 const movie = inject('movie')
-console.log(movie)
+const movieStore = useMovieStore()
+
+const navigateToEditMoviePage = () => {
+  router.push({
+    name: 'edit-movie',
+    params: {
+      id: movie.id
+    }
+  })
+}
+
+const handleDelete = async () => {
+  const response = await request.delete(`/api/movies/${movie.id}`)
+  if (response.status === 200) {
+    const updatedMovies = movieStore.movies.filter((currentMovie) => currentMovie.id !== movie.id)
+    movieStore.setMovies(updatedMovies)
+    router.push({ name: 'movies' })
+  }
+}
 </script>
 
 <template>
@@ -17,9 +39,9 @@ console.log(movie)
     <div
       class="bg-[#24222F] flex min-w-max self-start lg:self-auto items-center py-[10px] gap-7 rounded-[10px] px-7"
     >
-      <PencilIcon class="cursor-pointer" />
+      <PencilIcon class="cursor-pointer" @click="navigateToEditMoviePage" />
       <div class="h-[24px] w-[1px] bg-darkGray"></div>
-      <TrashIcon class="cursor-pointer" />
+      <TrashIcon class="cursor-pointer" @click="handleDelete" />
     </div>
   </div>
 </template>

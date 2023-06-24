@@ -92,6 +92,7 @@ export default {
     list_of_my_movies: 'List of my movies',
     total: 'Total',
     add_movie: 'Add movie',
+    edit_movie: 'Edit movie',
     genre: 'Genre'
   },
   movie_details: {
@@ -113,5 +114,10 @@ export default {
     new: 'New',
     mins_ago: 'mins ago',
     days_ago: 'days ago'
+  },
+
+  // Error Messages and General Responses
+  messages: {
+    changes_are_not_bilingual: 'You should edit fields in both languages'
   }
 }

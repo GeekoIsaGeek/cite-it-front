@@ -1,5 +1,6 @@
 <script setup>
 import ChatQuoteIcon from '@/components/icons/TheChatQuoteIcon.vue'
+import useGetImagePath from '@/composables/useGetImagePath.js'
 import { RouterLink } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 
@@ -9,7 +10,7 @@ const props = defineProps({
     required: true
   }
 })
-
+const image = useGetImagePath(props.movie.poster)
 const { locale } = useI18n()
 const destinationRoute = {
   name: 'movie-details',
@@ -21,7 +22,11 @@ const destinationRoute = {
 
 <template>
   <div class="w-[calc(100%-32px)] justify-items-center">
-    <img :src="props.movie.poster" alt="movie image" class="rounded-xl object-cover mb-4" />
+    <img
+      :src="image"
+      alt="movie image"
+      class="rounded-xl object-cover mb-4 w-[358px] h-[302px] md:w-[440px] md:h-[370px]"
+    />
     <RouterLink :to="destinationRoute" class="text-2xl mt-4 mb-[18px] hover:text-[#cbbbff]">
       {{ props.movie.name[locale] }}
     </RouterLink>

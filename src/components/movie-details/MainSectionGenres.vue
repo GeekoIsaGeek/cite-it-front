@@ -1,7 +1,17 @@
 <script setup>
+import { inject } from 'vue'
+import { getLocalizedGenres } from '@/utils/localizationUtils.js'
+import { useI18n } from 'vue-i18n'
+import { watchEffect } from 'vue'
 import { ref } from 'vue'
 
-const genres = ref(['Drama', 'Thriller'])
+const movie = inject('movie')
+const { locale } = useI18n()
+const genres = ref([])
+
+watchEffect(() => {
+  genres.value = getLocalizedGenres(movie.genre.split(','), locale.value)
+}, locale.value)
 </script>
 
 <template>

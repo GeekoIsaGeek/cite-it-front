@@ -6,20 +6,53 @@ import UploadImage from '@/components/UI/ImageUploader.vue'
 import AddButton from '@/components/UI/RedButton.vue'
 import { useGeneralStore } from '@/stores/generalStore.js'
 import MovieGenres from '@/components/movies/MovieGenres.vue'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
+import request from '@/config/axiosInstance.js'
+import { useI18n } from 'vue-i18n'
+import { getServerErrorMessages } from '@/utils/getErrors.js'
+import { useMovieStore } from '@/stores/movieStore.js'
+import ServerErrors from '@/components/shared/ServerErrors.vue'
+
+const { locale } = useI18n()
+const serverErrors = ref(null)
+const movieStore = useMovieStore()
 
 const { setShowAddMovieModal } = useGeneralStore()
 const movieDetails = reactive({
   name: null,
   name_ka: null,
-  genres: [],
-  year: null,
+  genre: [],
+  release_date: null,
   director: null,
   director_ka: null,
   description: null,
   description_ka: null,
-  image: null
+  poster: null
 })
+
+const handleAdd = async ({ valid, touched }) => {
+  const isFormValid = valid && touched && movieDetails.genre.length > 0 && movieDetails.poster
+  const formData = new FormData()
+  formData.append('genre', movieDetails.genre)
+  Object.entries(movieDetails).forEach((field) => {
+    if (field[0] !== 'genre') formData.append(field[0], field[1])
+  })
+
+  try {
+    if (isFormValid) {
+      const response = await request.post('/api/movies', formData, {
+        headers: {
+          'Accept-Language': locale.value,
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      movieStore.addNewMovie(response.data)
+      setShowAddMovieModal(false)
+    }
+  } catch (error) {
+    serverErrors.value = getServerErrorMessages(error)
+  }
+}
 </script>
 
 <template>
@@ -27,7 +60,7 @@ const movieDetails = reactive({
     :heading="$t('movies.add_movie')"
     :handleClose="() => setShowAddMovieModal(false)"
   >
-    <Form class="flex flex-col gap-6">
+    <Form class="flex flex-col gap-6" v-slot="{ meta }">
       <FormField
         name="movie_name"
         rules="only_latin|required"
@@ -42,8 +75,13 @@ const movieDetails = reactive({
         language="ქარ"
         v-model="movieDetails.name_ka"
       />
-      <MovieGenres v-model="movieDetails.genres" />
-      <FormField name="year" rules="required" placeholder="წელი/Year" v-model="movieDetails.year" />
+      <MovieGenres v-model="movieDetails.genre" />
+      <FormField
+        name="year"
+        rules="required"
+        placeholder="წელი/Year"
+        v-model="movieDetails.release_date"
+      />
       <FormField
         name="director"
         rules="only_latin|required"
@@ -74,8 +112,9 @@ const movieDetails = reactive({
         isTextArea
         v-model="movieDetails.description_ka"
       />
-      <UploadImage previewImage v-model="movieDetails.image" />
-      <AddButton>Add</AddButton>
+      <UploadImage previewImage v-model="movieDetails.poster" />
+      <ServerErrors :errors="serverErrors" />
+      <AddButton @click="() => handleAdd(meta)">Add</AddButton>
     </Form>
   </AddMovieWrapper>
 </template>

@@ -28,7 +28,7 @@ const navigateToEditQuoteModal = () => {
 </script>
 
 <template>
-  <div class="bg-[#24222F] rounded-[10px] px-10 py-8 flex flex-col gap-8 max-w-max min-w-max">
+  <div class="bg-[#24222F] rounded-[10px] px-10 py-8 flex flex-col gap-8 max-h-max min-w-max">
     <div class="flex items-center gap-5">
       <TheEyeIcon />
       <button class="hover:text-gray-400" @click="navigateToViewQuoteModal">

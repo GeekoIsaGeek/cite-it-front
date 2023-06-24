@@ -93,6 +93,7 @@ export default {
     list_of_my_movies: 'ჩემი ფილმები',
     total: 'სულ',
     add_movie: 'დამატება',
+    edit_movie: 'ციტატის რედაქტირება',
     genre: 'ჟანრი'
   },
   movie_details: {
@@ -114,5 +115,10 @@ export default {
     new: 'ახალი',
     mins_ago: 'წუთის წინ',
     days_ago: 'დღის წინ'
+  },
+
+  // Error Messages and General Responses
+  messages: {
+    changes_are_not_bilingual: 'აუცილებელია დაარედაქტიროთ ორივე ენაზე'
   }
 }

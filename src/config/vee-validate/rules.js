@@ -12,10 +12,10 @@ defineRule('only_lowercase', (value) => {
   return RegExp(/^[a-z][a-z0-9_.]*$/).test(value)
 })
 defineRule('only_georgian', (value) => {
-  return RegExp(/^[ა-ჰ]*$/).test(value)
+  return RegExp(/^[ა-ჰ\s]*$/).test(value)
 })
 defineRule('only_latin', (value) => {
-  return RegExp(/^[a-zA-Z]*$/).test(value)
+  return RegExp(/^[a-zA-Z\s]*$/).test(value)
 })
 
 configure({

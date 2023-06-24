@@ -1,12 +1,12 @@
 <script setup>
 import { useUserStore } from '@/stores/userStore.js'
-import useGetAvatar from '@/composables/useGetAvatar.js'
+import useGetImagePath from '@/composables/useGetImagePath.js'
 import avatarPlaceholder from '@/assets/images/Profile_avatar_placeholder_large.png'
 import { capitalize, computed } from 'vue'
 
 const userStore = useUserStore()
 const username = computed(() => capitalize(userStore.user.username || ''))
-const avatar = useGetAvatar()
+const avatar = useGetImagePath(userStore.user.profile_picture)
 </script>
 <template>
   <div class="flex gap-4 items-center">
