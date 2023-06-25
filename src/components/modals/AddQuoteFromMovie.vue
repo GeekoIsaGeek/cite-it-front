@@ -13,7 +13,7 @@ import { ref, computed, reactive } from 'vue'
 import { storeToRefs } from 'pinia'
 import ServerErrors from '@/components/shared/ServerErrors.vue'
 import fillFormData from '@/utils/fillFormData'
-import useAddNewPost from '@/composables/useAddNewPost'
+import useSendPostRequest from '@/composables/useSendPostRequest.js'
 
 const quoteData = reactive({
   quote: null,
@@ -37,7 +37,7 @@ const handleCancel = () => {
   })
 }
 
-const addNewPost = useAddNewPost()
+const addNewPost = useSendPostRequest()
 
 const handleSubmit = async ({ touched, valid }) => {
   errorMessages.value = []

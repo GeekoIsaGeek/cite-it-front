@@ -10,7 +10,7 @@ import { reactive, ref } from 'vue'
 import { useMovieStore } from '@/stores/movieStore.js'
 import ServerErrors from '@/components/shared/ServerErrors.vue'
 import fillFormData from '@/utils/fillFormData.js'
-import useAddNewPost from '@/composables/useAddNewPost'
+import useSendPostRequest from '@/composables/useSendPostRequest.js'
 
 const serverErrors = ref([])
 const movieStore = useMovieStore()
@@ -28,7 +28,7 @@ const movieDetails = reactive({
   poster: null
 })
 
-const addNewPost = useAddNewPost()
+const addNewPost = useSendPostRequest()
 
 const AddNewMovie = async ({ valid, touched }) => {
   serverErrors.value = []

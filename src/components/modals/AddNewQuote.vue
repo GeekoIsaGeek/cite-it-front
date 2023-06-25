@@ -9,7 +9,7 @@ import { useGeneralStore } from '@/stores/generalStore.js'
 import { reactive } from 'vue'
 import { useMovieStore } from '@/stores/movieStore.js'
 import fillFormData from '@/utils/fillFormData'
-import useAddNewPost from '@/composables/useAddNewPost'
+import useSendPostRequest from '@/composables/useSendPostRequest.js'
 
 const { setShowAddNewPostModal } = useGeneralStore()
 const movieStore = useMovieStore()
@@ -20,7 +20,7 @@ const quoteData = reactive({
   movieName: null
 })
 
-const addNewPost = useAddNewPost()
+const addNewPost = useSendPostRequest()
 
 const handleSubmit = async ({ valid, touched }) => {
   const isFormValid = valid && touched && quoteData.image && quoteData.movieName
