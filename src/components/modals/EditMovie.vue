@@ -42,9 +42,9 @@ const handleFormSubmit = async () => {
   errorMessage.value = null
 
   if (
-    editsAreMadeInBothLanguages(data, 'name', 'name_ka') === false ||
-    editsAreMadeInBothLanguages(data, 'director', 'director_ka') === false ||
-    editsAreMadeInBothLanguages(data, 'description', 'description_ka') === false
+    !editsAreMadeInBothLanguages(data, 'name') ||
+    !editsAreMadeInBothLanguages(data, 'director') ||
+    !editsAreMadeInBothLanguages(data, 'description')
   ) {
     errorMessage.value = t('messages.changes_are_not_bilingual')
     return
