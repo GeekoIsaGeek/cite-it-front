@@ -3,23 +3,24 @@ import TheEyeIcon from '@/components/icons/TheEyeIcon.vue'
 import TheEditIcon from '@/components/icons/TheEditIcon.vue'
 import TheThrashIcon from '@/components/icons/TheTrashIcon.vue'
 import { useRouter } from 'vue-router'
-import { computed } from 'vue'
 
-defineProps({
+const props = defineProps({
   handleDelete: {
     type: Function,
+    required: true
+  },
+  quote: {
+    type: Object,
     required: true
   }
 })
 
 const router = useRouter()
-const postId = computed(() => router.currentRoute.value.params.id)
-
 const navigateToViewQuoteModal = () => {
   router.push({
     name: 'view-quote',
     params: {
-      id: postId.value
+      id: props.quote.id
     }
   })
 }
@@ -28,7 +29,7 @@ const navigateToEditQuoteModal = () => {
   router.push({
     name: 'edit-quote',
     params: {
-      id: postId.value
+      id: props.quote.id
     }
   })
 }

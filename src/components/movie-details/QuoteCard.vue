@@ -2,7 +2,7 @@
 import TheMoreIcon from '@/components/icons/TheMoreIcon.vue'
 import QuoteCardMoreOptions from '@/components/movie-details/QuoteCardMoreOptions.vue'
 import PostStatistics from '@/components/shared/PostStatistics.vue'
-import { ref, computed } from 'vue'
+import { ref, computed, provide } from 'vue'
 import useGetImagePath from '@/composables/useGetImagePath.js'
 import { useI18n } from 'vue-i18n'
 import request from '@/config/axiosInstance.js'
@@ -46,6 +46,7 @@ const handleDelete = async () => {
     <QuoteCardMoreOptions
       :handleDelete="handleDelete"
       v-if="showDropdown"
+      :quote="quoteObject"
       class="absolute bottom-16 right-8 lg:top-9 lg:left-[92%]"
     />
   </div>
