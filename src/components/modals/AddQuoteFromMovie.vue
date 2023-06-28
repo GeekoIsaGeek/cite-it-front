@@ -7,19 +7,51 @@ import MovieDetails from '@/components/movie-details/add-quote/MovieDetails.vue'
 import FormField from '@/components/UI/AddPostFormInput.vue'
 import ImageUploader from '@/components/UI/ImageUploader.vue'
 import AddQuoteButton from '@/components/UI/RedButton.vue'
+import { useMovieStore } from '@/stores/movieStore.js'
 import { Form } from 'vee-validate'
-import { ref } from 'vue'
+import { ref, computed, reactive } from 'vue'
+import { storeToRefs } from 'pinia'
+import ServerErrors from '@/components/shared/ServerErrors.vue'
+import fillFormData from '@/utils/fillFormData'
+import useSendPostRequest from '@/composables/useSendPostRequest.js'
 
-const image = ref(null)
+const quoteData = reactive({
+  quote: null,
+  quote_ka: null,
+  image: null
+})
 
 const router = useRouter()
+const movieId = computed(() => router.currentRoute.value.params.id)
+const movieStore = useMovieStore()
+const { movies } = storeToRefs(useMovieStore())
+const movie = ref(movies.value.find((movie) => movie.id === parseInt(movieId.value)))
+const errorMessages = ref([])
+
 const handleCancel = () => {
   router.push({
     name: 'movie-details',
     params: {
-      id: router.currentRoute.value.params.id
+      id: movieId.value
     }
   })
+}
+
+const addNewPost = useSendPostRequest()
+
+const handleSubmit = async ({ touched, valid }) => {
+  errorMessages.value = []
+  const isFormValid = touched && valid && quoteData.image
+  const formData = fillFormData(quoteData)
+  formData.append('id', movieId.value)
+
+  const { data: newQuote, errors } = await addNewPost(formData, 'quotes', isFormValid)
+  if (!errors) {
+    movie.value = { ...movie.value, quotes: [...movie.value.quotes, newQuote] }
+    movieStore.updateMovies(movie.value)
+    handleCancel()
+  }
+  errorMessages.value = errors
 }
 </script>
 
@@ -32,14 +64,15 @@ const handleCancel = () => {
       </div>
       <div class="w-full px-8">
         <Author class="my-[30px]" />
-        <MovieDetails />
-        <Form class="mt-7 mb-11 flex flex-col gap-4">
+        <MovieDetails :movie="movie" />
+        <Form class="mt-7 mb-11 flex flex-col gap-4" v-slot="{ meta }">
           <FormField
             rules="required|only_latin"
             type="text"
             placeholder="Add new quote"
             language="Eng"
-            name="quote_ka"
+            name="quote"
+            v-model="quoteData.quote"
             isTextArea
           />
           <FormField
@@ -47,14 +80,16 @@ const handleCancel = () => {
             type="text"
             placeholder="ახალი ციტატა"
             language="ქარ"
-            name="quote_en"
+            name="quote_ka"
+            v-model="quoteData.quote_ka"
             isTextArea
           />
+          <ImageUploader previewImage v-model="quoteData.image" />
+          <ServerErrors :errors="errorMessages" v-if="errorMessages.length > 0" />
+          <AddQuoteButton class="w-full mt-14 py-[9px]" @click="() => handleSubmit(meta)">{{
+            $t('movie_details.add_quote')
+          }}</AddQuoteButton>
         </Form>
-        <ImageUploader previewImage v-model="image" class="mt-[-30px]" />
-        <AddQuoteButton class="w-full mt-14 py-[9px]">{{
-          $t('movie_details.add_quote')
-        }}</AddQuoteButton>
       </div>
     </div>
   </QuoteModalWrapper>

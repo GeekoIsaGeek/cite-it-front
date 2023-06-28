@@ -5,16 +5,15 @@ import ModalWrapper from '@/components/shared/AddNewPostModalWrapper.vue'
 import UploadImage from '@/components/UI/ImageUploader.vue'
 import EditButton from '@/components/UI/RedButton.vue'
 import MovieGenres from '@/components/movies/MovieGenres.vue'
-import { reactive } from 'vue'
+import { reactive, ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { computed } from 'vue'
 import { useMovieStore } from '@/stores/movieStore.js'
-import request from '@/config/axiosInstance.js'
-import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { editsAreMadeInBothLanguages } from '@/utils/validations.js'
-import { getServerErrorMessages } from '@/utils/getErrors.js'
 import { storeToRefs } from 'pinia'
+import fillFormData from '@/utils/fillFormData.js'
+import useSendPostRequest from '@/composables/useSendPostRequest.js'
+import getUpdatedValues from '@/utils/getUpdatedValues.js'
 
 const router = useRouter()
 const { t } = useI18n()
@@ -36,37 +35,27 @@ const movieDetails = reactive({
 })
 const errorMessage = ref(null)
 const initialValues = { ...movieDetails }
+const editMovie = useSendPostRequest()
 
 const handleFormSubmit = async () => {
-  const data = {}
-  for (const key in movieDetails) {
-    if (movieDetails[key] !== initialValues[key]) {
-      data[key] = movieDetails[key]
-    }
-  }
+  const data = getUpdatedValues(movieDetails, initialValues)
+  errorMessage.value = null
 
-  try {
-    errorMessage.value = null
-    // User must not be able to make a request if changes are not made in both language fields
-    if (
-      editsAreMadeInBothLanguages(data, 'name', 'name_ka') === false ||
-      editsAreMadeInBothLanguages(data, 'director', 'director_ka') === false ||
-      editsAreMadeInBothLanguages(data, 'description', 'description_ka') === false
-    ) {
-      throw new Error(t('messages.changes_are_not_bilingual'))
-    }
-    const formData = new FormData()
-    Object.entries(data).forEach((field) => formData.append(field[0], field[1]))
-    const response = await request.post(`/api/movies/${movie.id}`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    })
-    movieStore.updateMovies(response.data)
-    router.push({ name: 'movies' })
-  } catch (error) {
-    errorMessage.value = error.message || getServerErrorMessages(error)
+  if (
+    !editsAreMadeInBothLanguages(data, 'name') ||
+    !editsAreMadeInBothLanguages(data, 'director') ||
+    !editsAreMadeInBothLanguages(data, 'description')
+  ) {
+    errorMessage.value = t('messages.changes_are_not_bilingual')
+    return
   }
+  const formData = fillFormData(data)
+  const { data: updatedMovie, errors } = await editMovie(formData, `movies/${movie.id}`)
+  if (!errors) {
+    movieStore.updateMovies(updatedMovie)
+    router.push({ name: 'movies' })
+  }
+  errorMessage.value = errors
 }
 </script>
 

@@ -4,7 +4,10 @@ import AddNewQuote from '@/components/modals/AddNewQuote.vue'
 import { useGeneralStore } from '@/stores/generalStore.js'
 import PostCard from '@/components/news-feed/NewsFeedPostCard.vue'
 import SearchMobile from '@/components/news-feed/SearchMobile.vue'
+import { useQuoteStore } from '@/stores/quoteStore.js'
+import { storeToRefs } from 'pinia'
 
+const { quotes } = storeToRefs(useQuoteStore())
 const generalStore = useGeneralStore()
 </script>
 <template>
@@ -15,7 +18,7 @@ const generalStore = useGeneralStore()
       <SearchMobile v-if="generalStore.showSearchBar" />
     </div>
     <ul class="flex flex-col gap-10">
-      <PostCard v-for="(_, index) in 2" :key="index" />
+      <PostCard v-for="quote in quotes" :key="quote.id" :quote="quote" />
     </ul>
   </div>
 </template>

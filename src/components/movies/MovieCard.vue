@@ -3,6 +3,7 @@ import ChatQuoteIcon from '@/components/icons/TheChatQuoteIcon.vue'
 import useGetImagePath from '@/composables/useGetImagePath.js'
 import { RouterLink } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { computed } from 'vue'
 
 const props = defineProps({
   movie: {
@@ -10,8 +11,11 @@ const props = defineProps({
     required: true
   }
 })
+
+const quoteCount = computed(() => props.movie.quotes.length)
 const image = useGetImagePath(props.movie.poster)
 const { locale } = useI18n()
+
 const destinationRoute = {
   name: 'movie-details',
   params: {
@@ -31,7 +35,7 @@ const destinationRoute = {
       {{ props.movie.name[locale] }}
     </RouterLink>
     <div class="flex items-center gap-3">
-      <span class="text-xl">10</span>
+      <span class="text-xl">{{ quoteCount }}</span>
       <ChatQuoteIcon />
     </div>
   </div>

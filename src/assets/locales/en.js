@@ -118,6 +118,8 @@ export default {
 
   // Error Messages and General Responses
   messages: {
-    changes_are_not_bilingual: 'You should edit fields in both languages'
+    changes_are_not_bilingual: 'You should edit fields in both languages',
+    invalid_form: 'Make sure every field is valid',
+    nothing_found: 'Nothing found'
   }
 }

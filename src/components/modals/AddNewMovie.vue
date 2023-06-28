@@ -7,14 +7,12 @@ import AddButton from '@/components/UI/RedButton.vue'
 import { useGeneralStore } from '@/stores/generalStore.js'
 import MovieGenres from '@/components/movies/MovieGenres.vue'
 import { reactive, ref } from 'vue'
-import request from '@/config/axiosInstance.js'
-import { useI18n } from 'vue-i18n'
-import { getServerErrorMessages } from '@/utils/getErrors.js'
 import { useMovieStore } from '@/stores/movieStore.js'
 import ServerErrors from '@/components/shared/ServerErrors.vue'
+import fillFormData from '@/utils/fillFormData.js'
+import useSendPostRequest from '@/composables/useSendPostRequest.js'
 
-const { locale } = useI18n()
-const serverErrors = ref(null)
+const serverErrors = ref([])
 const movieStore = useMovieStore()
 
 const { setShowAddMovieModal } = useGeneralStore()
@@ -30,28 +28,19 @@ const movieDetails = reactive({
   poster: null
 })
 
-const handleAdd = async ({ valid, touched }) => {
-  const isFormValid = valid && touched && movieDetails.genre.length > 0 && movieDetails.poster
-  const formData = new FormData()
-  formData.append('genre', movieDetails.genre)
-  Object.entries(movieDetails).forEach((field) => {
-    if (field[0] !== 'genre') formData.append(field[0], field[1])
-  })
+const addNewPost = useSendPostRequest()
 
-  try {
-    if (isFormValid) {
-      const response = await request.post('/api/movies', formData, {
-        headers: {
-          'Accept-Language': locale.value,
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      movieStore.addNewMovie(response.data)
-      setShowAddMovieModal(false)
-    }
-  } catch (error) {
-    serverErrors.value = getServerErrorMessages(error)
+const AddNewMovie = async ({ valid, touched }) => {
+  serverErrors.value = []
+  const isFormValid = valid && touched && movieDetails.genre.length > 0 && movieDetails.poster
+  const formData = fillFormData(movieDetails)
+
+  const { data, errors } = await addNewPost(formData, 'movies', isFormValid)
+  if (!errors) {
+    movieStore.addNewMovie(data)
+    setShowAddMovieModal(false)
   }
+  serverErrors.value = errors
 }
 </script>
 
@@ -114,7 +103,7 @@ const handleAdd = async ({ valid, touched }) => {
       />
       <UploadImage previewImage v-model="movieDetails.poster" />
       <ServerErrors :errors="serverErrors" />
-      <AddButton @click="() => handleAdd(meta)">Add</AddButton>
+      <AddButton @click="() => AddNewMovie(meta)">Add</AddButton>
     </Form>
   </AddMovieWrapper>
 </template>

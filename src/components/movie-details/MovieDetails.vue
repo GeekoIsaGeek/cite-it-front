@@ -5,14 +5,14 @@ import AddButton from '@/components/UI/RedButton.vue'
 import PlusIcon from '@/components/icons/ThePlusIcon.vue'
 import QuoteCard from '@/components/movie-details/QuoteCard.vue'
 import { useRouter } from 'vue-router'
-import { computed } from 'vue'
+import { computed, provide } from 'vue'
 import { useMovieStore } from '@/stores/movieStore'
-import { provide } from 'vue'
 
 const router = useRouter()
 const movieStore = useMovieStore()
 const movieId = computed(() => router.currentRoute.value.params.id)
-const movie = movieStore.movies.find((el) => parseInt(movieId.value) === el.id)
+const movie = computed(() => movieStore.movies.find((el) => parseInt(movieId.value) === el.id))
+const quotes = computed(() => movie.value.quotes)
 
 const navigateToAddQuoteModal = () => {
   router.push({
@@ -35,7 +35,7 @@ provide('movie', movie)
       >
         <div class="lg:flex gap-2 text-2xl lg:border-r border-darkGray pr-4">
           <p>{{ $t('movie_details.quotes') }}</p>
-          <p>({{ $t('movies.total') }} {{ movieStore.count }})</p>
+          <p>({{ $t('movies.total') }} {{ movie.quotes.length }})</p>
         </div>
         <div class="lg:hidden w-full h-[1px] bg-[#54535A]"></div>
         <AddButton class="px-4 text-xl flex items-center gap-2" @click="navigateToAddQuoteModal">
@@ -43,8 +43,8 @@ provide('movie', movie)
           {{ $t('movie_details.add_quote') }}
         </AddButton>
       </div>
-      <ul class="mt-14">
-        <QuoteCard />
+      <ul class="mt-14 flex flex-col gap-10" v-if="quotes.length > 0">
+        <QuoteCard v-for="(quote, index) in quotes" :key="index" :quote="quote" />
       </ul>
     </div>
   </Wrapper>

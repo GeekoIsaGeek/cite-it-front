@@ -1,19 +1,31 @@
 <script setup>
 import PostAuthor from '@/components/news-feed/NewsFeedPostCardAuthor.vue'
 import PostStatistics from '@/components/shared/PostStatistics.vue'
-
 import PostComments from '@/components/news-feed/NewsFeedPostCardComments.vue'
+import { useI18n } from 'vue-i18n'
+import useGetImagePath from '@/composables/useGetImagePath.js'
+
+const props = defineProps({
+  quote: {
+    type: Object,
+    required: true
+  }
+})
+const { locale } = useI18n()
+const image = useGetImagePath(props.quote.image)
 </script>
 
 <template>
   <div class="px-6 py-6 bg-almostBlack rounded-xl">
-    <PostAuthor />
+    <PostAuthor :author="quote.movie.author" />
     <p class="lg:text-xl mt-4 mb-7">
-      “Follow your dream.” -
-      <span class="text-[#DDCCAA]">Movie name</span>.
+      “{{ quote.quote[locale] }}” -
+      <span class="text-[#DDCCAA]"
+        >{{ quote.movie.name[locale] }} ({{ quote.movie.release_date }})</span
+      >.
     </p>
     <img
-      src="https://www.slashfilm.com/img/gallery/black-swan-ending-explained-a-dance-on-the-dark-side/intro-1667567351.jpg"
+      :src="image"
       alt="image from the movie"
       class="w-full h-[200px] xl:h-[500px] rounded-[10px] object-cover"
     />
