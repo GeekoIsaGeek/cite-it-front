@@ -3,10 +3,13 @@ import CommentAuthor from '@/components/news-feed/NewsFeedPostCardAuthor.vue'
 import avatarPlaceholder from '@/assets/images/Profile_avatar_placeholder_large.png'
 import useGetImagePath from '@/composables/useGetImagePath.js'
 import { useUserStore } from '@/stores/userStore.js'
-const comments = [
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nunc vel massa  facilisis consequat elit morbi convallis convallis. Volutpat vitae et nisl et. Adipiscing enim integer mi leo nisl. Arcu vitae mauris odio eget.',
-  'Lorem ipsum dolor sit amet, consectetur adipiscin'
-]
+
+defineProps({
+  comments: {
+    type: Array,
+    required: true
+  }
+})
 const userStore = useUserStore()
 const avatar = useGetImagePath(userStore.user.profile_picture)
 </script>

@@ -15,6 +15,8 @@ const quoteStore = useQuoteStore()
 const quote = computed(() =>
   quoteStore.quotes.find((quote) => quote.id === parseInt(route.params.id))
 )
+
+console.log(quote.value)
 const image = useGetImagePath(quote.value.image)
 const movieId = computed(() => quote.value.movie.id)
 </script>

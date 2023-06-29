@@ -5,6 +5,7 @@ import { ref } from 'vue'
 import { useMovieStore } from '@/stores/movieStore.js'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useUserStore } from '@/stores/userStore.js'
 
 const props = defineProps({
   setMovie: {
@@ -15,6 +16,7 @@ const props = defineProps({
 const showMovieList = ref(false)
 const selectedMovie = ref(null)
 const movieStore = useMovieStore()
+const userStore = useUserStore()
 const { locale } = useI18n()
 
 const handleSelect = (selectedMovieName) => {
@@ -22,7 +24,11 @@ const handleSelect = (selectedMovieName) => {
   props.setMovie(selectedMovieName)
 }
 const movieNames = computed(() => {
-  return Object.values(movieStore.movies).map((movie) => movie.name[locale.value])
+  return Object.values(movieStore.movies).map((movie) => {
+    if (movie.author.id === userStore.user.id) {
+      return movie.name[locale.value]
+    }
+  })
 })
 </script>
 

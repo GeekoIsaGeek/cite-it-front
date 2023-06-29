@@ -116,6 +116,13 @@ export default {
     mins_ago: 'წუთის წინ',
     days_ago: 'დღის წინ'
   },
+  routing: {
+    whoops: 'უპს!',
+    page_not_found: 'გვერდი რომელსაც ეძებთ არ მოიძებნა',
+    you_shall_not_pass: 'ამ გვერდზე ვერ გადახვალთ!',
+    forbidden_text: 'ვწუხვართ, თქვენ არ გაქვთ ამ გვერდზე გადასვლის უფლება',
+    return_home: 'მთავარზე დაბრუნება'
+  },
 
   // Error Messages and General Responses
   messages: {
