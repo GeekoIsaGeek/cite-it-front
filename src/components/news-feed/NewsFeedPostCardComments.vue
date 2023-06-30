@@ -12,6 +12,11 @@ defineProps({
 })
 const userStore = useUserStore()
 const avatar = useGetImagePath(userStore.user.profile_picture)
+
+const handleSubmit = (event) => {
+  event.preventDefault()
+  event.target.reset()
+}
 </script>
 
 <template>
@@ -24,11 +29,13 @@ const avatar = useGetImagePath(userStore.user.profile_picture)
     </ul>
     <div class="mt-6 flex items-center gap-6">
       <img :src="avatar || avatarPlaceholder" alt="avatar" class="w-[52px] h-[52px] rounded-full" />
-      <textarea
-        rows="1"
-        class="w-full rounded-[10px] lg:text-xl px-7 py-3 outline-none bg-[#24222F] resize-none"
-        :placeholder="$t('news_feed.write_comment')"
-      />
+      <form @submit="handleSubmit" class="w-full">
+        <input
+          type="text"
+          class="w-full rounded-[10px] lg:text-xl px-7 py-3 outline-none bg-[#24222F] resize-none"
+          :placeholder="$t('news_feed.write_comment')"
+        />
+      </form>
     </div>
   </div>
 </template>

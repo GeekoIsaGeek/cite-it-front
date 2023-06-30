@@ -7,7 +7,8 @@ export const useGeneralStore = defineStore('general', {
       showAddNewPostModal: false,
       showSearchBar: false,
       showAddMovieModal: false,
-      searchString: null
+      searchString: null,
+      searchedData: []
     }
   },
   actions: {
@@ -25,6 +26,9 @@ export const useGeneralStore = defineStore('general', {
     },
     setSearchString(searchString) {
       this.searchString = searchString
+    },
+    setSearchedData(searchedData) {
+      this.searchedData = searchedData
     }
   }
 })

@@ -3,10 +3,13 @@ import PencilIcon from '@/components/icons/ThePencilIcon.vue'
 import SearchIcon from '@/components/icons/TheSearchIcon.vue'
 import { ref } from 'vue'
 import { useGeneralStore } from '@/stores/generalStore.js'
+import useSearchAndSetData from '@/composables/useSearchAndSetData.js'
 
 const { setShowAddNewPostModal } = useGeneralStore()
-
 const expandSearch = ref(false)
+const searchString = ref('')
+
+const handleSearch = useSearchAndSetData()
 </script>
 
 <template>
@@ -30,12 +33,15 @@ const expandSearch = ref(false)
       ]"
     >
       <SearchIcon :color="'#CED4DA'" />
-      <input
-        type="text"
-        class="w-full bg-transparent outline-none"
-        :placeholder="$t('news_feed.search_guide')"
-        v-if="expandSearch"
-      />
+      <form @submit.prevent="() => handleSearch(searchString)">
+        <input
+          type="text"
+          class="w-full bg-transparent outline-none"
+          :placeholder="$t('news_feed.search_guide')"
+          v-model="searchString"
+          v-if="expandSearch"
+        />
+      </form>
       <p class="text-xl" v-if="!expandSearch">{{ $t('news_feed.search_by') }}</p>
     </div>
   </div>
