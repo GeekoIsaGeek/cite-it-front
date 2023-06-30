@@ -16,7 +16,7 @@ const movieCount = computed(() => movieStore.movies.length)
 <template>
   <div class="flex items-center self-start flex-wrap justify-between w-full mb-16 px-4">
     <p class="text-2xl pt-[25px] md:pt-0">
-      {{ $t('movies.list_of_my_movies') }}
+      {{ $t('movies.list_of_movies') }}
       <span class="text-base lg:text-2xl">({{ $t('movies.total') }} {{ movieCount }})</span>
     </p>
     <div class="flex items-center gap-12">

@@ -90,7 +90,7 @@ export default {
     success: 'გილოცავთ'
   },
   movies: {
-    list_of_my_movies: 'ჩემი ფილმები',
+    list_of_movies: 'ფილმების სია',
     total: 'სულ',
     add_movie: 'დამატება',
     edit_movie: 'ციტატის რედაქტირება',

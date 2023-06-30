@@ -1,7 +1,7 @@
 <script setup>
 import PencilIcon from '@/components/icons/ThePencilIcon.vue'
 import SearchIcon from '@/components/icons/TheSearchIcon.vue'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useGeneralStore } from '@/stores/generalStore.js'
 import useSearchAndSetData from '@/composables/useSearchAndSetData.js'
 
@@ -9,6 +9,11 @@ const { setShowAddNewPostModal } = useGeneralStore()
 const expandSearch = ref(false)
 const searchString = ref('')
 
+watch(searchString, (newValue) => {
+  if (!newValue.startsWith('@') && !newValue.startsWith('#')) {
+    searchString.value = ''
+  }
+})
 const handleSearch = useSearchAndSetData()
 </script>
 
@@ -24,7 +29,6 @@ const handleSearch = useSearchAndSetData()
       <PencilIcon />
       <p class="lg:text-xl">{{ $t('news_feed.write_new_quote') }}</p>
     </div>
-
     <div
       @click="() => (expandSearch = true)"
       :class="[
@@ -33,10 +37,13 @@ const handleSearch = useSearchAndSetData()
       ]"
     >
       <SearchIcon :color="'#CED4DA'" />
-      <form @submit.prevent="() => handleSearch(searchString)">
+      <form
+        @submit.prevent="() => handleSearch(searchString)"
+        :class="['min-w-max', expandSearch && 'w-full']"
+      >
         <input
           type="text"
-          class="w-full bg-transparent outline-none"
+          class="w-full min-w-max bg-transparent outline-none"
           :placeholder="$t('news_feed.search_guide')"
           v-model="searchString"
           v-if="expandSearch"

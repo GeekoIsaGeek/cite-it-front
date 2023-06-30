@@ -1,19 +1,28 @@
 <script setup>
 import GoBackIcon from '@/components/icons/TheGoBackIcon.vue'
 import { useGeneralStore } from '@/stores/generalStore.js'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import useSearchAndSetData from '@/composables/useSearchAndSetData.js'
 
 const searchString = ref('')
 const generalStore = useGeneralStore()
-const handleSearch = useSearchAndSetData()
+watch(searchString, (newValue) => {
+  if (!newValue.startsWith('@') && !newValue.startsWith('#')) {
+    searchString.value = ''
+  }
+})
+const handleSearchAndSet = useSearchAndSetData()
+const handleSubmit = () => {
+  handleSearchAndSet(searchString.value)
+  generalStore.setShowSearchBar(false)
+}
 </script>
 
 <template>
   <div class="lg:hidden absolute z-50 w-full top-0 left-0 bg-almostBlack min-h-[70vh]">
     <div class="py-6 px-8 flex items-center gap-6 border-b border-b-gray-400">
       <GoBackIcon @click="() => generalStore.setShowSearchBar(false)" />
-      <form @submit.prevent="() => handleSearch(searchString)">
+      <form @submit.prevent="() => handleSubmit()">
         <input
           type="text"
           :placeholder="$t('news_feed.search')"

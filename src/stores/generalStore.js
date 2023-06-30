@@ -8,7 +8,8 @@ export const useGeneralStore = defineStore('general', {
       showSearchBar: false,
       showAddMovieModal: false,
       searchString: null,
-      searchedData: []
+      searchedData: [],
+      typeOfSearchedData: null
     }
   },
   actions: {
@@ -29,6 +30,15 @@ export const useGeneralStore = defineStore('general', {
     },
     setSearchedData(searchedData) {
       this.searchedData = searchedData
+    },
+    setTypeOfSearchedData(searchString) {
+      if (searchString.startsWith('@')) {
+        this.typeOfSearchedData = 'movie'
+      } else if (searchString.startsWith('#')) {
+        this.typeOfSearchedData = 'quote'
+      } else {
+        this.typeOfSearchedData = null
+      }
     }
   }
 })

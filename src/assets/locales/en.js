@@ -89,7 +89,7 @@ export default {
     success: 'Success'
   },
   movies: {
-    list_of_my_movies: 'List of my movies',
+    list_of_movies: 'List of movies',
     total: 'Total',
     add_movie: 'Add movie',
     edit_movie: 'Edit movie',

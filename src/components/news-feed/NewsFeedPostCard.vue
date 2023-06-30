@@ -23,7 +23,6 @@ const navigateToQuoteDetails = () => {
     }
   })
 }
-console.log(props.quote)
 const { locale } = useI18n()
 const image = useGetImagePath(props.quote.image)
 </script>
