@@ -16,7 +16,6 @@ const quote = computed(() =>
   quoteStore.quotes.find((quote) => quote.id === parseInt(route.params.id))
 )
 
-console.log(quote.value)
 const image = useGetImagePath(quote.value.image)
 const movieId = computed(() => quote.value.movie.id)
 </script>
@@ -33,7 +32,7 @@ const movieId = computed(() => quote.value.movie.id)
           alt="movie"
           class="rounded-[10px] w-full h-[300px] lg:h-[30vw] object-cover"
         />
-        <PostStatistics class="text-white text-xl py-0" />
+        <PostStatistics class="text-white text-xl py-0" :quote="quote" />
         <Comments class="text-white" />
       </div>
     </div>

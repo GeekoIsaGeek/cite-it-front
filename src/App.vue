@@ -6,6 +6,7 @@ import { onMounted } from 'vue'
 
 const quoteStore = useQuoteStore()
 const movieStore = useMovieStore()
+
 onMounted(() => {
   quoteStore.fetchQuotes()
   movieStore.fetchMovies()

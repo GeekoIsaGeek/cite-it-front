@@ -2,7 +2,7 @@
 import TheMoreIcon from '@/components/icons/TheMoreIcon.vue'
 import QuoteCardMoreOptions from '@/components/movie-details/QuoteCardMoreOptions.vue'
 import PostStatistics from '@/components/shared/PostStatistics.vue'
-import { ref, computed, provide } from 'vue'
+import { ref, computed } from 'vue'
 import useGetImagePath from '@/composables/useGetImagePath.js'
 import { useI18n } from 'vue-i18n'
 import request from '@/config/axiosInstance.js'
@@ -21,7 +21,7 @@ const props = defineProps({
 
 const poster = computed(() => useGetImagePath(props.quote.image))
 const quoteObject = computed(() => props.quote)
-const quote = computed(() => quoteObject.value.quote[locale.value])
+const quoteText = computed(() => quoteObject.value.quote[locale.value])
 const showDropdown = ref(false)
 
 const handleDelete = async () => {
@@ -39,10 +39,10 @@ const handleDelete = async () => {
           class="hover:text-darkGray cursor-pointer text-3xl self-end absolute lg:relative bottom-5"
           @click="() => (showDropdown = !showDropdown)"
         />
-        <h1 class="text-2xl italic lg:mt-7">"{{ quote }}"</h1>
+        <h1 class="text-2xl italic lg:mt-7">"{{ quoteText }}"</h1>
       </div>
     </div>
-    <PostStatistics class="text-xl" />
+    <PostStatistics class="text-xl" :quote="quote" />
     <QuoteCardMoreOptions
       :handleDelete="handleDelete"
       v-if="showDropdown"

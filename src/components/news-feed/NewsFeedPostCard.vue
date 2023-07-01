@@ -42,7 +42,7 @@ const image = useGetImagePath(props.quote.image)
       class="w-full h-[200px] xl:h-[500px] rounded-[10px] object-cover cursor-pointer"
       @click="navigateToQuoteDetails"
     />
-    <PostStatistics class="text-xl" :redirectHandler="navigateToQuoteDetails" />
+    <PostStatistics class="text-xl" :redirectHandler="navigateToQuoteDetails" :quote="quote" />
     <PostComments :comments="quote.comments" />
   </div>
 </template>
