@@ -2,10 +2,10 @@
 import PencilIcon from '@/components/icons/ThePencilIcon.vue'
 import SearchIcon from '@/components/icons/TheSearchIcon.vue'
 import { ref, watch } from 'vue'
-import { useGeneralStore } from '@/stores/generalStore.js'
+import { useModalStore } from '@/stores/modalStore.js'
 import useSearchAndSetData from '@/composables/useSearchAndSetData.js'
 
-const { setShowAddNewPostModal } = useGeneralStore()
+const { setShowAddNewPostModal } = useModalStore()
 const expandSearch = ref(false)
 const searchString = ref('')
 

@@ -1,7 +1,8 @@
 <script setup>
 import PostAndSearch from '@/components/news-feed/NewsFeedPostAndSearch.vue'
 import AddNewQuote from '@/components/modals/AddNewQuote.vue'
-import { useGeneralStore } from '@/stores/generalStore.js'
+import { useSearchStore } from '@/stores/searchStore.js'
+import { useModalStore } from '@/stores/modalStore.js'
 import PostCard from '@/components/news-feed/NewsFeedPostCard.vue'
 import SearchMobile from '@/components/news-feed/SearchMobile.vue'
 import { useQuoteStore } from '@/stores/quoteStore.js'
@@ -11,8 +12,9 @@ import NothingFoundMessage from '@/components/shared/NothingFoundMessage.vue'
 import { watch } from 'vue'
 
 const { quotes } = storeToRefs(useQuoteStore())
-const generalStore = useGeneralStore()
-const { searchedData, typeOfSearchedData } = storeToRefs(generalStore)
+const searchStore = useSearchStore()
+const modalStore = useModalStore()
+const { searchedData, typeOfSearchedData } = storeToRefs(searchStore)
 
 watch(typeOfSearchedData, (updatedTypeOfSearchedData) => {
   if (updatedTypeOfSearchedData === 'quote') {
@@ -23,9 +25,9 @@ watch(typeOfSearchedData, (updatedTypeOfSearchedData) => {
 <template>
   <div class="w-full md:max-w-[46vw] bg-[#191625]">
     <div class="mb-4">
-      <AddNewQuote v-if="generalStore.showAddNewPostModal" />
+      <AddNewQuote v-if="modalStore.showAddNewPostModal" />
       <PostAndSearch />
-      <SearchMobile v-if="generalStore.showSearchBar" />
+      <SearchMobile v-if="searchStore.showSearchBar" />
     </div>
     <ul class="flex flex-col gap-10" v-if="typeOfSearchedData !== 'movie' && quotes.length > 0">
       <PostCard v-for="quote in quotes" :key="quote.id" :quote="quote" />

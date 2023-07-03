@@ -4,24 +4,24 @@ import { RouterLink } from 'vue-router'
 import TheCameraIcon from '@/components/icons/TheCameraIcon.vue'
 import TheHomeIcon from '@/components/icons/TheHomeIcon.vue'
 import Close from '@/components/icons/TheCloseIcon.vue'
-import { useGeneralStore } from '@/stores/generalStore'
+import { useModalStore } from '@/stores/modalStore.js'
 import useGetImagePath from '@/composables/useGetImagePath.js'
 import { useUserStore } from '@/stores/userStore.js'
 import { capitalize, computed } from 'vue'
 import { useRoute } from 'vue-router'
 
-const generalStore = useGeneralStore()
+const modalStore = useModalStore()
 const userStore = useUserStore()
 const route = useRoute()
 const avatar = useGetImagePath(userStore.user.profile_picture)
 const username = computed(() => capitalize(userStore.user?.username || ''))
-const closeNavigationMenu = () => generalStore.setShowMobileNavigation(false)
+const closeNavigationMenu = () => modalStore.setShowMobileNavigation(false)
 const isMoviesRoute = computed(() => route.name === 'movies' || route.name === 'movie-details')
 </script>
 
 <template>
   <nav
-    v-if="generalStore.showMobileNavigation"
+    v-if="modalStore.showMobileNavigation"
     class="left-0 top-0 bg-veryDarkPurple fixed z-[100] md:hidden pr-[10vw] pl-12 pt-12 h-[60vh] w-[90vw] text-white rounded-lg flex flex-col gap-11"
   >
     <Close class="block md:hidden" @click="closeNavigationMenu" />

@@ -3,14 +3,17 @@ import Wrapper from '@/components/news-feed/NewsFeedWrapper.vue'
 import TopPanel from '@/components/movies/TheTopPanel.vue'
 import MovieCard from '@/components/movies/MovieCard.vue'
 import AddNewMovie from '@/components/modals/AddNewMovie.vue'
-import { useGeneralStore } from '@/stores/generalStore'
+import { useModalStore } from '@/stores/modalStore.js'
+import { useSearchStore } from '@/stores/searchStore.js'
+
 import { useMovieStore } from '@/stores/movieStore'
 import { ref } from 'vue'
 import { watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import NothingFoundMessage from '@/components/shared/NothingFoundMessage.vue'
 
-const { searchString, showAddMovieModal } = storeToRefs(useGeneralStore())
+const { searchString } = storeToRefs(useSearchStore())
+const { showAddMovieModal } = storeToRefs(useModalStore())
 const { movies: movieList } = storeToRefs(useMovieStore())
 const movies = ref([...movieList.value])
 

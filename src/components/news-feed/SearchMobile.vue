@@ -1,11 +1,11 @@
 <script setup>
 import GoBackIcon from '@/components/icons/TheGoBackIcon.vue'
-import { useGeneralStore } from '@/stores/generalStore.js'
+import { useSearchStore } from '@/stores/searchStore.js'
 import { ref, watch } from 'vue'
 import useSearchAndSetData from '@/composables/useSearchAndSetData.js'
 
 const searchString = ref('')
-const generalStore = useGeneralStore()
+const searchStore = useSearchStore()
 watch(searchString, (newValue) => {
   if (!newValue.startsWith('@') && !newValue.startsWith('#')) {
     searchString.value = ''
@@ -14,14 +14,14 @@ watch(searchString, (newValue) => {
 const handleSearchAndSet = useSearchAndSetData()
 const handleSubmit = () => {
   handleSearchAndSet(searchString.value)
-  generalStore.setShowSearchBar(false)
+  searchStore.setShowSearchBar(false)
 }
 </script>
 
 <template>
   <div class="lg:hidden absolute z-50 w-full top-0 left-0 bg-almostBlack min-h-[70vh]">
     <div class="py-6 px-8 flex items-center gap-6 border-b border-b-gray-400">
-      <GoBackIcon @click="() => generalStore.setShowSearchBar(false)" />
+      <GoBackIcon @click="() => searchStore.setShowSearchBar(false)" />
       <form @submit.prevent="() => handleSubmit()">
         <input
           type="text"

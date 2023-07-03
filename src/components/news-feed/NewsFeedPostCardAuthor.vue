@@ -1,5 +1,4 @@
 <script setup>
-import { useUserStore } from '@/stores/userStore.js'
 import useGetImagePath from '@/composables/useGetImagePath.js'
 import avatarPlaceholder from '@/assets/images/Profile_avatar_placeholder_large.png'
 import { capitalize, computed } from 'vue'
@@ -11,7 +10,6 @@ const props = defineProps({
   }
 })
 
-const userStore = useUserStore()
 const username = computed(() => capitalize(props.author?.username || ''))
 const avatar = useGetImagePath(props.author?.profile_picture)
 </script>

@@ -51,7 +51,7 @@ const handleSubmit = async ({ touched, valid }) => {
     movieStore.updateMovies(movie.value)
     handleCancel()
   }
-  errorMessages.value = errors
+  errorMessages.value = errors || []
 }
 </script>
 

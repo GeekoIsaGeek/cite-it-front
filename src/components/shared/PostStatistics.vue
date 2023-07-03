@@ -5,6 +5,7 @@ import request from '@/config/axiosInstance.js'
 import { ref, onMounted } from 'vue'
 import { likesChannel } from '@/echo.js'
 import { useQuoteStore } from '@/stores/quoteStore.js'
+import { computed } from 'vue'
 
 const props = defineProps({
   navigationHandler: {
@@ -17,12 +18,15 @@ const props = defineProps({
   }
 })
 const quoteStore = useQuoteStore()
-const likes = ref(props.quote.likes.length)
+const likesCount = ref(props.quote.likes.length)
+const comments = computed(
+  () => quoteStore.quotes.find((quote) => quote.id === props.quote.id).comments
+)
 
 onMounted(() => {
   likesChannel.listen('QuoteHasBeenLiked', (data) => {
     const quote = data.quote
-    likes.value = quote.likes.length
+    likesCount.value = quote.likes.length
     quoteStore.updateQuotes(quote)
   })
 })
@@ -35,10 +39,10 @@ const handleAddingLike = async () => {
 <template>
   <div class="py-6 flex gap-8 items-center">
     <p class="flex items-center gap-4" @click="navigationHandler">
-      10 <TheCommentIcon class="cursor-pointer" />
+      {{ comments.length }} <TheCommentIcon class="cursor-pointer" />
     </p>
     <p class="flex items-center gap-4">
-      {{ likes }} <TheHeartIcon class="cursor-pointer" @click="handleAddingLike" />
+      {{ likesCount }} <TheHeartIcon class="cursor-pointer" @click="handleAddingLike" />
     </p>
   </div>
 </template>

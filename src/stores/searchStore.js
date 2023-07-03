@@ -1,30 +1,15 @@
 import { defineStore } from 'pinia'
 
-export const useGeneralStore = defineStore('general', {
+export const useSearchStore = defineStore('search', {
   state: () => {
     return {
-      showMobileNavigation: false,
-      showAddNewPostModal: false,
-      showSearchBar: false,
-      showAddMovieModal: false,
       searchString: null,
       searchedData: [],
-      typeOfSearchedData: null
+      typeOfSearchedData: null,
+      showSearchBar: false
     }
   },
   actions: {
-    setShowMobileNavigation(shouldShow) {
-      this.showMobileNavigation = shouldShow
-    },
-    setShowAddNewPostModal(shouldShow) {
-      this.showAddNewPostModal = shouldShow
-    },
-    setShowSearchBar(shouldShow) {
-      this.showSearchBar = shouldShow
-    },
-    setShowAddMovieModal(shouldShow) {
-      this.showAddMovieModal = shouldShow
-    },
     setSearchString(searchString) {
       this.searchString = searchString
     },
@@ -39,6 +24,9 @@ export const useGeneralStore = defineStore('general', {
       } else {
         this.typeOfSearchedData = null
       }
+    },
+    setShowSearchBar(shouldShow) {
+      this.showSearchBar = shouldShow
     }
   }
 })

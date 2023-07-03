@@ -4,7 +4,7 @@ import FormField from '@/components/UI/AddPostFormInput.vue'
 import AddMovieWrapper from '@/components/shared/AddNewPostModalWrapper.vue'
 import UploadImage from '@/components/UI/ImageUploader.vue'
 import AddButton from '@/components/UI/RedButton.vue'
-import { useGeneralStore } from '@/stores/generalStore.js'
+import { useModalStore } from '@/stores/modalStore.js'
 import MovieGenres from '@/components/movies/MovieGenres.vue'
 import { reactive, ref } from 'vue'
 import { useMovieStore } from '@/stores/movieStore.js'
@@ -15,7 +15,7 @@ import useSendPostRequest from '@/composables/useSendPostRequest.js'
 const serverErrors = ref([])
 const movieStore = useMovieStore()
 
-const { setShowAddMovieModal } = useGeneralStore()
+const { setShowAddMovieModal } = useModalStore()
 const movieDetails = reactive({
   name: null,
   name_ka: null,
@@ -40,7 +40,7 @@ const AddNewMovie = async ({ valid, touched }) => {
     movieStore.addNewMovie(data)
     setShowAddMovieModal(false)
   }
-  serverErrors.value = errors
+  serverErrors.value = errors || []
 }
 </script>
 

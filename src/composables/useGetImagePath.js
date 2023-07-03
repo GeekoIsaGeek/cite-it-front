@@ -3,7 +3,7 @@ export default (picture) => {
 
   if (!picture) return null
   if (
-    picture.startsWith('public/') ||
+    picture.startsWith('users/') ||
     picture.startsWith('posters/') ||
     picture.startsWith('quotes/')
   ) {

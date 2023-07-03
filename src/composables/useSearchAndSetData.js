@@ -1,9 +1,9 @@
 import request from '@/config/axiosInstance'
-import { useGeneralStore } from '@/stores/generalStore'
+import { useSearchStore } from '@/stores/searchStore.js'
 import { useQuoteStore } from '@/stores/quoteStore'
 
 export default () => {
-  const generalStore = useGeneralStore()
+  const searchStore = useSearchStore()
   const quoteStore = useQuoteStore()
 
   return async (searchString) => {
@@ -12,8 +12,8 @@ export default () => {
     }
     const response = await request.get(`/api/search/${encodeURIComponent(searchString)}`)
     if (response.status === 200) {
-      generalStore.setSearchedData(response.data)
+      searchStore.setSearchedData(response.data)
     }
-    generalStore.setTypeOfSearchedData(searchString)
+    searchStore.setTypeOfSearchedData(searchString)
   }
 }

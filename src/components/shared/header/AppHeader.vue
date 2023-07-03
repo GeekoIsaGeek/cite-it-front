@@ -6,7 +6,8 @@ import { useUserStore } from '@/stores/userStore.js'
 import request from '@/config/axiosInstance.js'
 import NotificationsButton from '@/components/shared/header/NotificationsButton.vue'
 import HamburgerMenu from '@/components/icons/TheHamburgerMenuIcon.vue'
-import { useGeneralStore } from '@/stores/generalStore'
+import { useModalStore } from '@/stores/modalStore.js'
+import { useSearchStore } from '@/stores/searchStore.js'
 import SearchIcon from '@/components/icons/TheSearchIcon.vue'
 import Notifications from '@/components/notifications/NotificationsWrapper.vue'
 import { useRoute } from 'vue-router'
@@ -20,7 +21,8 @@ defineProps({
   }
 })
 
-const generalStore = useGeneralStore()
+const searchStore = useSearchStore()
+const modalStore = useModalStore()
 const userStore = useUserStore()
 const { name: routeName } = useRoute()
 userStore.fetchUser()
@@ -33,7 +35,7 @@ const handleLogout = async () => {
   try {
     await request.post('/api/logout')
     clearUser()
-    router.push('/login')
+    router.push({ name: 'login' })
   } catch (error) {
     console.error(error)
   }
@@ -47,13 +49,13 @@ const handleLogout = async () => {
     <h3 class="hidden md:block text-sm text-offGold font-medium md:text-base">MOVIE QUOTES</h3>
     <HamburgerMenu
       class="cursor-pointer md:hidden text-white text-2xl"
-      @click="generalStore.setShowMobileNavigation(true)"
+      @click="modalStore.setShowMobileNavigation(true)"
     />
     <div class="flex items-center gap-3">
       <SearchIcon
         class="lg:hidden cursor-pointer mr-5 h-6 w-6"
         color="white"
-        @click="() => generalStore.setShowSearchBar(true)"
+        @click="() => searchStore.setShowSearchBar(true)"
         v-if="routeName === 'news-feed'"
       />
       <NotificationsButton

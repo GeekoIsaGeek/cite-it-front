@@ -6,15 +6,14 @@ import { ref, computed } from 'vue'
 import useGetImagePath from '@/composables/useGetImagePath.js'
 import { useI18n } from 'vue-i18n'
 import request from '@/config/axiosInstance.js'
+import { useQuoteStore } from '@/stores/quoteStore.js'
+import { inject } from 'vue'
+import { useMovieStore } from '@/stores/movieStore.js'
 
 const { locale } = useI18n()
 const props = defineProps({
   quote: {
     type: Object,
-    required: true
-  },
-  updateQuotes: {
-    type: Function,
     required: true
   }
 })
@@ -23,10 +22,18 @@ const poster = computed(() => useGetImagePath(props.quote.image))
 const quoteObject = computed(() => props.quote)
 const quoteText = computed(() => quoteObject.value.quote[locale.value])
 const showDropdown = ref(false)
+const quoteStore = useQuoteStore()
+const movieStore = useMovieStore()
+const movie = inject('movie')
 
 const handleDelete = async () => {
   const { status } = await request.delete(`/api/quotes/${props.quote.id}`)
   if (status === 200) showDropdown.value = false
+  quoteStore.removeQuote(props.quote.id)
+  movieStore.updateMovies({
+    ...movie.value,
+    quotes: [...movie.value.quotes.filter((quote) => quote.id !== props.quote.id)]
+  })
 }
 </script>
 
@@ -39,7 +46,7 @@ const handleDelete = async () => {
           class="hover:text-darkGray cursor-pointer text-3xl self-end absolute lg:relative bottom-5"
           @click="() => (showDropdown = !showDropdown)"
         />
-        <h1 class="text-2xl italic lg:mt-7">"{{ quoteText }}"</h1>
+        <h1 class="text-2xl italic lg:mt-7 break-all">"{{ quoteText }}"</h1>
       </div>
     </div>
     <PostStatistics class="text-xl" :quote="quote" />

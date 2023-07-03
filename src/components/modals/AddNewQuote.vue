@@ -5,13 +5,13 @@ import { Form } from 'vee-validate'
 import PostButton from '@/components/UI/RedButton.vue'
 import ImageUploader from '@/components/UI/ImageUploader.vue'
 import ChooseMovie from '@/components/news-feed/TheChooseMovieField.vue'
-import { useGeneralStore } from '@/stores/generalStore.js'
+import { useModalStore } from '@/stores/modalStore.js'
 import { reactive } from 'vue'
 import { useMovieStore } from '@/stores/movieStore.js'
 import fillFormData from '@/utils/fillFormData'
 import useSendPostRequest from '@/composables/useSendPostRequest.js'
 
-const { setShowAddNewPostModal } = useGeneralStore()
+const { setShowAddNewPostModal } = useModalStore()
 const movieStore = useMovieStore()
 const quoteData = reactive({
   quote: null,

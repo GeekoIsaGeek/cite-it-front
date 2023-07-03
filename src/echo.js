@@ -14,3 +14,4 @@ export const echo = new Echo({
 })
 
 export const likesChannel = echo.channel('likes')
+export const commentsChannel = echo.channel('comments')
