@@ -89,7 +89,7 @@ export default {
     success: 'Success'
   },
   movies: {
-    list_of_my_movies: 'List of my movies',
+    list_of_movies: 'List of movies',
     total: 'Total',
     add_movie: 'Add movie',
     edit_movie: 'Edit movie',
@@ -115,7 +115,13 @@ export default {
     mins_ago: 'mins ago',
     days_ago: 'days ago'
   },
-
+  routing: {
+    whoops: 'Whoops!',
+    page_not_found: "We can't see the page you are looking for",
+    you_shall_not_pass: 'You shall not pass!',
+    forbidden_text: 'Sorry, but  you don’t have permission to access this page',
+    return_home: 'Return home'
+  },
   // Error Messages and General Responses
   messages: {
     changes_are_not_bilingual: 'You should edit fields in both languages',

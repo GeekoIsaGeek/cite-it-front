@@ -29,7 +29,7 @@ const destinationRoute = {
     <img
       :src="image"
       alt="movie image"
-      class="rounded-xl object-cover mb-4 w-[358px] h-[302px] md:w-[440px] md:h-[370px]"
+      class="rounded-xl object-cover mb-4 h-[302px] w-full md:h-[370px]"
     />
     <RouterLink :to="destinationRoute" class="text-2xl mt-4 mb-[18px] hover:text-[#cbbbff]">
       {{ props.movie.name[locale] }}

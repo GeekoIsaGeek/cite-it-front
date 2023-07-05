@@ -15,6 +15,7 @@ const props = defineProps({
     required: true
   }
 })
+
 const route = useRoute()
 const quoteId = route.params.id
 const router = useRouter()

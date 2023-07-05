@@ -2,13 +2,14 @@
 import AddButton from '@/components/UI/RedButton.vue'
 import SearchIcon from '@/components/icons/TheSearchIcon.vue'
 import PlusIcon from '@/components/icons/ThePlusIcon.vue'
-import { useGeneralStore } from '@/stores/generalStore'
+import { useModalStore } from '@/stores/modalStore.js'
+import { useSearchStore } from '@/stores/searchStore.js'
 import { computed } from 'vue'
 import { useMovieStore } from '@/stores/movieStore'
 
-const { setShowAddMovieModal } = useGeneralStore()
+const { setShowAddMovieModal } = useModalStore()
 const movieStore = useMovieStore()
-const generalStore = useGeneralStore()
+const searchStore = useSearchStore()
 
 const movieCount = computed(() => movieStore.movies.length)
 </script>
@@ -16,7 +17,7 @@ const movieCount = computed(() => movieStore.movies.length)
 <template>
   <div class="flex items-center self-start flex-wrap justify-between w-full mb-16 px-4">
     <p class="text-2xl pt-[25px] md:pt-0">
-      {{ $t('movies.list_of_my_movies') }}
+      {{ $t('movies.list_of_movies') }}
       <span class="text-base lg:text-2xl">({{ $t('movies.total') }} {{ movieCount }})</span>
     </p>
     <div class="flex items-center gap-12">
@@ -26,7 +27,7 @@ const movieCount = computed(() => movieStore.movies.length)
           type="text"
           class="bg-transparent outline-none text-xl w-16 focus:w-36 transition-width duration-300 ease-out"
           :placeholder="$t('news_feed.search')"
-          @input="(e) => generalStore.setSearchString(e.target.value)"
+          @input="(e) => searchStore.setSearchString(e.target.value)"
         />
       </div>
       <AddButton

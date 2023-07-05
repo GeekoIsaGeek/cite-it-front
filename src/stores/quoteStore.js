@@ -16,6 +16,9 @@ export const useQuoteStore = defineStore('quote', {
         return currentQuote
       })
     },
+    removeQuote(quoteId) {
+      this.quotes = this.quotes.filter((quote) => quote.id !== quoteId)
+    },
     async fetchQuotes() {
       const { data } = await request.get('/api/quotes')
       this.quotes = data

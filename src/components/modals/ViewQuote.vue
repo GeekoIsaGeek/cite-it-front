@@ -31,8 +31,8 @@ const movieId = computed(() => quote.value.movie.id)
           alt="movie"
           class="rounded-[10px] w-full h-[300px] lg:h-[30vw] object-cover"
         />
-        <PostStatistics class="text-white text-xl py-0" />
-        <Comments class="text-white" />
+        <PostStatistics class="text-white text-xl py-0" :quote="quote" />
+        <Comments class="text-white" :quote="quote" />
       </div>
     </div>
   </QuoteModalWrapper>

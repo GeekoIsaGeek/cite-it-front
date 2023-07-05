@@ -90,7 +90,7 @@ export default {
     success: 'გილოცავთ'
   },
   movies: {
-    list_of_my_movies: 'ჩემი ფილმები',
+    list_of_movies: 'ფილმების სია',
     total: 'სულ',
     add_movie: 'დამატება',
     edit_movie: 'ციტატის რედაქტირება',
@@ -115,6 +115,13 @@ export default {
     new: 'ახალი',
     mins_ago: 'წუთის წინ',
     days_ago: 'დღის წინ'
+  },
+  routing: {
+    whoops: 'უპს!',
+    page_not_found: 'გვერდი რომელსაც ეძებთ არ მოიძებნა',
+    you_shall_not_pass: 'ამ გვერდზე ვერ გადახვალთ!',
+    forbidden_text: 'ვწუხვართ, თქვენ არ გაქვთ ამ გვერდზე გადასვლის უფლება',
+    return_home: 'მთავარზე დაბრუნება'
   },
 
   // Error Messages and General Responses

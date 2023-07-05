@@ -2,14 +2,19 @@
 import { RouterView } from 'vue-router'
 import { useMovieStore } from '@/stores/movieStore'
 import { useQuoteStore } from '@/stores/quoteStore'
-import { onMounted } from 'vue'
+import { useUserStore } from '@/stores/userStore.js'
+import { watchEffect } from 'vue'
 
 const quoteStore = useQuoteStore()
 const movieStore = useMovieStore()
-onMounted(() => {
-  quoteStore.fetchQuotes()
-  movieStore.fetchMovies()
-})
+const userStore = useUserStore()
+
+watchEffect(() => {
+  if (userStore.user.id) {
+    quoteStore.fetchQuotes()
+    movieStore.fetchMovies()
+  }
+}, userStore.user)
 </script>
 
 <template>

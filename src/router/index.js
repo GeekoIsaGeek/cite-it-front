@@ -12,6 +12,8 @@ import NewsFeedWrapper from '@/components/news-feed/NewsFeedWrapper.vue'
 import EditQuote from '@/components/modals/EditQuote.vue'
 import AddNewQuote from '@/components/modals/AddQuoteFromMovie.vue'
 import EditMovie from '@/components/modals/EditMovie.vue'
+import NotFoundView from '@/views/NotFoundview.vue'
+import ForbiddenView from '@/views/ForbiddenView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -87,8 +89,18 @@ const router = createRouter({
       }
     },
     {
+      path: '/page-not-found',
+      name: 'page-not-found',
+      component: NotFoundView
+    },
+    {
+      path: '/forbidden',
+      name: 'forbidden',
+      component: ForbiddenView
+    },
+    {
       path: '/:catchAll(.*)',
-      redirect: '/'
+      redirect: '/page-not-found'
     }
   ]
 })
@@ -99,7 +111,9 @@ router.beforeEach(async (to) => {
   if (!Object.keys(userStore.user).length > 0) {
     await userStore.fetchUser()
   }
-
+  if (to.name === 'forbidden' || to.name === 'page-not-found') {
+    return
+  }
   if (
     userStore.isLoggedIn &&
     to.path.startsWith('/auth') &&
@@ -109,7 +123,7 @@ router.beforeEach(async (to) => {
     return { name: 'my-profile' }
   }
   if (!userStore.isLoggedIn && to.name !== 'home' && !to.path.startsWith('/auth')) {
-    return { name: 'login' }
+    return { name: 'forbidden' }
   }
 })
 
