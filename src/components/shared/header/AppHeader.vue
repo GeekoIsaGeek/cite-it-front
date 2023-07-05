@@ -43,7 +43,7 @@ const handleLogout = async () => {
 }
 
 const notificationCount = computed(
-  () => userStore.user?.notifications?.filter((notification) => notification.seen === false).length
+  () => userStore.user?.notifications?.filter((notification) => notification.seen === 0).length
 )
 </script>
 

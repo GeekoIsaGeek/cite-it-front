@@ -3,25 +3,26 @@ import NotificationCard from '@/components/notifications/NotificationCard.vue'
 import TheTriangleIcon from '@/components/icons/TheTriangleIcon.vue'
 import { useUserStore } from '@/stores/userStore.js'
 import { echo } from '@/echo.js'
-import { computed } from 'vue'
-import { onMounted, onBeforeUnmount } from 'vue'
-
-onMounted(() => (document.body.style.overflow = 'hidden'))
-onBeforeUnmount(() => (document.body.style.overflow = 'auto'))
+import { onMounted, onBeforeUnmount, ref } from 'vue'
 
 const userStore = useUserStore()
-const notifications = computed(() => userStore.user.notifications)
+const notifications = ref(userStore.user.notifications)
 
 onMounted(() => {
+  document.body.style.overflow = 'hidden'
   echo.private(`notifications.${userStore.user.id}`).listen('QuoteNotificationEvent', (data) => {
-    console.log(data.notification)
+    if (userStore.user.id === data.receiverId) {
+      userStore.addNewNotification(data.notification)
+      notifications.value = [...notifications.value, data.notification]
+    }
   })
 })
+onBeforeUnmount(() => (document.body.style.overflow = 'auto'))
 </script>
 
 <template>
   <div
-    class="modal-bg-gradient fixed z-50 lg:z-auto top-0 lg:top-[86px] h-full left-0 w-full lg:min-h-max flex justify-center items-start"
+    class="modal-bg-gradient fixed z-50 lg:z-auto top-[86px] h-full left-0 w-full lg:min-h-max flex justify-center items-start"
   >
     <div
       class="notifications bg-black h-[90%] fixed overflow-y-scroll text-white right-0 md:right-[40px] xl:right-[70px] top-[86px] w-full md:w-[700px] lg:w-[960px] rounded-xl pb-13 pt-10 px-8"
