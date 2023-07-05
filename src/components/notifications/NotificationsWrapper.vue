@@ -1,24 +1,47 @@
 <script setup>
 import NotificationCard from '@/components/notifications/NotificationCard.vue'
 import TheTriangleIcon from '@/components/icons/TheTriangleIcon.vue'
+import { useUserStore } from '@/stores/userStore.js'
+import { echo } from '@/echo.js'
+import { computed } from 'vue'
+import { onMounted, onBeforeUnmount } from 'vue'
+
+onMounted(() => (document.body.style.overflow = 'hidden'))
+onBeforeUnmount(() => (document.body.style.overflow = 'auto'))
+
+const userStore = useUserStore()
+const notifications = computed(() => userStore.user.notifications)
+
+onMounted(() => {
+  echo.private(`notifications.${userStore.user.id}`).listen('QuoteNotificationEvent', (data) => {
+    console.log(data.notification)
+  })
+})
 </script>
 
 <template>
   <div
-    class="bg-black min-h-max fixed text-white right-0 md:right-[40px] xl:right-[70px] top-[86px] w-full md:w-[700px] lg:w-[960px] rounded-xl pb-13 pt-10 px-8"
+    class="modal-bg-gradient fixed z-50 lg:z-auto top-0 lg:top-[86px] h-full left-0 w-full lg:min-h-max flex justify-center items-start"
   >
-    <div class="flex items-center justify-between">
-      <h1 class="text-xl lg:text-[32px]">{{ $t('notifications.notifications') }}</h1>
-      <p class="cursor-pointer underline text-sm lg:text-base hover:text-gray-300 lg:mb-6">
-        {{ $t('notifications.mark_as_all_read') }}
-      </p>
+    <div
+      class="notifications bg-black h-[90%] fixed overflow-y-scroll text-white right-0 md:right-[40px] xl:right-[70px] top-[86px] w-full md:w-[700px] lg:w-[960px] rounded-xl pb-13 pt-10 px-8"
+    >
+      <div class="flex items-center justify-between">
+        <h1 class="text-xl lg:text-[32px]">{{ $t('notifications.notifications') }}</h1>
+        <p class="cursor-pointer underline text-sm lg:text-base hover:text-gray-300 lg:mb-6">
+          {{ $t('notifications.mark_as_all_read') }}
+        </p>
+      </div>
+      <ul class="flex flex-col gap-4 mt-8 relative z-20">
+        <NotificationCard
+          v-for="notification in notifications"
+          :key="notification.id"
+          :notification="notification"
+        />
+      </ul>
+      <TheTriangleIcon
+        class="fixed top-[70px] right-[150px] z-10 sm:right-[130px] md:right-[284px] lg:right-[315px]"
+      />
     </div>
-    <ul class="flex flex-col gap-4 mt-8">
-      <NotificationCard hasCommented :isNew="false" />
-      <NotificationCard :hasCommented="false" isNew />
-    </ul>
-    <TheTriangleIcon
-      class="absolute right-[150px] top-[-15px] sm:right-[26%] md:right-[35%] lg:right-[25.5%]"
-    />
   </div>
 </template>

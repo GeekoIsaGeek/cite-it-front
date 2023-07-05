@@ -10,6 +10,7 @@ import { useMovieStore } from '@/stores/movieStore'
 import { ref } from 'vue'
 import { watch } from 'vue'
 import { storeToRefs } from 'pinia'
+
 import NothingFoundMessage from '@/components/shared/NothingFoundMessage.vue'
 
 const { searchString } = storeToRefs(useSearchStore())
@@ -23,10 +24,11 @@ watch(searchString, (updatedSearchString) => {
   if (updatedSearchString === '') {
     movies.value = movieList.value
   } else {
+    updatedSearchString = updatedSearchString.toLowerCase()
     movies.value = movieList.value.filter(
       (movie) =>
-        movie.name.en.startsWith(updatedSearchString) ||
-        movie.name.ka.startsWith(updatedSearchString)
+        movie.name.en.toLowerCase().startsWith(updatedSearchString) ||
+        movie.name.ka.toLowerCase().startsWith(updatedSearchString)
     )
   }
 })

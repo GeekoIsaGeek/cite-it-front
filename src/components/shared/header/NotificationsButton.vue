@@ -1,17 +1,21 @@
 <script setup>
 import TheBellIcon from '@/components/icons/TheBellIcon.vue'
-import { ref } from 'vue'
-const notificationCount = ref(0)
+defineProps({
+  count: {
+    type: Number,
+    required: true
+  }
+})
 </script>
 
 <template>
   <div class="relative flex mr-9 cursor-pointer">
     <TheBellIcon />
     <div
-      v-if="notificationCount > 0"
+      v-if="count > 0"
       class="text-white font-medium w-6 h-6 bg-[#E33812] flex justify-center items-center rounded-full absolute right-[-12px] top-[-2px]"
     >
-      {{ notificationCount }}
+      {{ count }}
     </div>
   </div>
 </template>

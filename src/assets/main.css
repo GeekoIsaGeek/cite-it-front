@@ -34,11 +34,13 @@ img {
 }
 
 textarea,
+.notifications,
 .dialog {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 textarea::-webkit-scrollbar,
-.dialog::-webkit-scrollbar {
+.dialog::-webkit-scrollbar,
+.notifications::-webkit-scrollbar {
   display: none;
 }
