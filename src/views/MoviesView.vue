@@ -8,7 +8,7 @@ import { useSearchStore } from '@/stores/searchStore.js'
 
 import { useMovieStore } from '@/stores/movieStore'
 import { ref } from 'vue'
-import { watch } from 'vue'
+import { watch, watchEffect } from 'vue'
 import { storeToRefs } from 'pinia'
 
 import NothingFoundMessage from '@/components/shared/NothingFoundMessage.vue'
@@ -18,7 +18,7 @@ const { showAddMovieModal } = storeToRefs(useModalStore())
 const { movies: movieList } = storeToRefs(useMovieStore())
 const movies = ref([...movieList.value])
 
-watch(movieList.value, (updatedList) => (movies.value = updatedList))
+watchEffect(() => (movies.value = movieList.value), movieList.value)
 
 watch(searchString, (updatedSearchString) => {
   if (updatedSearchString === '') {
@@ -32,6 +32,7 @@ watch(searchString, (updatedSearchString) => {
     )
   }
 })
+console.log(movies.value)
 </script>
 
 <template>
