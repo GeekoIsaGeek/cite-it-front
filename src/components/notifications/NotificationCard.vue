@@ -8,6 +8,8 @@ import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import timeAgo from '@/utils/timeAgo'
 import { useI18n } from 'vue-i18n'
+import request from '@/config/axiosInstance.js'
+import { useUserStore } from '@/stores/userStore.js'
 
 const props = defineProps({
   notification: {
@@ -20,15 +22,23 @@ const router = useRouter()
 const avatar = useGetImagePath(props.notification.author_avatar)
 const author = computed(() => capitalize(props.notification.author))
 const isNew = computed(() => props.notification.seen === 0)
-const timeOfCreation = computed(() => timeAgo(props.notification.created_at, locale.value))
+const creationTime = computed(() => timeAgo(props.notification.created_at, locale.value))
+const userStore = useUserStore()
 
-const handleClickOnNotification = () =>
+const handleClickOnNotification = async () => {
+  if (props.notification.seen === 0) {
+    const response = await request.post(`/api/${props.notification.id}/mark-as-read`)
+    if (response.status === 200) {
+      userStore.saveUpdatedNotification(response.data)
+    }
+  }
   router.push({
     name: 'view-quote',
     params: {
       id: props.notification.quote_id
     }
   })
+}
 </script>
 
 <template>
@@ -64,7 +74,7 @@ const handleClickOnNotification = () =>
           isNew ? 'center' : 'start'
         }`"
       >
-        <p>{{ timeOfCreation }}</p>
+        <p>{{ creationTime }}</p>
         <p class="text-[#198754]" v-if="isNew">{{ $t('notifications.new') }}</p>
       </div>
     </div>

@@ -3,10 +3,11 @@ import NotificationCard from '@/components/notifications/NotificationCard.vue'
 import TheTriangleIcon from '@/components/icons/TheTriangleIcon.vue'
 import { useUserStore } from '@/stores/userStore.js'
 import { echo } from '@/echo.js'
-import { onMounted, onBeforeUnmount, ref } from 'vue'
+import { onMounted, onBeforeUnmount, computed } from 'vue'
+import request from '@/config/axiosInstance.js'
 
 const userStore = useUserStore()
-const notifications = ref(userStore.user.notifications)
+const notifications = computed(() => userStore.user.notifications)
 
 onMounted(() => {
   document.body.style.overflow = 'hidden'
@@ -18,6 +19,14 @@ onMounted(() => {
   })
 })
 onBeforeUnmount(() => (document.body.style.overflow = 'auto'))
+
+const handleMarkAllAsRead = async () => {
+  const response = await request.post('/api/notifications/mark-all-as-read')
+  if (response.status === 200) {
+    userStore.setNotifications(response.data)
+  }
+  console.log(response)
+}
 </script>
 
 <template>
@@ -29,7 +38,10 @@ onBeforeUnmount(() => (document.body.style.overflow = 'auto'))
     >
       <div class="flex items-center justify-between">
         <h1 class="text-xl lg:text-[32px]">{{ $t('notifications.notifications') }}</h1>
-        <p class="cursor-pointer underline text-sm lg:text-base hover:text-gray-300 lg:mb-6">
+        <p
+          class="cursor-pointer underline text-sm lg:text-base hover:text-gray-300 lg:mb-6"
+          @click="handleMarkAllAsRead"
+        >
           {{ $t('notifications.mark_as_all_read') }}
         </p>
       </div>
