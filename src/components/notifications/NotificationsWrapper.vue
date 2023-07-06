@@ -25,7 +25,6 @@ const handleMarkAllAsRead = async () => {
   if (response.status === 200) {
     userStore.setNotifications(response.data)
   }
-  console.log(response)
 }
 </script>
 
