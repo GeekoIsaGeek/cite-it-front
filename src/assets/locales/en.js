@@ -122,6 +122,20 @@ export default {
     forbidden_text: 'Sorry, but  you don’t have permission to access this page',
     return_home: 'Return home'
   },
+  time: {
+    justNow: 'just now',
+    minute: 'minute',
+    minutes: 'minutes',
+    hour: 'hour',
+    hours: 'hours',
+    day: 'day',
+    days: 'days',
+    month: 'month',
+    months: 'months',
+    year: 'year',
+    years: 'years',
+    ago: 'ago'
+  },
   // Error Messages and General Responses
   messages: {
     changes_are_not_bilingual: 'You should edit fields in both languages',
