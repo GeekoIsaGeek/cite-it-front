@@ -5,25 +5,34 @@ import { useSearchStore } from '@/stores/searchStore.js'
 import { useModalStore } from '@/stores/modalStore.js'
 import PostCard from '@/components/news-feed/NewsFeedPostCard.vue'
 import SearchMobile from '@/components/news-feed/SearchMobile.vue'
-import { useQuoteStore } from '@/stores/quoteStore.js'
 import { storeToRefs } from 'pinia'
 import MovieCard from '@/components/movies/MovieCard.vue'
 import NothingFoundMessage from '@/components/shared/NothingFoundMessage.vue'
-import { watch } from 'vue'
+import useInfiniteScroll from '@/composables/useInfiniteScroll'
+import { watch, onMounted, onBeforeUnmount } from 'vue'
 
-const { quotes } = storeToRefs(useQuoteStore())
 const searchStore = useSearchStore()
 const modalStore = useModalStore()
 const { searchedData, typeOfSearchedData } = storeToRefs(searchStore)
+const { fetchData, handleScroll, items: quotes } = useInfiniteScroll('quotes/paginate')
+
+onMounted(() => {
+  fetchData()
+  window.addEventListener('scroll', handleScroll)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 
 watch(typeOfSearchedData, (updatedTypeOfSearchedData) => {
   if (updatedTypeOfSearchedData === 'quote') {
-    quotes.value = searchedData
+    quotes.value = searchedData.value
   }
 })
 </script>
 <template>
-  <div class="w-full md:max-w-[46vw] bg-[#191625]">
+  <div class="news-feed w-full md:max-w-[46vw] bg-[#191625]">
     <div class="mb-4">
       <AddNewQuote v-if="modalStore.showAddNewPostModal" />
       <PostAndSearch />

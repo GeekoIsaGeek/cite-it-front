@@ -3,14 +3,26 @@ import NotificationCard from '@/components/notifications/NotificationCard.vue'
 import TheTriangleIcon from '@/components/icons/TheTriangleIcon.vue'
 import { useUserStore } from '@/stores/userStore.js'
 import { echo } from '@/echo.js'
-import { onMounted, onBeforeUnmount, computed } from 'vue'
+import { onMounted, onBeforeUnmount, ref } from 'vue'
 import request from '@/config/axiosInstance.js'
+import useInfiniteScroll from '@/composables/useInfiniteScroll.js'
 
 const userStore = useUserStore()
-const notifications = computed(() => userStore.user.notifications)
+const notificationsRef = ref(null)
+const { fetchData, items: notifications } = useInfiniteScroll('notifications')
+
+const handleScroll = () => {
+  const { scrollTop, clientHeight, scrollHeight } = notificationsRef.value
+  if (scrollTop + clientHeight >= scrollHeight) {
+    fetchData()
+  }
+}
 
 onMounted(() => {
+  fetchData()
+  notificationsRef.value.addEventListener('scroll', handleScroll)
   document.body.style.overflow = 'hidden'
+
   echo.private(`notifications.${userStore.user.id}`).listen('QuoteNotificationEvent', (data) => {
     if (userStore.user.id === data.receiverId) {
       userStore.addNewNotification(data.notification)
@@ -18,7 +30,10 @@ onMounted(() => {
     }
   })
 })
-onBeforeUnmount(() => (document.body.style.overflow = 'auto'))
+onBeforeUnmount(() => {
+  document.body.style.overflow = 'auto'
+  notificationsRef.value.removeEventListener('scroll', handleScroll)
+})
 
 const handleMarkAllAsRead = async () => {
   const response = await request.post('/api/notifications/mark-all-as-read')
@@ -34,6 +49,7 @@ const handleMarkAllAsRead = async () => {
   >
     <div
       class="notifications bg-black h-[90%] fixed overflow-y-scroll text-white right-0 md:right-[40px] xl:right-[70px] top-[86px] w-full md:w-[700px] lg:w-[960px] rounded-xl pb-13 pt-10 px-8"
+      ref="notificationsRef"
     >
       <div class="flex items-center justify-between">
         <h1 class="text-xl lg:text-[32px]">{{ $t('notifications.notifications') }}</h1>
@@ -44,7 +60,7 @@ const handleMarkAllAsRead = async () => {
           {{ $t('notifications.mark_as_all_read') }}
         </p>
       </div>
-      <ul class="flex flex-col gap-4 mt-8 relative z-20">
+      <ul class="flex flex-col gap-4 mt-8 relative z-20" v-if="notifications.length > 0">
         <NotificationCard
           v-for="notification in notifications"
           :key="notification.id"

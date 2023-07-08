@@ -1,11 +1,19 @@
 <script setup>
-import { inject } from 'vue'
 import { getLocalizedGenres } from '@/utils/localizationUtils.js'
 import { useI18n } from 'vue-i18n'
 import { watchEffect } from 'vue'
 import { ref } from 'vue'
 
-const movie = inject('movie')
+import { toRef } from 'vue'
+
+const props = defineProps({
+  movie: {
+    type: Object,
+    required: true
+  }
+})
+
+const movie = toRef(props.movie)
 const { locale } = useI18n()
 const genres = ref([])
 

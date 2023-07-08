@@ -7,24 +7,29 @@ import useGetImagePath from '@/composables/useGetImagePath.js'
 import { useI18n } from 'vue-i18n'
 import request from '@/config/axiosInstance.js'
 import { useQuoteStore } from '@/stores/quoteStore.js'
-import { inject } from 'vue'
 import { useMovieStore } from '@/stores/movieStore.js'
+
+import { toRef } from 'vue'
 
 const { locale } = useI18n()
 const props = defineProps({
   quote: {
     type: Object,
     required: true
+  },
+  movie: {
+    type: Object,
+    required: true
   }
 })
 
+const movie = toRef(props.movie)
 const poster = computed(() => useGetImagePath(props.quote.image))
 const quoteObject = computed(() => props.quote)
 const quoteText = computed(() => quoteObject.value.quote[locale.value])
 const showDropdown = ref(false)
 const quoteStore = useQuoteStore()
 const movieStore = useMovieStore()
-const movie = inject('movie')
 
 const handleDelete = async () => {
   const { status } = await request.delete(`/api/quotes/${props.quote.id}`)

@@ -35,12 +35,14 @@ img {
 
 textarea,
 .notifications,
-.dialog {
+.dialog,
+.news-feed {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 textarea::-webkit-scrollbar,
 .dialog::-webkit-scrollbar,
-.notifications::-webkit-scrollbar {
+.notifications::-webkit-scrollbar,
+.news-feed::-webkit-scrollbar {
   display: none;
 }
