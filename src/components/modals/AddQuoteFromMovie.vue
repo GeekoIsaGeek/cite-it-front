@@ -14,6 +14,7 @@ import { storeToRefs } from 'pinia'
 import ServerErrors from '@/components/shared/ServerErrors.vue'
 import fillFormData from '@/utils/fillFormData'
 import useSendPostRequest from '@/composables/useSendPostRequest.js'
+import FormWrapperTransition from '@/components/shared/FormWrapperTransition.vue'
 
 const quoteData = reactive({
   quote: null,
@@ -57,40 +58,44 @@ const handleSubmit = async ({ touched, valid }) => {
 
 <template>
   <QuoteModalWrapper>
-    <div class="dialog bg-almostBlack pt-6 lg:w-1/2 rounded-xl pb-24 overflow-y-scroll text-white">
-      <div class="px-8 pt-4 pb-6 border-b border-b-darkGray relative">
-        <h2 class="text-center text-2xl">{{ $t('movie_details.add_quote') }}</h2>
-        <CloseIcon class="right-8 top-3 hover:text-darkGray" @click="handleCancel" />
+    <FormWrapperTransition>
+      <div
+        class="dialog bg-almostBlack pt-6 lg:w-1/2 rounded-xl pb-24 overflow-y-scroll text-white"
+      >
+        <div class="px-8 pt-4 pb-6 border-b border-b-darkGray relative">
+          <h2 class="text-center text-2xl">{{ $t('movie_details.add_quote') }}</h2>
+          <CloseIcon class="right-8 top-3 hover:text-darkGray" @click="handleCancel" />
+        </div>
+        <div class="w-full px-8">
+          <Author class="my-[30px]" />
+          <MovieDetails :movie="movie" />
+          <Form class="mt-7 mb-11 flex flex-col gap-4" v-slot="{ meta }">
+            <FormField
+              rules="required|only_latin"
+              type="text"
+              placeholder="Add new quote"
+              language="Eng"
+              name="quote"
+              v-model="quoteData.quote"
+              isTextArea
+            />
+            <FormField
+              rules="required|only_georgian"
+              type="text"
+              placeholder="ახალი ციტატა"
+              language="ქარ"
+              name="quote_ka"
+              v-model="quoteData.quote_ka"
+              isTextArea
+            />
+            <ImageUploader previewImage v-model="quoteData.image" />
+            <ServerErrors :errors="errorMessages" v-if="errorMessages.length > 0" />
+            <AddQuoteButton class="w-full mt-14 py-[9px]" @click="() => handleSubmit(meta)">{{
+              $t('movie_details.add_quote')
+            }}</AddQuoteButton>
+          </Form>
+        </div>
       </div>
-      <div class="w-full px-8">
-        <Author class="my-[30px]" />
-        <MovieDetails :movie="movie" />
-        <Form class="mt-7 mb-11 flex flex-col gap-4" v-slot="{ meta }">
-          <FormField
-            rules="required|only_latin"
-            type="text"
-            placeholder="Add new quote"
-            language="Eng"
-            name="quote"
-            v-model="quoteData.quote"
-            isTextArea
-          />
-          <FormField
-            rules="required|only_georgian"
-            type="text"
-            placeholder="ახალი ციტატა"
-            language="ქარ"
-            name="quote_ka"
-            v-model="quoteData.quote_ka"
-            isTextArea
-          />
-          <ImageUploader previewImage v-model="quoteData.image" />
-          <ServerErrors :errors="errorMessages" v-if="errorMessages.length > 0" />
-          <AddQuoteButton class="w-full mt-14 py-[9px]" @click="() => handleSubmit(meta)">{{
-            $t('movie_details.add_quote')
-          }}</AddQuoteButton>
-        </Form>
-      </div>
-    </div>
+    </FormWrapperTransition>
   </QuoteModalWrapper>
 </template>

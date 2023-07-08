@@ -6,6 +6,7 @@ import { echo } from '@/echo.js'
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 import request from '@/config/axiosInstance.js'
 import useInfiniteScroll from '@/composables/useInfiniteScroll.js'
+import ModalTransition from '@/components/shared/ModalTransition.vue'
 
 const userStore = useUserStore()
 const notificationsRef = ref(null)
@@ -44,32 +45,40 @@ const handleMarkAllAsRead = async () => {
 </script>
 
 <template>
-  <div
-    class="modal-bg-gradient fixed z-50 lg:z-auto top-[86px] h-full left-0 w-full lg:min-h-max flex justify-center items-start"
-  >
+  <ModalTransition>
     <div
-      class="notifications bg-black h-[90%] fixed overflow-y-scroll text-white right-0 md:right-[40px] xl:right-[70px] top-[86px] w-full md:w-[700px] lg:w-[960px] rounded-xl pb-13 pt-10 px-8"
-      ref="notificationsRef"
+      class="modal-bg-gradient fixed z-50 lg:z-auto top-[86px] h-full left-0 w-full lg:min-h-max flex justify-center items-start"
     >
-      <div class="flex items-center justify-between">
-        <h1 class="text-xl lg:text-[32px]">{{ $t('notifications.notifications') }}</h1>
-        <p
-          class="cursor-pointer underline text-sm lg:text-base hover:text-gray-300 lg:mb-6"
-          @click="handleMarkAllAsRead"
+      <Transition
+        appear
+        enter-from-class="h-[0px]"
+        enter-active-class="transition-all duration-500 ease-in-out"
+      >
+        <div
+          class="notifications bg-black h-[90%] fixed overflow-y-scroll text-white right-0 md:right-[40px] xl:right-[70px] top-[86px] w-full md:w-[700px] lg:w-[960px] rounded-xl pb-13 pt-10 px-8"
+          ref="notificationsRef"
         >
-          {{ $t('notifications.mark_as_all_read') }}
-        </p>
-      </div>
-      <ul class="flex flex-col gap-4 mt-8 relative z-20" v-if="notifications.length > 0">
-        <NotificationCard
-          v-for="notification in notifications"
-          :key="notification.id"
-          :notification="notification"
-        />
-      </ul>
-      <TheTriangleIcon
-        class="fixed top-[70px] right-[150px] z-10 sm:right-[130px] md:right-[284px] lg:right-[315px]"
-      />
+          <div class="flex items-center justify-between">
+            <h1 class="text-xl lg:text-[32px]">{{ $t('notifications.notifications') }}</h1>
+            <p
+              class="cursor-pointer underline text-sm lg:text-base hover:text-gray-300 lg:mb-6"
+              @click="handleMarkAllAsRead"
+            >
+              {{ $t('notifications.mark_as_all_read') }}
+            </p>
+          </div>
+          <ul class="flex flex-col gap-4 mt-8 relative z-20" v-if="notifications.length > 0">
+            <NotificationCard
+              v-for="notification in notifications"
+              :key="notification.id"
+              :notification="notification"
+            />
+          </ul>
+          <TheTriangleIcon
+            class="fixed top-[70px] right-[150px] z-10 sm:right-[130px] md:right-[284px] lg:right-[315px]"
+          />
+        </div>
+      </Transition>
     </div>
-  </div>
+  </ModalTransition>
 </template>

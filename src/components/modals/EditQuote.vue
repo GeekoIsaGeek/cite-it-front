@@ -15,6 +15,7 @@ import useSendPostRequest from '@/composables/useSendPostRequest.js'
 import { editsAreMadeInBothLanguages } from '@/utils/validations.js'
 import getUpdatedValues from '@/utils/getUpdatedValues.js'
 import { useRouter } from 'vue-router'
+import FormWrapperTransition from '@/components/shared/FormWrapperTransition.vue'
 
 const quoteStore = useQuoteStore()
 const quoteId = useRoute().params.id
@@ -66,44 +67,48 @@ const handleSubmit = async () => {
 
 <template>
   <QuoteModalWrapper>
-    <div
-      class="dialog flex flex-col text-white w-full lg:w-1/2 bg-almostBlack pt-8 overflow-y-scroll pb-7 rounded-xl"
-    >
-      <TopPanel :heading="$t('movie_details.edit_quote')" :movieId="quote.movie.id" />
-      <div class="flex flex-col px-6 gap-10">
-        <Author class="mt-7" />
-        <Form class="flex flex-col gap-6">
-          <FormField
-            rules="required|only_latin"
-            name="quote"
-            language="Eng"
-            isTextArea
-            v-model="quoteData.quote"
-          />
-          <FormField
-            rules="required|only_georgian"
-            name="quote_ka"
-            language="ქარ"
-            isTextArea
-            v-model="quoteData.quote_ka"
-          />
-          <div class="w-full h-[300px] lg:h-[30vw] relative">
-            <img :src="image" alt="movie" class="rounded-[10px] w-full h-full object-cover" />
-            <div
-              class="w-2/5 overflow-hidden lg:w-1/4 h-[50%] lg:h-[25%] cursor-pointer absolute top-[25%] lg:top-[40%] left-[25%] lg:left-[35%] modal-bg-gradient rounded-[10px] flex flex-col gap-3 justify-center items-center"
-            >
-              <input
-                type="file"
-                class="scale-[1000%] absolute opacity-0"
-                @change="handleImageChange"
-              />
-              <ThePhotoCameraIcon />
-              {{ $t('movie_details.change_photo') }}
+    <FormWrapperTransition type="edit">
+      <div
+        class="dialog flex flex-col text-white w-full lg:w-1/2 bg-almostBlack pt-8 overflow-y-scroll pb-7 rounded-xl"
+      >
+        <TopPanel :heading="$t('movie_details.edit_quote')" :movieId="quote.movie.id" />
+        <div class="flex flex-col px-6 gap-10">
+          <Author class="mt-7" />
+          <Form class="flex flex-col gap-6">
+            <FormField
+              rules="required|only_latin"
+              name="quote"
+              language="Eng"
+              isTextArea
+              v-model="quoteData.quote"
+            />
+            <FormField
+              rules="required|only_georgian"
+              name="quote_ka"
+              language="ქარ"
+              isTextArea
+              v-model="quoteData.quote_ka"
+            />
+            <div class="w-full h-[300px] lg:h-[30vw] relative">
+              <img :src="image" alt="movie" class="rounded-[10px] w-full h-full object-cover" />
+              <div
+                class="w-2/5 overflow-hidden lg:w-1/4 h-[50%] lg:h-[25%] cursor-pointer absolute top-[25%] lg:top-[40%] left-[25%] lg:left-[35%] modal-bg-gradient rounded-[10px] flex flex-col gap-3 justify-center items-center"
+              >
+                <input
+                  type="file"
+                  class="scale-[1000%] absolute opacity-0"
+                  @change="handleImageChange"
+                />
+                <ThePhotoCameraIcon />
+                {{ $t('movie_details.change_photo') }}
+              </div>
             </div>
-          </div>
-          <SaveButton @click="() => handleSubmit()">{{ $t('my_profile.save_changes') }}</SaveButton>
-        </Form>
+            <SaveButton @click="() => handleSubmit()">{{
+              $t('my_profile.save_changes')
+            }}</SaveButton>
+          </Form>
+        </div>
       </div>
-    </div>
+    </FormWrapperTransition>
   </QuoteModalWrapper>
 </template>

@@ -9,6 +9,7 @@ import { useRoute } from 'vue-router'
 import { useQuoteStore } from '@/stores/quoteStore.js'
 import { computed } from 'vue'
 import useGetImagePath from '@/composables/useGetImagePath.js'
+import FormWrapperTransition from '@/components/shared/FormWrapperTransition.vue'
 
 const route = useRoute()
 const quoteStore = useQuoteStore()
@@ -21,19 +22,21 @@ const movieId = computed(() => quote.value.movie.id)
 
 <template>
   <QuoteModalWrapper>
-    <div class="dialog bg-almostBlack lg:w-1/2 pt-10 pb-8 overflow-y-scroll rounded-xl">
-      <TopPanel :heading="$t('movie_details.view_quote')" :movieId="movieId" />
-      <div class="flex flex-col px-8 gap-11">
-        <QuoteAuthor class="text-white mt-8" />
-        <Quotes :quotes="quote.quote" />
-        <img
-          :src="image"
-          alt="movie"
-          class="rounded-[10px] w-full h-[300px] lg:h-[30vw] object-cover"
-        />
-        <PostStatistics class="text-white text-xl py-0" :quote="quote" />
-        <Comments class="text-white" :quote="quote" />
+    <FormWrapperTransition type="view">
+      <div class="dialog bg-almostBlack lg:w-1/2 pt-10 pb-8 overflow-y-scroll rounded-xl">
+        <TopPanel :heading="$t('movie_details.view_quote')" :movieId="movieId" />
+        <div class="flex flex-col px-8 gap-11">
+          <QuoteAuthor class="text-white mt-8" />
+          <Quotes :quotes="quote.quote" />
+          <img
+            :src="image"
+            alt="movie"
+            class="rounded-[10px] w-full h-[300px] lg:h-[30vw] object-cover"
+          />
+          <PostStatistics class="text-white text-xl py-0" :quote="quote" />
+          <Comments class="text-white" :quote="quote" />
+        </div>
       </div>
-    </div>
+    </FormWrapperTransition>
   </QuoteModalWrapper>
 </template>
