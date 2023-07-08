@@ -1,5 +1,7 @@
 <script setup>
 import Button from '@/components/UI/RedButton.vue'
+
+const emit = defineEmits(['scrollTo'])
 </script>
 
 <template>
@@ -11,6 +13,8 @@ import Button from '@/components/UI/RedButton.vue'
     >
       {{ $t('landing.hero_heading') }}
     </p>
-    <Button class="px-[14px] py-2 md:px-4">{{ $t('landing.hero_button') }}</Button>
+    <Button @click="emit('scrollTo')" class="px-[14px] py-2 md:px-4">{{
+      $t('landing.hero_button')
+    }}</Button>
   </section>
 </template>
