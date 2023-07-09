@@ -16,11 +16,16 @@ import { editsAreMadeInBothLanguages } from '@/utils/validations.js'
 import getUpdatedValues from '@/utils/getUpdatedValues.js'
 import { useRouter } from 'vue-router'
 import FormWrapperTransition from '@/components/shared/FormWrapperTransition.vue'
+import { computed } from 'vue'
+import { useUserStore } from '@/stores/userStore.js'
 
 const quoteStore = useQuoteStore()
+const userStore = useUserStore()
 const quoteId = useRoute().params.id
 const quote = quoteStore.quotes.find((quote) => quote.id === parseInt(quoteId))
 const router = useRouter()
+const userOwnsPost = computed(() => quote.movie.author.id === userStore.user.id)
+console.log(userOwnsPost.value)
 
 const image = ref(useGetImagePath(quote.image))
 
@@ -71,7 +76,11 @@ const handleSubmit = async () => {
       <div
         class="dialog flex flex-col text-white w-full lg:w-1/2 bg-almostBlack pt-8 overflow-y-scroll pb-7 rounded-xl"
       >
-        <TopPanel :heading="$t('movie_details.edit_quote')" :movieId="quote.movie.id" />
+        <TopPanel
+          :heading="$t('movie_details.edit_quote')"
+          :movieId="quote.movie.id"
+          :userOwnsPost="userOwnsPost"
+        />
         <div class="flex flex-col px-6 gap-10">
           <Author class="mt-7" />
           <Form class="flex flex-col gap-6">
