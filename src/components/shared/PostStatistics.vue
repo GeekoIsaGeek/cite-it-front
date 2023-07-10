@@ -20,8 +20,8 @@ const router = useRouter()
 const likesCount = ref(props.quote.likes.length)
 
 onMounted(() => {
-  likesChannel.listen('QuoteLikedEvent', () => {
-    likesCount.value += 1
+  likesChannel.listen('QuoteLikedEvent', (data) => {
+    if (props.quote.id === data.quoteId) likesCount.value += 1
   })
 })
 
