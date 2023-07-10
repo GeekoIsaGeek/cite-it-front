@@ -71,9 +71,9 @@ const handleSubmit = async () => {
       <div
         class="dialog flex flex-col text-white w-full lg:w-1/2 bg-almostBlack pt-8 overflow-y-scroll pb-7 rounded-xl"
       >
-        <TopPanel :heading="$t('movie_details.edit_quote')" :movieId="quote.movie.id" />
+        <TopPanel :heading="$t('movie_details.edit_quote')" :movie="quote.movie" />
         <div class="flex flex-col px-6 gap-10">
-          <Author class="mt-7" />
+          <Author class="mt-7" :imageUrl="quote.image" />
           <Form class="flex flex-col gap-6">
             <FormField
               rules="required|only_latin"

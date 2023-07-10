@@ -4,8 +4,6 @@ import TheCommentIcon from '@/components/icons/TheCommentIcon.vue'
 import request from '@/config/axiosInstance.js'
 import { ref, onMounted } from 'vue'
 import { likesChannel } from '@/echo.js'
-import { useQuoteStore } from '@/stores/quoteStore.js'
-import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 const props = defineProps({
@@ -18,12 +16,8 @@ const props = defineProps({
     required: true
   }
 })
-const quoteStore = useQuoteStore()
 const router = useRouter()
 const likesCount = ref(props.quote.likes.length)
-const comments = computed(
-  () => quoteStore.quotes.find((quote) => quote.id === props.quote.id).comments
-)
 
 onMounted(() => {
   likesChannel.listen('QuoteLikedEvent', () => {
@@ -39,7 +33,7 @@ const handleAddingLike = async () => {
 <template>
   <div class="py-6 flex gap-8 items-center">
     <p class="flex items-center gap-4" @click="navigationHandler">
-      {{ comments.length }}
+      {{ quote.comments.length }}
       <TheCommentIcon
         class="cursor-pointer"
         @click="

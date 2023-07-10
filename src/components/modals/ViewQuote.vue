@@ -17,16 +17,15 @@ const quote = computed(() =>
   quoteStore.quotes.find((quote) => quote.id === parseInt(route.params.id))
 )
 const image = useGetImagePath(quote.value.image)
-const movieId = computed(() => quote.value.movie.id)
 </script>
 
 <template>
   <QuoteModalWrapper>
     <FormWrapperTransition type="view">
       <div class="dialog bg-almostBlack lg:w-1/2 pt-10 pb-8 overflow-y-scroll rounded-xl">
-        <TopPanel :heading="$t('movie_details.view_quote')" :movieId="movieId" />
+        <TopPanel :heading="$t('movie_details.view_quote')" :movie="quote.movie" />
         <div class="flex flex-col px-8 gap-11">
-          <QuoteAuthor class="text-white mt-8" />
+          <QuoteAuthor class="text-white mt-8" :imageUrl="quote.image" />
           <Quotes :quotes="quote.quote" />
           <img
             :src="image"

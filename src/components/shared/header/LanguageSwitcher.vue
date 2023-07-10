@@ -29,22 +29,29 @@ const handleLocalization = (language) => {
       <i class="ri-arrow-down-s-fill text-2xl"></i>
     </button>
 
-    <ul
-      class="flex flex-col z-50 absolute top-full right-0 bg-[#FEFBEC] py-3 text-darkBlue text-lg rounded"
-      v-if="showLocales"
+    <Transition
+      enter-from-class="opacity-0"
+      enter-active-class="transition-opacity duration-500 ease"
+      leave-active-class="transition-opacity duration-300 ease-out"
+      leave-to-class="opacity-0"
     >
-      <li
-        class="px-5 border-l-4 border-transparent hover:border-l-red-500 transition-all ease-in-out"
-        @click="(e) => handleLocalization(e.target.innerText)"
+      <ul
+        class="flex flex-col z-50 absolute top-full right-0 bg-[#FEFBEC] py-3 text-darkBlue text-lg rounded"
+        v-if="showLocales"
       >
-        English
-      </li>
-      <li
-        class="px-5 border-l-4 border-transparent hover:border-l-red-500 transition-all ease-in-out"
-        @click="(e) => handleLocalization(e.target.innerText)"
-      >
-        ქართული
-      </li>
-    </ul>
+        <li
+          class="px-5 border-l-4 border-transparent hover:border-l-red-500 transition-all ease-in-out"
+          @click="(e) => handleLocalization(e.target.innerText)"
+        >
+          English
+        </li>
+        <li
+          class="px-5 border-l-4 border-transparent hover:border-l-red-500 transition-all ease-in-out"
+          @click="(e) => handleLocalization(e.target.innerText)"
+        >
+          ქართული
+        </li>
+      </ul>
+    </Transition>
   </div>
 </template>
