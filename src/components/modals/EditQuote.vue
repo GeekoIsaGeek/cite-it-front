@@ -73,7 +73,7 @@ const handleSubmit = async () => {
       >
         <TopPanel :heading="$t('movie_details.edit_quote')" :movie="quote.movie" />
         <div class="flex flex-col px-6 gap-10">
-          <Author class="mt-7" :imageUrl="quote.image" />
+          <Author class="mt-7" :imageUrl="quote.movie.author.profile_picture" />
           <Form class="flex flex-col gap-6">
             <FormField
               rules="required|only_latin"
