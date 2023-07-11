@@ -1,6 +1,6 @@
-# Movie-Quotes-Upgraded
+# Epic Movie Quotes
 
-This is a client-side app for "Movie Quotes Upgraded" project.
+This is a client-side app for "Epic Movie Quotes" project.
 
 ### Table of Contents
 
