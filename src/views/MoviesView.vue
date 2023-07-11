@@ -5,28 +5,34 @@ import MovieCard from '@/components/movies/MovieCard.vue'
 import AddNewMovie from '@/components/modals/AddNewMovie.vue'
 import { useModalStore } from '@/stores/modalStore.js'
 import { useSearchStore } from '@/stores/searchStore.js'
-
 import { useMovieStore } from '@/stores/movieStore'
-import { ref } from 'vue'
 import { watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import NothingFoundMessage from '@/components/shared/NothingFoundMessage.vue'
+import useInfiniteScroll from '@/composables/useInfiniteScroll.js'
+import { onMounted } from 'vue'
+import { onBeforeUnmount } from 'vue'
 
 const { searchString } = storeToRefs(useSearchStore())
 const { showAddMovieModal } = storeToRefs(useModalStore())
 const { movies: movieList } = storeToRefs(useMovieStore())
-const movies = ref([...movieList.value])
+const { fetchData, handleScroll, items: movies } = useInfiniteScroll('movies/paginate')
 
-watch(movieList.value, (updatedList) => (movies.value = updatedList))
+onMounted(() => {
+  fetchData()
+  window.addEventListener('scroll', handleScroll)
+})
+onBeforeUnmount(() => window.removeEventListener('scroll', handleScroll))
 
 watch(searchString, (updatedSearchString) => {
   if (updatedSearchString === '') {
     movies.value = movieList.value
   } else {
+    updatedSearchString = updatedSearchString.toLowerCase()
     movies.value = movieList.value.filter(
       (movie) =>
-        movie.name.en.startsWith(updatedSearchString) ||
-        movie.name.ka.startsWith(updatedSearchString)
+        movie.name.en.toLowerCase().startsWith(updatedSearchString) ||
+        movie.name.ka.toLowerCase().startsWith(updatedSearchString)
     )
   }
 })
@@ -34,7 +40,7 @@ watch(searchString, (updatedSearchString) => {
 
 <template>
   <Wrapper>
-    <div class="flex flex-col min-h-[100vh] lg:w-full bg-veryDarkPurple pt-4 pb-[120px] relative">
+    <div class="flex flex-col lg:w-full bg-veryDarkPurple pt-4 relative">
       <TopPanel />
       <div
         class="grid grid-auto-fill-sm lg:grid-auto-fill justify-items-center gap-y-10 gap-x-[10px]"

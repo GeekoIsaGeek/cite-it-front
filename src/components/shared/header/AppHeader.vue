@@ -31,6 +31,7 @@ const showNotifications = ref(false)
 
 const router = useRouter()
 const currentRoute = computed(() => router.currentRoute.value.path)
+
 const handleLogout = async () => {
   try {
     await request.post('/api/logout')
@@ -40,6 +41,10 @@ const handleLogout = async () => {
     console.error(error)
   }
 }
+
+const notificationCount = computed(
+  () => userStore.user?.notifications?.filter((notification) => notification.seen === 0).length
+)
 </script>
 
 <template>
@@ -59,6 +64,7 @@ const handleLogout = async () => {
         v-if="routeName === 'news-feed'"
       />
       <NotificationsButton
+        :count="notificationCount"
         v-if="showNotificationsButton"
         @click="() => (showNotifications = !showNotifications)"
       />

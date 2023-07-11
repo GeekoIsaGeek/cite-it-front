@@ -1,7 +1,6 @@
 <script setup>
 import TrashIcon from '@/components/icons/TheTrashIcon.vue'
 import PencilIcon from '@/components/icons/TheEditIcon.vue'
-import { inject } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import request from '@/config/axiosInstance.js'
@@ -9,9 +8,18 @@ import { useMovieStore } from '@/stores/movieStore.js'
 import { computed } from 'vue'
 import { useUserStore } from '@/stores/userStore.js'
 
+import { toRef } from 'vue'
+
+const props = defineProps({
+  movie: {
+    type: Object,
+    required: true
+  }
+})
+
+const movie = toRef(props.movie)
 const router = useRouter()
 const { locale } = useI18n()
-const movie = inject('movie')
 const movieStore = useMovieStore()
 const userStore = useUserStore()
 const userOwnsThePost = computed(() => movie.value.author.id === userStore.user.id)

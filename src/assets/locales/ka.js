@@ -124,6 +124,20 @@ export default {
     return_home: 'მთავარზე დაბრუნება'
   },
 
+  time: {
+    justNow: 'ახლახანს',
+    minute: 'წუთის',
+    minutes: 'წუთის',
+    hour: 'საათის',
+    hours: 'საათის',
+    day: 'დღის',
+    days: 'დღის',
+    month: 'თვის',
+    months: 'თვის',
+    year: 'წლის',
+    years: 'წლის',
+    ago: 'წინ'
+  },
   // Error Messages and General Responses
   messages: {
     changes_are_not_bilingual: 'აუცილებელია დაარედაქტიროთ ორივე ენაზე',

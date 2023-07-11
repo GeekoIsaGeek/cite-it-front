@@ -24,9 +24,9 @@ const comment = ref('')
 const shouldLimitCommentsCount = computed(() => route.name === 'news-feed')
 
 const comments = computed(() => {
-  const comments = quoteStore.quotes.find((quote) => quote.id === props.quote.id).comments
-  if (shouldLimitCommentsCount.value && comments.length > 2) {
-    return comments.splice(2, comments.length - 1)
+  const comments = [...quoteStore.quotes.find((quote) => quote.id === props.quote.id).comments]
+  if (shouldLimitCommentsCount.value && comments.length >= 2) {
+    return comments.splice(comments.length - 2, comments.length - 1)
   }
   return comments
 })

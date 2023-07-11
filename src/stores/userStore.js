@@ -33,6 +33,18 @@ export const useUserStore = defineStore('user', {
     clearUpdatableCredentials() {
       this.updatableCredentials = {}
     },
+    addNewNotification(notification) {
+      this.user.notifications = [...this.user.notifications, notification]
+    },
+    saveUpdatedNotification(notification) {
+      const filteredNotifications = this.user.notifications.filter(
+        (currentNotification) => currentNotification.id !== notification.id
+      )
+      this.user.notifications = [...filteredNotifications, notification]
+    },
+    setNotifications(notifications) {
+      this.user.notifications = notifications
+    },
     async fetchUser() {
       try {
         await request.get('/sanctum/csrf-cookie')

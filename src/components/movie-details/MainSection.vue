@@ -3,9 +3,16 @@ import MainSectionHeading from '@/components/movie-details/MainSectionHeading.vu
 import MainSectionGenres from '@/components/movie-details/MainSectionGenres.vue'
 import useGetImagePath from '@/composables/useGetImagePath.js'
 import { useI18n } from 'vue-i18n'
-import { inject } from 'vue'
+import { toRef } from 'vue'
 
-const movie = inject('movie')
+const props = defineProps({
+  movie: {
+    type: Object,
+    required: true
+  }
+})
+
+const movie = toRef(props.movie)
 const image = useGetImagePath(movie.value.poster)
 const { locale } = useI18n()
 </script>
@@ -16,8 +23,8 @@ const { locale } = useI18n()
       <img :src="image" alt="movie" class="h-full w-full rounded-xl object-cover" />
     </div>
     <div class="w-full flex flex-col gap-5 text-lightGray">
-      <MainSectionHeading />
-      <MainSectionGenres />
+      <MainSectionHeading :movie="movie" />
+      <MainSectionGenres :movie="movie" />
       <p class="text-lg font-bold">
         {{ $t('movie_details.director') }}:
         <span class="text-white font-medium">{{ movie.director[locale] }}</span>

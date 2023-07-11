@@ -18,14 +18,17 @@ const props = defineProps({
 })
 const quoteStore = useQuoteStore()
 
+const quoteObject = toRef(props.quote)
 onMounted(() => {
-  commentsChannel.listen('CommentHasBeenAdded', (data) => {
-    quoteStore.value = data.quote
-    quoteStore.updateQuotes(data.quote)
+  commentsChannel.listen('CommentAddedEvent', (data) => {
+    const updatedQuote = {
+      ...quoteObject.value,
+      comments: [...quoteObject.value.comments, data.comment]
+    }
+    quoteObject.value = updatedQuote
+    quoteStore.updateQuotes(updatedQuote)
   })
 })
-
-const quoteObject = toRef(props.quote)
 
 const router = useRouter()
 const navigateToQuoteDetails = () => {

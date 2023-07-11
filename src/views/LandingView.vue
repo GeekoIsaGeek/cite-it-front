@@ -3,19 +3,26 @@ import HeroSection from '@/components/landing/HeroSection.vue'
 import MovieWrapper from '@/components/landing/MovieWrapper.vue'
 import AppHeader from '@/components/shared/header/AppHeader.vue'
 import NavigationMobile from '@/components/news-feed/NavigationMobile.vue'
+
+const scrollToFirstMovie = () => {
+  const element = document.getElementById('first-movie')
+  const y = element.getBoundingClientRect().top + window.pageYOffset
+  window.scrollTo({ top: y, behavior: 'smooth' })
+}
 </script>
 
 <template>
   <div class="bg-darkBlue min-h-screen">
     <NavigationMobile />
     <AppHeader />
-    <HeroSection />
+    <HeroSection @scrollTo="scrollToFirstMovie" />
     <div class="relative">
       <div class="bg-gradient-to-r from-black z-0 absolute top-0 left-0 h-full w-full"></div>
       <MovieWrapper
         quote="You have to leave something behind to go forward"
         movie="Interstellar, 2014"
         class="pt-[40%] lg:pt-[30vh] bg-[url('@/assets/images/image-1.png')] bg-local"
+        id="first-movie"
       />
       <MovieWrapper
         quote="I think we’re just gonna have
