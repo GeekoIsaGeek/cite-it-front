@@ -16,11 +16,16 @@ import { editsAreMadeInBothLanguages } from '@/utils/validations.js'
 import getUpdatedValues from '@/utils/getUpdatedValues.js'
 import { useRouter } from 'vue-router'
 import FormWrapperTransition from '@/components/shared/FormWrapperTransition.vue'
+import { computed } from 'vue'
+import { useUserStore } from '@/stores/userStore.js'
 
 const quoteStore = useQuoteStore()
+const userStore = useUserStore()
 const quoteId = useRoute().params.id
 const quote = quoteStore.quotes.find((quote) => quote.id === parseInt(quoteId))
 const router = useRouter()
+const userOwnsPost = computed(() => quote.movie.author.id === userStore.user.id)
+console.log(userOwnsPost.value)
 
 const image = ref(useGetImagePath(quote.image))
 

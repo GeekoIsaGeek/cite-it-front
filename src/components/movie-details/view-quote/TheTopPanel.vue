@@ -12,6 +12,7 @@ const props = defineProps({
     type: String,
     required: true
   },
+
   movie: {
     type: Object,
     required: false
