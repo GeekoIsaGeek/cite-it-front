@@ -53,18 +53,25 @@ const handleSelect = (genre) => {
       <span v-if="selectedGenres.length < 1">{{ $t('movies.genre') }}</span>
       <PlusIcon @click="() => (showGenres = !showGenres)" />
     </div>
-    <ul
-      v-if="showGenres"
-      class="flex flex-col absolute bg-veryDarkPurple py-4 w-full left-0 top-full rounded border border-gray-400"
+    <Transition
+      enter-from-class="opacity-0"
+      enter-active-class="transition-all duration-300 ease-out"
+      leave-active-class="transition-opacity duration-300 ease-out"
+      leave-to-class="opacity-0"
     >
-      <li
-        v-for="genre in genres"
-        :key="genre"
-        class="px-4 lg:text-xl hover:bg-darkPurple py-1 cursor-pointer"
-        @click="() => handleSelect(genre)"
+      <ul
+        v-if="showGenres"
+        class="flex flex-col absolute bg-veryDarkPurple py-4 w-full left-0 top-full rounded border border-gray-400"
       >
-        {{ genre }}
-      </li>
-    </ul>
+        <li
+          v-for="genre in genres"
+          :key="genre"
+          class="px-4 lg:text-xl hover:bg-darkPurple py-1 cursor-pointer"
+          @click="() => handleSelect(genre)"
+        >
+          {{ genre }}
+        </li>
+      </ul>
+    </Transition>
   </div>
 </template>

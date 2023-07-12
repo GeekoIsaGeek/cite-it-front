@@ -51,8 +51,8 @@ const handleMarkAllAsRead = async () => {
     >
       <Transition
         appear
-        enter-from-class="translate-x-[50%] opacity-[10%]"
-        enter-active-class="transition-all duration-300 ease-in-out"
+        enter-from-class="translate-x-[100%]"
+        enter-active-class="transition-translate duration-300 ease-out"
       >
         <div
           class="notifications bg-black h-[90%] fixed overflow-y-scroll text-white right-0 md:right-[40px] xl:right-[70px] top-[86px] w-full md:w-[700px] lg:w-[960px] rounded-xl pb-13 pt-10 px-8"

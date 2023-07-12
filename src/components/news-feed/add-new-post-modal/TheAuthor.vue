@@ -4,8 +4,15 @@ import useGetImagePath from '@/composables/useGetImagePath.js'
 import avatarPlaceholder from '@/assets/images/Profile_avatar_placeholder_large.png'
 import { capitalize } from 'vue'
 
+const props = defineProps({
+  imageUrl: {
+    type: String,
+    required: false
+  }
+})
+
 const userStore = useUserStore()
-const avatar = useGetImagePath(userStore.user.profile_picture)
+const avatar = useGetImagePath(props.imageUrl || userStore.user.profile_picture)
 </script>
 <template>
   <div class="flex gap-4 items-center">

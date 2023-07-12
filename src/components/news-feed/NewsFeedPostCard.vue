@@ -19,13 +19,13 @@ const props = defineProps({
 const quoteStore = useQuoteStore()
 
 const quoteObject = toRef(props.quote)
+
 onMounted(() => {
   commentsChannel.listen('CommentAddedEvent', (data) => {
     const updatedQuote = {
       ...quoteObject.value,
       comments: [...quoteObject.value.comments, data.comment]
     }
-    quoteObject.value = updatedQuote
     quoteStore.updateQuotes(updatedQuote)
   })
 })

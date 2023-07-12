@@ -75,7 +75,7 @@ const handleClickOnNotification = async () => {
         }`"
       >
         <p>{{ creationTime }}</p>
-        <p class="text-[#198754]" v-if="isNew">{{ $t('notifications.new') }}</p>
+        <p class="text-[#198754] self-end" v-if="isNew">{{ $t('notifications.new') }}</p>
       </div>
     </div>
     <div></div>
