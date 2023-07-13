@@ -1,6 +1,6 @@
 # Epic Movie Quotes
 
-This is a client-side app for "Epic Movie Quotes" project.
+This is a client-side app for "Epic Movie Quotes" project. The app consists of couple of modals and 4 main pages including: Home, News Feed, Movies, and Edit Profile. Modals and several other UI components of the app are animated.
 
 ### Table of Contents
 
