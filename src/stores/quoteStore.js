@@ -16,6 +16,9 @@ export const useQuoteStore = defineStore('quote', {
         return currentQuote
       })
     },
+    addNewQuote(quote) {
+      this.quotes = [quote, ...this.quotes]
+    },
     removeQuote(quoteId) {
       this.quotes = this.quotes.filter((quote) => quote.id !== quoteId)
     },

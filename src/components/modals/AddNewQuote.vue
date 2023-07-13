@@ -10,9 +10,18 @@ import { reactive } from 'vue'
 import { useMovieStore } from '@/stores/movieStore.js'
 import fillFormData from '@/utils/fillFormData'
 import useSendPostRequest from '@/composables/useSendPostRequest.js'
+import { useQuoteStore } from '@/stores/quoteStore.js'
+
+const props = defineProps({
+  addQuoteHandler: {
+    type: Function,
+    required: true
+  }
+})
 
 const { setShowAddNewPostModal } = useModalStore()
 const movieStore = useMovieStore()
+const quoteStore = useQuoteStore()
 const quoteData = reactive({
   quote: null,
   quote_ka: null,
@@ -32,17 +41,15 @@ const handleSubmit = async ({ valid, touched }) => {
 
   const { data: newQuote, errors } = await addNewPost(formData, 'quotes', isFormValid)
   if (!errors) {
-    movieStore.updateMovies({ ...targetMovie, quotes: [...targetMovie.quotes, newQuote] })
+    quoteStore.addNewQuote({ ...newQuote, movie: targetMovie })
+    props.addQuoteHandler({ ...newQuote, movie: targetMovie })
     setShowAddNewPostModal(false)
   }
 }
 </script>
 
 <template>
-  <AddNewPostModalWrapper
-    :heading="$t('news_feed.write_new_quote')"
-    :handleClose="() => setShowAddNewPostModal(false)"
-  >
+  <AddNewPostModalWrapper :heading="$t('news_feed.write_new_quote')" :handleClose="() => setShowAddNewPostModal(false)">
     <Form class="flex flex-col gap-6 w-full" v-slot="{ meta }">
       <FormField
         rules="required|only_latin"

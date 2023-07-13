@@ -60,9 +60,9 @@ const handleSubmit = async () => {
     if (!errors) {
       quoteStore.updateQuotes(data)
       router.push({
-        name: 'movie-details',
+        name: 'view-quote',
         params: {
-          id: quote.movie.id
+          id: quote.id
         }
       })
     }

@@ -30,11 +30,15 @@ watch(typeOfSearchedData, (updatedTypeOfSearchedData) => {
     quotes.value = searchedData.value
   }
 })
+
+const addNewQuote = (quote) => {
+  quotes.value = [quote, ...quotes.value]
+}
 </script>
 <template>
   <div class="news-feed w-full md:max-w-[46vw] bg-[#191625]">
     <div class="mb-4">
-      <AddNewQuote v-if="modalStore.showAddNewPostModal" />
+      <AddNewQuote v-if="modalStore.showAddNewPostModal" :addQuoteHandler="addNewQuote" />
       <PostAndSearch />
       <SearchMobile v-if="searchStore.showSearchBar" />
     </div>
