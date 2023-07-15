@@ -43,12 +43,9 @@ const addNewQuote = (quote) => {
       <SearchMobile v-if="searchStore.showSearchBar" />
     </div>
     <ul class="flex flex-col gap-10" v-if="typeOfSearchedData !== 'movie' && quotes.length > 0">
-      <PostCard v-for="quote in quotes" :key="quote.id" :quote="quote" />
+      <PostCard v-for="quote in quotes" :key="quote.id" :quoteId="quote.id" />
     </ul>
-    <ul
-      class="flex flex-col gap-10"
-      v-else-if="searchedData.length > 0 && typeOfSearchedData === 'movie'"
-    >
+    <ul class="flex flex-col gap-10" v-else-if="searchedData.length > 0 && typeOfSearchedData === 'movie'">
       <MovieCard
         v-for="movie in searchedData"
         :key="movie.id"

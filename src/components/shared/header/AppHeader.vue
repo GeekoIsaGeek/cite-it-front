@@ -11,8 +11,7 @@ import { useSearchStore } from '@/stores/searchStore.js'
 import SearchIcon from '@/components/icons/TheSearchIcon.vue'
 import Notifications from '@/components/notifications/NotificationsWrapper.vue'
 import { useRoute } from 'vue-router'
-import { ref } from 'vue'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 defineProps({
   showNotificationsButton: {
@@ -89,9 +88,7 @@ const notificationCount = computed(
       >
         {{ $t('landing.logout') }}
       </button>
-      <Notifications
-        v-if="showNotifications && !currentRoute.startsWith('/auth') && currentRoute !== '/'"
-      />
+      <Notifications v-if="showNotifications && !currentRoute.startsWith('/auth') && currentRoute !== '/'" />
     </div>
   </header>
 </template>

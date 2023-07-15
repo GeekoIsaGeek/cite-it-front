@@ -40,6 +40,9 @@ const handleMarkAllAsRead = async () => {
   const response = await request.post('/api/notifications/mark-all-as-read')
   if (response.status === 200) {
     userStore.setNotifications(response.data)
+    notifications.value = notifications.value.map((notification) => {
+      return { ...notification, seen: 1 }
+    })
   }
 }
 </script>

@@ -8,10 +8,12 @@ import request from '@/config/axiosInstance.js'
 import { computed } from 'vue'
 import { useQuoteStore } from '@/stores/quoteStore.js'
 import { useRoute } from 'vue-router'
+import { onMounted } from 'vue'
+import { commentsChannel } from '@/echo.js'
 
 const props = defineProps({
-  quote: {
-    type: Object,
+  quoteId: {
+    type: Number,
     required: true
   }
 })
@@ -22,9 +24,23 @@ const route = useRoute()
 const avatar = useGetImagePath(userStore.user.profile_picture)
 const comment = ref('')
 const shouldLimitCommentsCount = computed(() => route.name === 'news-feed')
+const quote = ref(quoteStore.quotes.find((quote) => quote.id === props.quoteId))
+
+onMounted(() => {
+  commentsChannel.listen('CommentAddedEvent', (data) => {
+    if (props.quoteId === data.comment.quote_id) {
+      const updatedQuote = {
+        ...quote.value,
+        comments: [...quote.value.comments, data.comment]
+      }
+      quote.value = updatedQuote
+      quoteStore.updateQuotes(updatedQuote)
+    }
+  })
+})
 
 const comments = computed(() => {
-  const comments = [...quoteStore.quotes.find((quote) => quote.id === props.quote.id).comments]
+  const comments = [...quote.value.comments]
   if (shouldLimitCommentsCount.value && comments.length >= 2) {
     return comments.splice(comments.length - 2, comments.length - 1)
   }
@@ -33,7 +49,7 @@ const comments = computed(() => {
 
 const handleSubmit = async (event) => {
   event.preventDefault()
-  await request.post(`/api/${props.quote.id}/add-comment`, {
+  await request.post(`/api/${props.quoteId}/add-comment`, {
     comment: comment.value
   })
   comment.value = ''
