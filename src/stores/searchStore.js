@@ -1,32 +1,39 @@
 import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
-export const useSearchStore = defineStore('search', {
-  state: () => {
-    return {
-      searchString: null,
-      searchedData: [],
-      typeOfSearchedData: null,
-      showSearchBar: false
+export const useSearchStore = defineStore('search', () => {
+  const searchString = ref('')
+  const searchedData = ref([])
+  const typeOfSearchedData = ref(null)
+  const showSearchBar = ref(false)
+
+  const setSearchString = (givenSearchString) => {
+    searchString.value = givenSearchString
+  }
+  const setSearchedData = (givenSearchedData) => {
+    searchedData.value = givenSearchedData
+  }
+
+  const setTypeOfSearchedData = (searchString) => {
+    if (searchString.startsWith('@')) {
+      typeOfSearchedData.value = 'movie'
+    } else if (searchString.startsWith('#')) {
+      typeOfSearchedData.value = 'quote'
+    } else {
+      typeOfSearchedData.value = null
     }
-  },
-  actions: {
-    setSearchString(searchString) {
-      this.searchString = searchString
-    },
-    setSearchedData(searchedData) {
-      this.searchedData = searchedData
-    },
-    setTypeOfSearchedData(searchString) {
-      if (searchString.startsWith('@')) {
-        this.typeOfSearchedData = 'movie'
-      } else if (searchString.startsWith('#')) {
-        this.typeOfSearchedData = 'quote'
-      } else {
-        this.typeOfSearchedData = null
-      }
-    },
-    setShowSearchBar(shouldShow) {
-      this.showSearchBar = shouldShow
-    }
+  }
+  const setShowSearchBar = (shouldShow) => {
+    showSearchBar.value = shouldShow
+  }
+  return {
+    searchString,
+    searchedData,
+    typeOfSearchedData,
+    showSearchBar,
+    setSearchString,
+    setSearchedData,
+    setTypeOfSearchedData,
+    setShowSearchBar
   }
 })
