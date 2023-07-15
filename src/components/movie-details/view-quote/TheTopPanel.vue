@@ -55,6 +55,9 @@ const handleDelete = async () => {
       <TheDeleteIcon />{{ $t('movie_details.delete') }}
     </button>
     <h2 class="hidden lg:block text-2xl text-white">{{ heading }}</h2>
-    <TheCloselIcon class="relative text-white top-[0]" @click="() => router.back()" />
+    <TheCloselIcon
+      class="relative text-white top-[0]"
+      @click="() => router.push({ name: 'news-feed' })"
+    />
   </div>
 </template>

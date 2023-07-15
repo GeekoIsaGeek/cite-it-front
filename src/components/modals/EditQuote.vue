@@ -16,16 +16,11 @@ import { editsAreMadeInBothLanguages } from '@/utils/validations.js'
 import getUpdatedValues from '@/utils/getUpdatedValues.js'
 import { useRouter } from 'vue-router'
 import FormWrapperTransition from '@/components/shared/FormWrapperTransition.vue'
-import { computed } from 'vue'
-import { useUserStore } from '@/stores/userStore.js'
 
 const quoteStore = useQuoteStore()
-const userStore = useUserStore()
 const quoteId = useRoute().params.id
 const quote = quoteStore.quotes.find((quote) => quote.id === parseInt(quoteId))
 const router = useRouter()
-const userOwnsPost = computed(() => quote.movie.author.id === userStore.user.id)
-console.log(userOwnsPost.value)
 
 const image = ref(useGetImagePath(quote.image))
 
@@ -60,9 +55,9 @@ const handleSubmit = async () => {
     if (!errors) {
       quoteStore.updateQuotes(data)
       router.push({
-        name: 'movie-details',
+        name: 'view-quote',
         params: {
-          id: quote.movie.id
+          id: quote.id
         }
       })
     }
@@ -80,13 +75,7 @@ const handleSubmit = async () => {
         <div class="flex flex-col px-6 gap-10">
           <Author class="mt-7" :imageUrl="quote.movie.author.profile_picture" />
           <Form class="flex flex-col gap-6">
-            <FormField
-              rules="required|only_latin"
-              name="quote"
-              language="Eng"
-              isTextArea
-              v-model="quoteData.quote"
-            />
+            <FormField rules="required|only_latin" name="quote" language="Eng" isTextArea v-model="quoteData.quote" />
             <FormField
               rules="required|only_georgian"
               name="quote_ka"
@@ -99,18 +88,12 @@ const handleSubmit = async () => {
               <div
                 class="w-2/5 overflow-hidden lg:w-1/4 h-[50%] lg:h-[25%] cursor-pointer absolute top-[25%] lg:top-[40%] left-[25%] lg:left-[35%] modal-bg-gradient rounded-[10px] flex flex-col gap-3 justify-center items-center"
               >
-                <input
-                  type="file"
-                  class="scale-[1000%] absolute opacity-0"
-                  @change="handleImageChange"
-                />
+                <input type="file" class="scale-[1000%] absolute opacity-0" @change="handleImageChange" />
                 <ThePhotoCameraIcon />
                 {{ $t('movie_details.change_photo') }}
               </div>
             </div>
-            <SaveButton @click="() => handleSubmit()">{{
-              $t('my_profile.save_changes')
-            }}</SaveButton>
+            <SaveButton @click="() => handleSubmit()">{{ $t('my_profile.save_changes') }}</SaveButton>
           </Form>
         </div>
       </div>

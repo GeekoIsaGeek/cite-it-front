@@ -30,21 +30,22 @@ watch(typeOfSearchedData, (updatedTypeOfSearchedData) => {
     quotes.value = searchedData.value
   }
 })
+
+const addNewQuote = (quote) => {
+  quotes.value = [quote, ...quotes.value]
+}
 </script>
 <template>
   <div class="news-feed w-full md:max-w-[46vw] bg-[#191625]">
     <div class="mb-4">
-      <AddNewQuote v-if="modalStore.showAddNewPostModal" />
+      <AddNewQuote v-if="modalStore.showAddNewPostModal" :addQuoteHandler="addNewQuote" />
       <PostAndSearch />
       <SearchMobile v-if="searchStore.showSearchBar" />
     </div>
     <ul class="flex flex-col gap-10" v-if="typeOfSearchedData !== 'movie' && quotes.length > 0">
-      <PostCard v-for="quote in quotes" :key="quote.id" :quote="quote" />
+      <PostCard v-for="quote in quotes" :key="quote.id" :quoteId="quote.id" />
     </ul>
-    <ul
-      class="flex flex-col gap-10"
-      v-else-if="searchedData.length > 0 && typeOfSearchedData === 'movie'"
-    >
+    <ul class="flex flex-col gap-10" v-else-if="searchedData.length > 0 && typeOfSearchedData === 'movie'">
       <MovieCard
         v-for="movie in searchedData"
         :key="movie.id"

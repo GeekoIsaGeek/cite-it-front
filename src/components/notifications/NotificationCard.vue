@@ -70,9 +70,7 @@ const handleClickOnNotification = async () => {
         </div>
       </div>
       <div
-        :class="`flex flex-row-reverse gap-6 lg:flex-col self-start ml-3 lg:ml-0 lg:self-${
-          isNew ? 'center' : 'start'
-        }`"
+        :class="`flex flex-row-reverse gap-6 lg:flex-col self-start ml-3 lg:ml-0 lg:self-${isNew ? 'center' : 'start'}`"
       >
         <p>{{ creationTime }}</p>
         <p class="text-[#198754] self-end" v-if="isNew">{{ $t('notifications.new') }}</p>

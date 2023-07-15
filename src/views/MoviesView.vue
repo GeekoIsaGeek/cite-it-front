@@ -36,6 +36,12 @@ watch(searchString, (updatedSearchString) => {
     )
   }
 })
+
+watch(movieList, (updatedValue) => {
+  if (updatedValue.length === movies.value.length || updatedValue.length === movies.value.length + 1) {
+    movies.value = updatedValue
+  }
+})
 </script>
 
 <template>
