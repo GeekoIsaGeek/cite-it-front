@@ -3,7 +3,7 @@ import MainSectionHeading from '@/components/movie-details/MainSectionHeading.vu
 import MainSectionGenres from '@/components/movie-details/MainSectionGenres.vue'
 import useGetImagePath from '@/composables/useGetImagePath.js'
 import { useI18n } from 'vue-i18n'
-import { toRef } from 'vue'
+import { toRef, computed } from 'vue'
 
 const props = defineProps({
   movie: {
@@ -13,7 +13,7 @@ const props = defineProps({
 })
 
 const movie = toRef(props.movie)
-const image = useGetImagePath(movie.value.poster)
+const image = computed(() => useGetImagePath(movie.value.poster))
 const { locale } = useI18n()
 </script>
 

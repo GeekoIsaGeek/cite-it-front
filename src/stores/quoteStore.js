@@ -15,6 +15,9 @@ export const useQuoteStore = defineStore('quote', () => {
   const removeQuote = (quoteId) => {
     quotes.value = quotes.value.filter((quote) => quote.id !== quoteId)
   }
+  const getQuote = (quoteId) => {
+    return quotes.value.find((quote) => quote.id === quoteId)
+  }
   const updateQuotes = (quote) => {
     quotes.value = quotes.value.map((currentQuote) => {
       if (currentQuote.id === quote.id) {
@@ -24,5 +27,5 @@ export const useQuoteStore = defineStore('quote', () => {
     })
   }
 
-  return { quotes, fetchQuotes, addNewQuote, removeQuote, updateQuotes }
+  return { quotes, fetchQuotes, addNewQuote, removeQuote, updateQuotes, getQuote }
 })

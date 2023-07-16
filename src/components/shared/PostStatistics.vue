@@ -33,7 +33,9 @@ watch(
 
 onMounted(() => {
   likesChannel.listen('QuoteLikedEvent', (data) => {
-    if (props.quote.id === data.quoteId) likesCount.value += 1
+    if (props.quote.id === data.quoteId) {
+      likesCount.value += 1
+    }
   })
 })
 

@@ -37,9 +37,7 @@ const scrollToFirstMovie = () => {
         class="pt-[40%] lg:pt-[60vh] bg-[url('@/assets/images/image-2.png')]"
       />
     </div>
-    <p
-      class="text-offGold text-[8px] md:font-medium md:text-sm py-[10px] md:py-4 px-9 md:px-[70px]"
-    >
+    <p class="text-offGold text-[8px] md:font-medium md:text-sm py-[10px] md:py-4 px-9 md:px-[70px]">
       © 2022 movie quotes. {{ $t('landing.footer_text') }}.
     </p>
   </div>

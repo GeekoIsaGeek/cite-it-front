@@ -21,7 +21,6 @@ const quoteStore = useQuoteStore()
 const quoteId = useRoute().params.id
 const quote = quoteStore.quotes.find((quote) => quote.id === parseInt(quoteId))
 const router = useRouter()
-
 const image = ref(useGetImagePath(quote.image))
 
 const quoteData = reactive({
