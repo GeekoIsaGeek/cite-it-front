@@ -47,7 +47,7 @@ const handleSubmit = async () => {
   const updatedValues = getUpdatedValues(quoteData, initialValues)
   const formData = fillFormData(updatedValues)
   formData.append('id', quote.movie.id)
-  formData.append('_method', 'put')
+  formData.append('_method', 'patch')
 
   if (editsAreMadeInBothLanguages(updatedValues, 'quote')) {
     const { data, errors } = await editQuote(formData, `quotes/${quoteId}`)

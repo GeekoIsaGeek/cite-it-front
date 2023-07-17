@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { useUserStore } from '@/stores/userStore'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 export const useNotificationStore = defineStore('notification', () => {
   const userStore = useUserStore()
@@ -9,8 +9,15 @@ export const useNotificationStore = defineStore('notification', () => {
 
   const addNewNotification = (notification) => {
     notifications.value = [...notifications.value, notification]
-    newNotifications.value = newNotifications.value + 1
   }
+
+  watch(
+    () => notifications.value,
+    (updatedNotifications) => {
+      newNotifications.value = updatedNotifications.filter((notification) => notification.seen === 0).length
+    }
+  )
+
   const saveUpdatedNotification = (notification) => {
     const filteredNotifications = notifications.value.filter(
       (currentNotification) => currentNotification.id !== notification.id

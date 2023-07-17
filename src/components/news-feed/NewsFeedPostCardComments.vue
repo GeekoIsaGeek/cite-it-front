@@ -21,11 +21,11 @@ const props = defineProps({
 const userStore = useUserStore()
 const quoteStore = useQuoteStore()
 const route = useRoute()
-const avatar = useGetImagePath(userStore.user.profile_picture)
+const avatar = computed(() => useGetImagePath(userStore.user.profile_picture))
 const comment = ref('')
 const shouldLimitCommentsCount = computed(() => route.name === 'news-feed')
 const quote = ref(quoteStore.quotes.find((quote) => quote.id === props.quoteId))
-console.log(props.quoteId)
+
 onMounted(() => {
   commentsChannel.listen('CommentAddedEvent', (data) => {
     if (props.quoteId === data.comment.quote_id) {
@@ -41,7 +41,7 @@ onMounted(() => {
 
 const comments = computed(() => {
   const comments = [...quote.value.comments]
-  if (shouldLimitCommentsCount.value && comments.length >= 2) {
+  if (shouldLimitCommentsCount.value && comments.length > 2) {
     return comments.splice(comments.length - 2, comments.length - 1)
   }
   return comments
@@ -59,7 +59,7 @@ const handleSubmit = async (event) => {
 <template>
   <div>
     <ul class="flex flex-col gap-6">
-      <li class="flex flex-col" v-for="(commentObject, index) in comments" :key="index">
+      <li class="flex flex-col" v-for="commentObject in comments" :key="commentObject.id">
         <CommentAuthor :author="commentObject.author" />
         <p class="lg:text-xl pb-6 border-b border-b-[#EFEFEF4D] lg:ml-20 pt-3 break-words">
           {{ commentObject.comment }}

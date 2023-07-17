@@ -24,6 +24,7 @@ export default (endpoint) => {
   return {
     fetchData,
     handleScroll,
-    items
+    items,
+    isLoading
   }
 }

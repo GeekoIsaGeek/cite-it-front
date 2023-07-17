@@ -25,7 +25,6 @@ defineProps({
 
 onMounted(() => {
   echo.private(`notifications.${userStore.user.id}`).listen('QuoteNotificationEvent', (data) => {
-    console.log(data)
     if (userStore.user.id === data.receiverId) {
       useNotificationStore().addNewNotification(data.notification)
     }
@@ -85,7 +84,7 @@ const newNotifications = computed(() => useNotificationStore().newNotifications)
       </SignUpButton>
       <button
         @click="() => router.push({ name: 'login' })"
-        v-if="!userStore.isLoggedIn"
+        v-if="!userStore.isLoggedIn && !currentRoute.startsWith('/auth')"
         class="px-4 py-1.5 md:px-6 md:py-[6px] border border-white flex justify-center items-center text-white rounded hover:text-darkBlue hover:bg-white transition-colors"
       >
         {{ $t('landing.login') }}
