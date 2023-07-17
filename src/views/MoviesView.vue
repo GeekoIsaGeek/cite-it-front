@@ -16,7 +16,7 @@ import { onBeforeUnmount } from 'vue'
 const { searchString } = storeToRefs(useSearchStore())
 const { showAddMovieModal } = storeToRefs(useModalStore())
 const { movies: movieList } = storeToRefs(useMovieStore())
-const { fetchData, handleScroll, items: movies } = useInfiniteScroll('movies/paginate')
+const { fetchData, handleScroll, items: movies, isLoading } = useInfiniteScroll('movies/paginate')
 
 onMounted(() => {
   fetchData()
@@ -24,21 +24,20 @@ onMounted(() => {
 })
 onBeforeUnmount(() => window.removeEventListener('scroll', handleScroll))
 
-watch(searchString, (updatedSearchString) => {
+watch([searchString, movieList], ([updatedSearchString, updatedMovieList]) => {
+  if (isLoading) {
+    return
+  }
   if (updatedSearchString === '') {
-    movies.value = movieList.value
+    movies.value = updatedMovieList
   } else {
     updatedSearchString = updatedSearchString.toLowerCase()
-    movies.value = movieList.value.filter(
+    movies.value = updatedMovieList.value.filter(
       (movie) =>
         movie.name.en.toLowerCase().startsWith(updatedSearchString) ||
         movie.name.ka.toLowerCase().startsWith(updatedSearchString)
     )
   }
-})
-
-watch(movieList, (updatedValue) => {
-  movies.value = updatedValue
 })
 </script>
 

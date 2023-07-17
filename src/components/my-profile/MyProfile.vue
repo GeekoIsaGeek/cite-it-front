@@ -40,6 +40,7 @@ const handleSave = async () => {
       formData.append(credential[0], credential[1])
     })
     formData.append('id', userStore.user.id)
+    formData.append('_method', 'patch')
     const response = await request.post('/api/update-profile', formData, {
       headers: { 'Content-Type': 'multipart/form-data', 'Accept-Language': locale.value }
     })
@@ -63,9 +64,7 @@ provide('handleUpdate', handleSave)
 
 <template>
   <NewsFeedWrapper>
-    <section
-      class="flex flex-col md:items-start items-center overflow-x-hidden w-full md:w-[70%] lg:w-[54%]"
-    >
+    <section class="flex flex-col md:items-start items-center overflow-x-hidden w-full md:w-[70%] lg:w-[54%]">
       <div class="block md:hidden pl-10 py-6 bg-veryDarkPurple w-full self-start">
         <TheGoBackIcon class="h-4 w-5 cursor-pointer" @click="router.back()" />
       </div>
@@ -83,9 +82,7 @@ provide('handleUpdate', handleSave)
         <button @click="handleCancel" class="hover:text-gray-400">
           {{ $t('my_profile.cancel') }}
         </button>
-        <ButtonSave class="px-4" @click="handleSave">{{
-          $t('my_profile.save_changes')
-        }}</ButtonSave>
+        <ButtonSave class="px-4" @click="handleSave">{{ $t('my_profile.save_changes') }}</ButtonSave>
       </div>
     </section>
     <ProfileUpdated v-if="showSuccessMessage" :modalCloser="() => (showSuccessMessage = false)" />

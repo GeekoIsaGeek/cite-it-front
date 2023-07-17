@@ -50,6 +50,7 @@ const handleFormSubmit = async () => {
     return
   }
   const formData = fillFormData(data)
+  formData.append('_method', 'patch')
   const { data: updatedMovie, errors } = await editMovie(formData, `movies/${movie.id}`)
   if (!errors) {
     movieStore.updateMovies(updatedMovie)
@@ -60,10 +61,7 @@ const handleFormSubmit = async () => {
 </script>
 
 <template>
-  <ModalWrapper
-    :heading="$t('movies.edit_movie')"
-    :handleClose="() => router.push({ name: 'movies' })"
-  >
+  <ModalWrapper :heading="$t('movies.edit_movie')" :handleClose="() => router.push({ name: 'movies' })">
     <Form class="flex flex-col gap-6" :initial-values="initialValues">
       <FormField
         name="name"

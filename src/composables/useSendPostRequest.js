@@ -22,6 +22,7 @@ export default () => {
         throw new Error(t('messages.invalid_form'))
       }
     } catch (error) {
+      console.error(error)
       errors.value = getServerErrorMessages(error) || error.message
     }
     return { data: responseData.value, errors: errors.value }

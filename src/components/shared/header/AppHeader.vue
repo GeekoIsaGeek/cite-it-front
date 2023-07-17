@@ -25,7 +25,6 @@ defineProps({
 
 onMounted(() => {
   echo.private(`notifications.${userStore.user.id}`).listen('QuoteNotificationEvent', (data) => {
-    console.log(data)
     if (userStore.user.id === data.receiverId) {
       useNotificationStore().addNewNotification(data.notification)
     }

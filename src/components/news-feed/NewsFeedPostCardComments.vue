@@ -25,7 +25,7 @@ const avatar = useGetImagePath(userStore.user.profile_picture)
 const comment = ref('')
 const shouldLimitCommentsCount = computed(() => route.name === 'news-feed')
 const quote = ref(quoteStore.quotes.find((quote) => quote.id === props.quoteId))
-console.log(props.quoteId)
+
 onMounted(() => {
   commentsChannel.listen('CommentAddedEvent', (data) => {
     if (props.quoteId === data.comment.quote_id) {

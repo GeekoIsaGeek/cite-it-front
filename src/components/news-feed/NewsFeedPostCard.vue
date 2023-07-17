@@ -16,7 +16,6 @@ const props = defineProps({
 })
 const quoteStore = useQuoteStore()
 const quoteObject = computed(() => quoteStore.quotes.find((quote) => quote.id === props.quoteId))
-console.log(quoteObject.value)
 
 const router = useRouter()
 const navigateToQuoteDetails = () => {

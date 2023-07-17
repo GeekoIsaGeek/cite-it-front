@@ -26,7 +26,7 @@ const handlePasswordUpdate = async () => {
   const url = `${import.meta.env.VITE_SERVER_URL}/api/reset-password`
   try {
     axios.defaults.withCredentials = true
-    await axios.post(url, credentials)
+    await axios.patch(url, credentials)
     router.push({ name: 'verification-succeed' })
   } catch (error) {
     errorMessage.value = error.response.data.message
