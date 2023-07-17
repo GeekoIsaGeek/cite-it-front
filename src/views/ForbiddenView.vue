@@ -10,7 +10,7 @@ const router = useRouter()
   <div class="bg-[#181623] w-full h-screen flex flex-col text-white justify-center items-center">
     <img :src="Gandolf" alt="gandolf" />
     <h1 class="text-2xl lg:text-5xl mt-7 mb-2">{{ $t('routing.you_shall_not_pass') }}</h1>
-    <p class="lg:text-2xl">{{ $t('routing.forbidden_text') }}</p>
+    <p class="lg:text-2xl px-4 text-center">{{ $t('routing.forbidden_text') }}</p>
     <ReturnButton
       class="px-[10px] mt-12"
       @click="
