@@ -11,9 +11,8 @@ import { useSearchStore } from '@/stores/searchStore.js'
 import SearchIcon from '@/components/icons/TheSearchIcon.vue'
 import Notifications from '@/components/notifications/NotificationsWrapper.vue'
 import { useRoute } from 'vue-router'
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted, provide } from 'vue'
 import { useNotificationStore } from '@/stores/notificationStore'
-import { onMounted } from 'vue'
 import { echo } from '@/echo.js'
 
 defineProps({
@@ -38,7 +37,7 @@ const { name: routeName } = useRoute()
 userStore.fetchUser()
 const { clearUser } = userStore
 const showNotifications = ref(false)
-
+provide('showNotifications', showNotifications)
 const router = useRouter()
 const currentRoute = computed(() => router.currentRoute.value.path)
 
@@ -51,7 +50,7 @@ const handleLogout = async () => {
     console.error(error)
   }
 }
-const newNotifications = computed(() => useNotificationStore().newNotifications)
+const newNotificationsCount = computed(() => useNotificationStore().newNotificationsCount)
 </script>
 
 <template>
@@ -71,7 +70,7 @@ const newNotifications = computed(() => useNotificationStore().newNotifications)
         v-if="routeName === 'news-feed'"
       />
       <NotificationsButton
-        :count="newNotifications"
+        :count="newNotificationsCount"
         v-if="showNotificationsButton"
         @click="() => (showNotifications = !showNotifications)"
       />

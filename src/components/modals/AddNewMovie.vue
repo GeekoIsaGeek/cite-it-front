@@ -31,11 +31,11 @@ const movieDetails = reactive({
 const addNewPost = useSendPostRequest()
 
 const AddNewMovie = async ({ valid, touched }) => {
-  serverErrors.value = []
   const isFormValid = valid && touched && movieDetails.genre.length > 0 && movieDetails.poster
   const formData = fillFormData(movieDetails)
-
   const { data, errors } = await addNewPost(formData, 'movies', isFormValid)
+  serverErrors.value = []
+
   if (!errors) {
     movieStore.addNewMovie(data)
     setShowAddMovieModal(false)
@@ -45,10 +45,7 @@ const AddNewMovie = async ({ valid, touched }) => {
 </script>
 
 <template>
-  <AddMovieWrapper
-    :heading="$t('movies.add_movie')"
-    :handleClose="() => setShowAddMovieModal(false)"
-  >
+  <AddMovieWrapper :heading="$t('movies.add_movie')" :handleClose="() => setShowAddMovieModal(false)">
     <Form class="flex flex-col gap-6" v-slot="{ meta }">
       <FormField
         name="movie_name"
@@ -65,12 +62,7 @@ const AddNewMovie = async ({ valid, touched }) => {
         v-model="movieDetails.name_ka"
       />
       <MovieGenres v-model="movieDetails.genre" />
-      <FormField
-        name="year"
-        rules="required"
-        placeholder="წელი/Year"
-        v-model="movieDetails.release_date"
-      />
+      <FormField name="year" rules="required" placeholder="წელი/Year" v-model="movieDetails.release_date" />
       <FormField
         name="director"
         rules="only_latin|required"
