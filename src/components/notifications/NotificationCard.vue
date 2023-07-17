@@ -5,11 +5,11 @@ import RedHeartIcon from '@/components/icons/TheRedHeartIcon.vue'
 import useGetImagePath from '@/composables/useGetImagePath.js'
 import { capitalize } from 'vue'
 import { computed } from 'vue'
-import { useRouter } from 'vue-router'
 import timeAgo from '@/utils/timeAgo'
 import { useI18n } from 'vue-i18n'
 import request from '@/config/axiosInstance.js'
 import { useNotificationStore } from '@/stores/notificationStore'
+import { inject } from 'vue'
 
 const props = defineProps({
   notification: {
@@ -18,26 +18,21 @@ const props = defineProps({
   }
 })
 const { locale } = useI18n()
-const router = useRouter()
 const avatar = useGetImagePath(props.notification.author_avatar)
 const author = computed(() => capitalize(props.notification.author))
 const isNew = computed(() => props.notification.seen === 0)
 const creationTime = computed(() => timeAgo(props.notification.created_at, locale.value))
 const notificationStore = useNotificationStore()
+const showNotifications = inject('showNotifications')
 
 const handleClickOnNotification = async () => {
   if (props.notification.seen === 0) {
     const response = await request.post(`/api/${props.notification.id}/mark-as-read`)
     if (response.status === 200) {
       notificationStore.saveUpdatedNotification(response.data)
+      showNotifications.value = false
     }
   }
-  router.push({
-    name: 'view-quote',
-    params: {
-      id: props.notification.quote_id
-    }
-  })
 }
 </script>
 
