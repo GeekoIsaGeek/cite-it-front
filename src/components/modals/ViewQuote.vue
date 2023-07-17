@@ -13,29 +13,25 @@ import FormWrapperTransition from '@/components/shared/FormWrapperTransition.vue
 
 const route = useRoute()
 const quoteStore = useQuoteStore()
-const quote = computed(() =>
-  quoteStore.quotes.find((quote) => quote.id === parseInt(route.params.id))
-)
-const image = useGetImagePath(quote.value.image)
+
+const quote = computed(() => quoteStore.quotes.find((quote) => quote.id === parseInt(route.params.id)))
+const image = computed(() => useGetImagePath(quote.value.image))
 </script>
 
 <template>
   <QuoteModalWrapper>
     <FormWrapperTransition type="view">
-      <div class="dialog bg-almostBlack lg:w-1/2 pt-10 pb-8 overflow-y-scroll rounded-xl">
+      <div class="dialog bg-almostBlack lg:w-1/2 pt-10 pb-8 overflow-y-scroll rounded-xl" v-if="quote">
         <TopPanel :heading="$t('movie_details.view_quote')" :movie="quote.movie" />
         <div class="flex flex-col px-8 gap-11">
           <QuoteAuthor class="text-white mt-8" :imageUrl="quote.movie.author.profile_picture" />
           <Quotes :quotes="quote.quote" />
-          <img
-            :src="image"
-            alt="movie"
-            class="rounded-[10px] w-full h-[300px] lg:h-[30vw] object-cover"
-          />
+          <img :src="image" alt="movie" class="rounded-[10px] w-full h-[300px] lg:h-[30vw] object-cover" />
           <PostStatistics class="text-white text-xl py-0" :quote="quote" />
-          <Comments class="text-white" :quote="quote" />
+          <Comments class="text-white" :quoteId="quote.id" />
         </div>
       </div>
+      <p v-else>...</p>
     </FormWrapperTransition>
   </QuoteModalWrapper>
 </template>

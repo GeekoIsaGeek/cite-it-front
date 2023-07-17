@@ -54,16 +54,9 @@ const handleInput = (event) => {
 
 <template>
   <div class="flex flex-col w-full gap-2 relative">
-    <label class="text-base text-white">
-      {{ label }} <span v-if="required" class="text-red-500">*</span>
-    </label>
+    <label class="text-base text-white"> {{ label }} <span v-if="required" class="text-red-500">*</span> </label>
 
-    <Field
-      v-slot="{ field, meta }"
-      :rules="rules"
-      :name="name"
-      @input="(event) => handleInput(event)"
-    >
+    <Field v-slot="{ field, meta }" :rules="rules" :name="name" @input="(event) => handleInput(event)">
       <input
         :placeholder="placeholder"
         :type="variableType"
@@ -76,15 +69,15 @@ const handleInput = (event) => {
           'pr-16': type === 'password'
         }"
       />
-    </Field>
 
-    <TheValidIcon v-if="isValid && isTouched" />
-    <TheInvalidIcon v-if="!isValid && isTouched" />
-    <ThePreviewIcon
-      v-if="type === 'password'"
-      :class="`right-${isTouched ? '[40px]' : '[13px]'}`"
-      @click="variableType = variableType === 'password' ? 'text' : 'password'"
-    />
+      <TheValidIcon v-if="isValid && isTouched" />
+      <TheInvalidIcon v-if="!isValid && isTouched" />
+      <ThePreviewIcon
+        v-if="type === 'password'"
+        :class="{ 'right-[40px]': isTouched, 'right-[13px]': !isTouched }"
+        @click="variableType = variableType === 'password' ? 'text' : 'password'"
+      />
+    </Field>
   </div>
   <ErrorMessage :name="name" class="text-redFail text-base mt-[-10px] break-words max-w-[360px]" />
 </template>

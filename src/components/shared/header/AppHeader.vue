@@ -12,12 +12,24 @@ import SearchIcon from '@/components/icons/TheSearchIcon.vue'
 import Notifications from '@/components/notifications/NotificationsWrapper.vue'
 import { useRoute } from 'vue-router'
 import { computed, ref } from 'vue'
+import { useNotificationStore } from '@/stores/notificationStore'
+import { onMounted } from 'vue'
+import { echo } from '@/echo.js'
 
 defineProps({
   showNotificationsButton: {
     type: Boolean,
     required: false
   }
+})
+
+onMounted(() => {
+  echo.private(`notifications.${userStore.user.id}`).listen('QuoteNotificationEvent', (data) => {
+    console.log(data)
+    if (userStore.user.id === data.receiverId) {
+      useNotificationStore().addNewNotification(data.notification)
+    }
+  })
 })
 
 const searchStore = useSearchStore()
@@ -40,10 +52,7 @@ const handleLogout = async () => {
     console.error(error)
   }
 }
-
-const notificationCount = computed(
-  () => userStore.user?.notifications?.filter((notification) => notification.seen === 0).length
-)
+const newNotifications = computed(() => useNotificationStore().newNotifications)
 </script>
 
 <template>
@@ -63,7 +72,7 @@ const notificationCount = computed(
         v-if="routeName === 'news-feed'"
       />
       <NotificationsButton
-        :count="notificationCount"
+        :count="newNotifications"
         v-if="showNotificationsButton"
         @click="() => (showNotifications = !showNotifications)"
       />
@@ -77,7 +86,7 @@ const notificationCount = computed(
       <button
         @click="() => router.push({ name: 'login' })"
         v-if="!userStore.isLoggedIn"
-        class="px-4 py-1.5 md:px-6 md:py-2 border border-white flex justify-center items-center text-white rounded hover:text-darkBlue hover:bg-white transition-colors"
+        class="px-4 py-1.5 md:px-6 md:py-[6px] border border-white flex justify-center items-center text-white rounded hover:text-darkBlue hover:bg-white transition-colors"
       >
         {{ $t('landing.login') }}
       </button>

@@ -13,6 +13,7 @@ import ServerErrors from '@/components/shared/ServerErrors.vue'
 import { useUserStore } from '@/stores/userStore.js'
 import { useRouter } from 'vue-router'
 import { getServerErrorMessages } from '@/utils/getErrors.js'
+import FormWrapperTransition from '@/components/shared/FormWrapperTransition.vue'
 
 const { locale } = useI18n()
 const router = useRouter()
@@ -49,49 +50,49 @@ const handleLogin = async () => {
 <template>
   <Teleport to="body">
     <ModalWrapper>
-      <FormWrapper :heading="$t('auth.login_heading')" :subHeading="`${$t('auth.login_heading')}.`">
-        <template v-slot:default="{ isTouched, isValid }">
-          <BaseInput
-            :placeholder="$t('auth.email_placeholder')"
-            :label="$t('auth.email_label')"
-            type="email"
-            rules="required|min:3"
-            name="email"
-            :setValue="(email) => (credentials.usernameOrEmail = email)"
-          />
-
-          <BaseInput
-            :placeholder="$t('auth.password_label')"
-            :label="$t('auth.password_label')"
-            type="password"
-            rules="required"
-            name="password"
-            :setValue="(password) => (credentials.password = password)"
-          />
-          <div class="flex justify-between">
-            <RememberCheckbox
-              :setValue="() => (credentials.remember = !credentials.remember)"
-              :value="credentials.remember"
+      <FormWrapperTransition>
+        <FormWrapper :heading="$t('auth.login_heading')" :subHeading="`${$t('auth.login_heading')}.`">
+          <template v-slot:default="{ isTouched, isValid }">
+            <BaseInput
+              :placeholder="$t('auth.email_placeholder')"
+              :label="$t('auth.email_label')"
+              type="email"
+              rules="required|min:3"
+              name="email"
+              :setValue="(email) => (credentials.usernameOrEmail = email)"
             />
-            <RouterLink :to="{ name: 'forgot-password' }" class="text-blue underline">
-              {{ $t('auth.forgot_password') }}
-            </RouterLink>
-          </div>
-          <SignInButton class="h-[38px]" :disabled="isTouched && !isValid" @click="handleLogin">{{
-            $t('auth.sign_in')
-          }}</SignInButton>
 
-          <GoogleAuthButton :action="$t('auth.google_sign_in')" />
-          <ServerErrors :errors="serverErrors" />
+            <BaseInput
+              :placeholder="$t('auth.password_label')"
+              :label="$t('auth.password_label')"
+              type="password"
+              rules="required"
+              name="password"
+              :setValue="(password) => (credentials.password = password)"
+            />
+            <div class="flex justify-between">
+              <RememberCheckbox
+                :setValue="() => (credentials.remember = !credentials.remember)"
+                :value="credentials.remember"
+              />
+              <RouterLink :to="{ name: 'forgot-password' }" class="text-blue underline">
+                {{ $t('auth.forgot_password') }}
+              </RouterLink>
+            </div>
+            <SignInButton class="h-[38px]" :disabled="isTouched && !isValid" @click="handleLogin">{{
+              $t('auth.sign_in')
+            }}</SignInButton>
 
-          <p class="mt-4 text-center text-darkGray">
-            {{ $t('auth.dont_have_account') }}
-            <RouterLink :to="{ name: 'register' }" class="text-blue underline">{{
-              $t('auth.sign_up')
-            }}</RouterLink>
-          </p>
-        </template>
-      </FormWrapper>
+            <GoogleAuthButton :action="$t('auth.google_sign_in')" />
+            <ServerErrors :errors="serverErrors" />
+
+            <p class="mt-4 text-center text-darkGray">
+              {{ $t('auth.dont_have_account') }}
+              <RouterLink :to="{ name: 'register' }" class="text-blue underline">{{ $t('auth.sign_up') }}</RouterLink>
+            </p>
+          </template>
+        </FormWrapper>
+      </FormWrapperTransition>
     </ModalWrapper>
   </Teleport>
 </template>

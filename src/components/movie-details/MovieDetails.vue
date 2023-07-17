@@ -26,12 +26,10 @@ const navigateToAddQuoteModal = () => {
 
 <template>
   <Wrapper>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full" v-if="movie">
       <h2 class="hidden lg:block text-2xl">{{ $t('movie_details.movie_description') }}</h2>
       <MainSection :movie="movie" />
-      <div
-        class="flex items-start px-9 lg:px-0 lg:items-center flex-col-reverse lg:flex-row mt-11 gap-9 lg:gap-4"
-      >
+      <div class="flex items-start px-9 lg:px-0 lg:items-center flex-col-reverse lg:flex-row mt-11 gap-9 lg:gap-4">
         <div class="lg:flex gap-2 text-2xl lg:border-r border-darkGray pr-4">
           <p>{{ $t('movie_details.quotes') }}</p>
           <p>({{ $t('movies.total') }} {{ quotes.length }})</p>
@@ -46,5 +44,6 @@ const navigateToAddQuoteModal = () => {
         <QuoteCard v-for="(quote, index) in quotes" :key="index" :quote="quote" :movie="movie" />
       </ul>
     </div>
+    <p v-else>...</p>
   </Wrapper>
 </template>

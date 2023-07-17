@@ -8,6 +8,7 @@ import BaseInput from '@/components/UI/BaseInput.vue'
 import request from '@/config/axiosInstance.js'
 import FormError from '@/components/shared/FormError.vue'
 import { ref } from 'vue'
+import ModalTransition from '@/components/shared/ModalTransition.vue'
 
 const router = useRouter()
 const email = ref(null)
@@ -25,24 +26,23 @@ const sendEmail = async () => {
 
 <template>
   <ModalWrapper>
-    <FormWrapper
-      :heading="$t('forgot_password.heading')"
-      :subHeading="$t('forgot_password.subHeading')"
-    >
-      <BaseInput
-        name="email"
-        :label="$t('auth.email_label')"
-        :placeholder="$t('auth.email_placeholder')"
-        rules="required|email"
-        type="email"
-        :setValue="(receivedEmail) => (email = receivedEmail)"
-      />
-      <FormError>{{ errorMessage }}</FormError>
-      <SendButton @click="sendEmail">{{ $t('forgot_password.send') }}</SendButton>
-      <p class="text-darkGray mt-5 flex items-center gap-4 justify-center">
-        <GoBackIcon />
-        <RouterLink :to="{ name: 'login' }">{{ $t('forgot_password.back_to_login') }}</RouterLink>
-      </p>
-    </FormWrapper>
+    <ModalTransition>
+      <FormWrapper :heading="$t('forgot_password.heading')" :subHeading="$t('forgot_password.subHeading')">
+        <BaseInput
+          name="email"
+          :label="$t('auth.email_label')"
+          :placeholder="$t('auth.email_placeholder')"
+          rules="required|email"
+          type="email"
+          :setValue="(receivedEmail) => (email = receivedEmail)"
+        />
+        <FormError>{{ errorMessage }}</FormError>
+        <SendButton @click="sendEmail">{{ $t('forgot_password.send') }}</SendButton>
+        <p class="text-darkGray mt-5 flex items-center gap-4 justify-center">
+          <GoBackIcon />
+          <RouterLink :to="{ name: 'login' }">{{ $t('forgot_password.back_to_login') }}</RouterLink>
+        </p>
+      </FormWrapper>
+    </ModalTransition>
   </ModalWrapper>
 </template>

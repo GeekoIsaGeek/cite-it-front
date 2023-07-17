@@ -1,14 +1,13 @@
 <script setup>
 import NotificationCard from '@/components/notifications/NotificationCard.vue'
 import TheTriangleIcon from '@/components/icons/TheTriangleIcon.vue'
-import { useUserStore } from '@/stores/userStore.js'
-import { echo } from '@/echo.js'
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 import request from '@/config/axiosInstance.js'
 import useInfiniteScroll from '@/composables/useInfiniteScroll.js'
 import ModalTransition from '@/components/shared/ModalTransition.vue'
+import { useNotificationStore } from '@/stores/notificationStore'
 
-const userStore = useUserStore()
+const notificationStore = useNotificationStore()
 const notificationsRef = ref(null)
 const { fetchData, items: notifications } = useInfiniteScroll('notifications')
 
@@ -23,13 +22,6 @@ onMounted(() => {
   fetchData()
   notificationsRef.value.addEventListener('scroll', handleScroll)
   document.body.style.overflow = 'hidden'
-
-  echo.private(`notifications.${userStore.user.id}`).listen('QuoteNotificationEvent', (data) => {
-    if (userStore.user.id === data.receiverId) {
-      userStore.addNewNotification(data.notification)
-      notifications.value = [...notifications.value, data.notification]
-    }
-  })
 })
 onBeforeUnmount(() => {
   document.body.style.overflow = 'auto'
@@ -39,7 +31,8 @@ onBeforeUnmount(() => {
 const handleMarkAllAsRead = async () => {
   const response = await request.post('/api/notifications/mark-all-as-read')
   if (response.status === 200) {
-    userStore.setNotifications(response.data)
+    notificationStore.setNotifications(response.data)
+    notificationStore.clearNewNotifications()
     notifications.value = notifications.value.map((notification) => {
       return { ...notification, seen: 1 }
     })

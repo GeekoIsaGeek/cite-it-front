@@ -25,9 +25,9 @@ onBeforeUnmount(() => {
   window.removeEventListener('scroll', handleScroll)
 })
 
-watch(typeOfSearchedData, (updatedTypeOfSearchedData) => {
-  if (updatedTypeOfSearchedData === 'quote') {
-    quotes.value = searchedData.value
+watch(searchedData, (updatedSearchedData) => {
+  if (typeOfSearchedData.value === 'quote') {
+    quotes.value = updatedSearchedData
   }
 })
 
