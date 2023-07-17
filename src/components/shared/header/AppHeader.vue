@@ -86,7 +86,7 @@ const newNotifications = computed(() => useNotificationStore().newNotifications)
       <button
         @click="() => router.push({ name: 'login' })"
         v-if="!userStore.isLoggedIn"
-        class="px-4 py-1.5 md:px-6 md:py-2 border border-white flex justify-center items-center text-white rounded hover:text-darkBlue hover:bg-white transition-colors"
+        class="px-4 py-1.5 md:px-6 md:py-[6px] border border-white flex justify-center items-center text-white rounded hover:text-darkBlue hover:bg-white transition-colors"
       >
         {{ $t('landing.login') }}
       </button>
