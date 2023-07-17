@@ -24,20 +24,24 @@ onMounted(() => {
 })
 onBeforeUnmount(() => window.removeEventListener('scroll', handleScroll))
 
-watch([searchString, movieList], ([updatedSearchString, updatedMovieList]) => {
-  if (isLoading) {
-    return
-  }
+watch(searchString, (updatedSearchString) => {
   if (updatedSearchString === '') {
-    movies.value = updatedMovieList
+    movies.value = movieList.value
   } else {
     updatedSearchString = updatedSearchString.toLowerCase()
-    movies.value = updatedMovieList.value.filter(
+    movies.value = movieList.value.filter(
       (movie) =>
         movie.name.en.toLowerCase().startsWith(updatedSearchString) ||
         movie.name.ka.toLowerCase().startsWith(updatedSearchString)
     )
   }
+})
+
+watch(movieList, (updatedMovieList) => {
+  if (isLoading) {
+    return
+  }
+  movies.value = updatedMovieList
 })
 </script>
 
