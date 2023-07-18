@@ -6,7 +6,8 @@ import { ref, onMounted } from 'vue'
 import { likesChannel } from '@/echo.js'
 import { useRouter } from 'vue-router'
 import { useQuoteStore } from '@/stores/quoteStore.js'
-import { watch } from 'vue'
+import { useUserStore } from '@/stores/userStore.js'
+import { watch, computed } from 'vue'
 
 const props = defineProps({
   navigationHandler: {
@@ -18,28 +19,40 @@ const props = defineProps({
     required: true
   }
 })
+const userStore = useUserStore()
 const quoteStore = useQuoteStore()
 const router = useRouter()
-const likesCount = ref(props.quote.likes.length)
+const likes = ref(props.quote.likes)
+const likesCount = computed(() => likes.value.length)
 
 const commentsCount = ref(props.quote.comments.length)
+const isPostLikedByUser = computed(() => !!likes.value.find((liker) => liker.id === userStore.user.id))
 
 watch(
   () => quoteStore.quotes,
   (updatedQuotes) => {
-    commentsCount.value = updatedQuotes.find((quote) => quote.id === props.quote.id).comments.length
+    commentsCount.value = updatedQuotes.find((quote) => quote.id === props.quote.id)?.comments.length
   }
 )
 
 onMounted(() => {
   likesChannel.listen('QuoteLikedEvent', (data) => {
     if (props.quote.id === data.quoteId) {
-      likesCount.value += 1
+      handleLiking()
     }
   })
 })
 
-const handleAddingLike = async () => {
+const handleLiking = () => {
+  if (isPostLikedByUser.value) {
+    likes.value = likes.value.filter((liker) => liker.id !== userStore.user.id)
+  } else {
+    likes.value.push(userStore.user)
+  }
+  quoteStore.updateQuotes({ ...props.quote, likes: [...likes.value] })
+}
+
+const sendRequestToLikePost = async () => {
   await request.post(`/api/${props.quote.id}/add-like`)
 }
 </script>
@@ -61,7 +74,12 @@ const handleAddingLike = async () => {
       />
     </p>
     <p class="flex items-center gap-4">
-      {{ likesCount }} <TheHeartIcon class="cursor-pointer" @click="handleAddingLike" />
+      {{ likesCount }}
+      <TheHeartIcon
+        class="cursor-pointer"
+        :color="isPostLikedByUser ? 'red' : 'white'"
+        @click="sendRequestToLikePost"
+      />
     </p>
   </div>
 </template>

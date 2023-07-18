@@ -56,7 +56,7 @@ const handleFormSubmit = async () => {
     movieStore.updateMovies(updatedMovie)
     router.push({ name: 'movies' })
   }
-  errorMessage.value = errors
+  errorMessage.value = errors || []
 }
 </script>
 

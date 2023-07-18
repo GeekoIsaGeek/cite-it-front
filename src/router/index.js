@@ -14,6 +14,7 @@ import AddNewQuote from '@/components/modals/AddQuoteFromMovie.vue'
 import EditMovie from '@/components/modals/EditMovie.vue'
 import NotFoundView from '@/views/NotFoundview.vue'
 import ForbiddenView from '@/views/ForbiddenView.vue'
+import AddMovie from '@/components/modals/AddNewMovie.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -77,7 +78,7 @@ const router = createRouter({
       name: 'edit-movie',
       components: {
         overlay: EditMovie,
-        default: MoviesView
+        default: NewsFeedWrapper
       }
     },
     {
@@ -87,6 +88,11 @@ const router = createRouter({
         default: NewsFeedWrapper,
         overlay: AddNewQuote
       }
+    },
+    {
+      path: '/movie/add',
+      name: 'add-movie',
+      components: { overlay: AddMovie, default: NewsFeedWrapper }
     },
     {
       path: '/page-not-found',
@@ -120,7 +126,7 @@ router.beforeEach(async (to) => {
     !to.path.startsWith('/auth/verification-succeed') &&
     !to.path.startsWith('/auth/email-confirmation')
   ) {
-    return { name: 'my-profile' }
+    return { name: 'news-feed' }
   }
   if (!userStore.isLoggedIn && to.name !== 'home' && !to.path.startsWith('/auth')) {
     return { name: 'forbidden' }

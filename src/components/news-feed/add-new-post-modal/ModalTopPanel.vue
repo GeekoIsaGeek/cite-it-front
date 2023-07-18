@@ -16,10 +16,7 @@ defineProps({
 <template>
   <div class="flex items-center justify-center text-white px-8 relative">
     <p class="text-2xl">{{ heading }}</p>
-    <CloseIcon
-      class="text-white hover:text-gray-300 top-[-2px] right-[32px]"
-      @click="handleClose"
-    />
+    <CloseIcon class="text-white hover:text-gray-300 top-[-2px] right-[32px]" @click="handleClose" />
   </div>
   <div class="w-full h-[1px] bg-[#EFEFEF33] mt-6 mb-8"></div>
 </template>

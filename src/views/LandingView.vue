@@ -3,6 +3,15 @@ import HeroSection from '@/components/landing/HeroSection.vue'
 import MovieWrapper from '@/components/landing/MovieWrapper.vue'
 import AppHeader from '@/components/shared/header/AppHeader.vue'
 import NavigationMobile from '@/components/news-feed/NavigationMobile.vue'
+import { onMounted } from 'vue'
+import { useUserStore } from '@/stores/userStore.js'
+import { useRouter } from 'vue-router'
+
+onMounted(() => {
+  if (useUserStore().user.id) {
+    useRouter().push('news-feed')
+  }
+})
 
 const scrollToFirstMovie = () => {
   const element = document.getElementById('first-movie')

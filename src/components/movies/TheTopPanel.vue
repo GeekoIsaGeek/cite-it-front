@@ -2,26 +2,28 @@
 import AddButton from '@/components/UI/RedButton.vue'
 import SearchIcon from '@/components/icons/TheSearchIcon.vue'
 import PlusIcon from '@/components/icons/ThePlusIcon.vue'
-import { useModalStore } from '@/stores/modalStore.js'
 import { useSearchStore } from '@/stores/searchStore.js'
 import { computed } from 'vue'
 import { useMovieStore } from '@/stores/movieStore'
+import { useUserStore } from '@/stores/userStore.js'
+import { useRouter } from 'vue-router'
 
-const { setShowAddMovieModal } = useModalStore()
+const router = useRouter()
 const movieStore = useMovieStore()
 const searchStore = useSearchStore()
+const userStore = useUserStore()
 
-const movieCount = computed(() => movieStore.movies.length)
+const movieCount = computed(() => movieStore.movies.filter((movie) => movie.author.id === userStore.user.id).length)
 </script>
 
 <template>
-  <div class="flex items-center self-start flex-wrap justify-between w-full mb-16 px-4">
-    <p class="text-2xl pt-[25px] md:pt-0">
-      {{ $t('movies.list_of_movies') }}
+  <div class="flex items-center self-start justify-between w-full mb-16 px-4">
+    <div class="text-2xl pt-6 md:pt-0 flex gap-2 lg:gap-4 flex-col lg:flex-row">
+      <p class="min-w-max">{{ $t('movies.list_of_movies') }}</p>
       <span class="text-base lg:text-2xl">({{ $t('movies.total') }} {{ movieCount }})</span>
-    </p>
-    <div class="flex items-center gap-12">
-      <div class="flex items-center gap-4">
+    </div>
+    <div class="flex justify-end items-center gap-12 w-full md:w-auto">
+      <div class="hidden md:flex items-center gap-4">
         <SearchIcon color="white" />
         <input
           type="text"
@@ -32,7 +34,7 @@ const movieCount = computed(() => movieStore.movies.length)
       </div>
       <AddButton
         class="px-4 lg:text-xl min-w-max flex items-center gap-2"
-        @click="() => setShowAddMovieModal(true)"
+        @click="() => router.push({ name: 'add-movie' })"
       >
         <PlusIcon />{{ $t('movies.add_movie') }}
       </AddButton>

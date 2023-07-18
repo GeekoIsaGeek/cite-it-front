@@ -37,10 +37,7 @@ const handleSearch = useSearchAndSetData()
       ]"
     >
       <SearchIcon :color="'#CED4DA'" />
-      <form
-        @submit.prevent="() => handleSearch(searchString)"
-        :class="['min-w-max', expandSearch && 'w-full']"
-      >
+      <form @submit.prevent="() => handleSearch(searchString)" :class="['min-w-max', expandSearch && 'w-full']">
         <input
           type="text"
           class="w-full min-w-max bg-transparent outline-none"

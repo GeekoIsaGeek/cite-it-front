@@ -34,27 +34,19 @@ const isMoviesRoute = computed(() => route.name === 'movies' || route.name === '
       <div class="flex items-center gap-6 ml-[-10px]">
         <img
           :src="avatar || avatarPlaceholder"
-          :class="`w-[50px] h-[50px] rounded-full  ${
-            route.name === 'my-profile' && 'border-2 border-redFail'
-          }`"
+          :class="`w-[50px] h-[50px] rounded-full  ${route.name === 'my-profile' && 'border-2 border-redFail'}`"
           alt="avatar"
         />
         <div class="flex flex-col">
           <h3 class="text-lg font-normal">{{ username }}</h3>
-          <RouterLink
-            :to="{ name: 'my-profile' }"
-            @click="closeNavigationMenu"
-            class="text-[#CED4DA]"
-            >{{ $t('news_feed.edit') }}</RouterLink
-          >
+          <RouterLink :to="{ name: 'my-profile' }" @click="closeNavigationMenu" class="text-[#CED4DA]">{{
+            $t('news_feed.edit')
+          }}</RouterLink>
         </div>
       </div>
 
       <div class="flex items-center gap-6">
-        <TheHomeIcon
-          class="mb-[3px] w-6 h-6"
-          :color="`${route.name === 'news-feed' ? 'red' : 'white'}`"
-        />
+        <TheHomeIcon class="mb-[3px] w-6 h-6" :color="`${route.name === 'news-feed' ? 'red' : 'white'}`" />
         <RouterLink :to="{ name: 'news-feed' }" @click="closeNavigationMenu" class="text-lg">{{
           $t('news_feed.news_feed')
         }}</RouterLink>

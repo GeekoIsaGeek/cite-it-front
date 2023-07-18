@@ -41,6 +41,8 @@ provide('showNotifications', showNotifications)
 const router = useRouter()
 const currentRoute = computed(() => router.currentRoute.value.path)
 
+const canDisplayNavigationMenu = computed(() => currentRoute.value !== '/' && !currentRoute.value.startsWith('/auth'))
+
 const handleLogout = async () => {
   try {
     await request.post('/api/logout')
@@ -56,13 +58,18 @@ const newNotificationsCount = computed(() => useNotificationStore().newNotificat
 <template>
   <header
     class="fixed select-none top-0 z-50 w-full bg-transparent h-[86px] flex justify-between items-center py-6 px-4 md:px-[40px] xl:px-[70px]"
+    v-if="!currentRoute.startsWith('/auth')"
   >
     <h3 class="hidden md:block text-sm text-offGold font-medium md:text-base">MOVIE QUOTES</h3>
+    <h3 class="block md:hidden text-sm text-offGold font-medium md:text-base" v-show="currentRoute === '/'">
+      MOVIE QUOTES
+    </h3>
     <HamburgerMenu
       class="cursor-pointer md:hidden text-white text-2xl"
+      v-if="canDisplayNavigationMenu"
       @click="modalStore.setShowMobileNavigation(true)"
     />
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-3 flex-row-reverse md:flex-row">
       <SearchIcon
         class="lg:hidden cursor-pointer mr-5 h-6 w-6"
         color="white"
@@ -76,22 +83,22 @@ const newNotificationsCount = computed(() => useNotificationStore().newNotificat
       />
       <LanguageSwitcher />
       <SignUpButton
-        class="px-6 py-2 hidden md:flex"
+        class="px-4 md:px-6 text-sm md:text-base"
         @click="() => router.push({ name: 'register' })"
         v-if="!userStore.isLoggedIn"
         >{{ $t('landing.signup') }}
       </SignUpButton>
       <button
         @click="() => router.push({ name: 'login' })"
-        v-if="!userStore.isLoggedIn && !currentRoute.startsWith('/auth')"
-        class="px-4 py-1.5 md:px-6 md:py-[6px] border border-white flex justify-center items-center text-white rounded hover:text-darkBlue hover:bg-white transition-colors"
+        v-if="!userStore.isLoggedIn"
+        class="px-4 py-1.5 text-sm m:text-base md:px-6 md:py-[8px] border border-white flex justify-center items-center text-white rounded hover:text-darkBlue hover:bg-white transition-colors"
       >
         {{ $t('landing.login') }}
       </button>
       <button
         @click="handleLogout"
         v-if="userStore.isLoggedIn"
-        class="px-4 py-1.5 md:px-6 md:py-2 border border-white flex justify-center items-center text-white rounded hover:text-darkBlue hover:bg-white transition-colors"
+        class="hidden md:flex px-4 py-1.5 md:px-6 md:py-2 border border-white justify-center items-center text-white rounded hover:text-darkBlue hover:bg-white transition-colors"
       >
         {{ $t('landing.logout') }}
       </button>

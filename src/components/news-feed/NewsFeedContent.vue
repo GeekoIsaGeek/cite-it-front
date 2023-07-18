@@ -15,7 +15,6 @@ const searchStore = useSearchStore()
 const modalStore = useModalStore()
 const { searchedData, typeOfSearchedData } = storeToRefs(searchStore)
 const { fetchData, handleScroll, items: quotes } = useInfiniteScroll('quotes/paginate')
-
 onMounted(() => {
   fetchData()
   window.addEventListener('scroll', handleScroll)

@@ -47,17 +47,10 @@ const handleDelete = async () => {
       <p class="text-darkGray">|</p>
       <TheDeleteIcon class="cursor-pointer" @click="handleDelete" />
     </div>
-    <button
-      class="flex items-center gap-2"
-      @click="handleDelete"
-      v-if="route.name === 'edit-quote' && isUserCreator"
-    >
+    <button class="flex items-center gap-2" @click="handleDelete" v-if="route.name === 'edit-quote' && isUserCreator">
       <TheDeleteIcon />{{ $t('movie_details.delete') }}
     </button>
     <h2 class="hidden lg:block text-2xl text-white">{{ heading }}</h2>
-    <TheCloselIcon
-      class="relative text-white top-[0]"
-      @click="() => router.push({ name: 'news-feed' })"
-    />
+    <TheCloselIcon class="relative text-white top-[0]" @click="() => router.push({ name: 'news-feed' })" />
   </div>
 </template>
