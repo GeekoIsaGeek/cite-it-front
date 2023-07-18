@@ -19,6 +19,7 @@ const { userMovies: movieList } = storeToRefs(useMovieStore())
 const { fetchData, handleScroll, items: movies } = useInfiniteScroll('movies/paginate')
 
 onMounted(() => {
+  movies.value = []
   fetchData()
   window.addEventListener('scroll', handleScroll)
 })

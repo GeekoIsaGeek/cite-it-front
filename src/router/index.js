@@ -78,7 +78,7 @@ const router = createRouter({
       name: 'edit-movie',
       components: {
         overlay: EditMovie,
-        default: MoviesView
+        default: NewsFeedWrapper
       }
     },
     {
@@ -92,7 +92,7 @@ const router = createRouter({
     {
       path: '/movie/add',
       name: 'add-movie',
-      components: { overlay: AddMovie, default: MoviesView }
+      components: { overlay: AddMovie, default: NewsFeedWrapper }
     },
     {
       path: '/page-not-found',
