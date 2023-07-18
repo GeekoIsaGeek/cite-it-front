@@ -14,6 +14,7 @@ import AddNewQuote from '@/components/modals/AddQuoteFromMovie.vue'
 import EditMovie from '@/components/modals/EditMovie.vue'
 import NotFoundView from '@/views/NotFoundview.vue'
 import ForbiddenView from '@/views/ForbiddenView.vue'
+import AddMovie from '@/components/modals/AddNewMovie.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -87,6 +88,11 @@ const router = createRouter({
         default: NewsFeedWrapper,
         overlay: AddNewQuote
       }
+    },
+    {
+      path: '/movie/add',
+      name: 'add-movie',
+      components: { overlay: AddMovie, default: MoviesView }
     },
     {
       path: '/page-not-found',

@@ -2,16 +2,18 @@
 import AddButton from '@/components/UI/RedButton.vue'
 import SearchIcon from '@/components/icons/TheSearchIcon.vue'
 import PlusIcon from '@/components/icons/ThePlusIcon.vue'
-import { useModalStore } from '@/stores/modalStore.js'
 import { useSearchStore } from '@/stores/searchStore.js'
 import { computed } from 'vue'
 import { useMovieStore } from '@/stores/movieStore'
+import { useUserStore } from '@/stores/userStore.js'
+import { useRouter } from 'vue-router'
 
-const { setShowAddMovieModal } = useModalStore()
+const router = useRouter()
 const movieStore = useMovieStore()
 const searchStore = useSearchStore()
+const userStore = useUserStore()
 
-const movieCount = computed(() => movieStore.movies.length)
+const movieCount = computed(() => movieStore.movies.filter((movie) => movie.author.id === userStore.user.id).length)
 </script>
 
 <template>
@@ -30,7 +32,10 @@ const movieCount = computed(() => movieStore.movies.length)
           @input="(e) => searchStore.setSearchString(e.target.value)"
         />
       </div>
-      <AddButton class="px-4 lg:text-xl min-w-max flex items-center gap-2" @click="() => setShowAddMovieModal(true)">
+      <AddButton
+        class="px-4 lg:text-xl min-w-max flex items-center gap-2"
+        @click="() => router.push({ name: 'add-movie' })"
+      >
         <PlusIcon />{{ $t('movies.add_movie') }}
       </AddButton>
     </div>

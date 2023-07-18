@@ -1,9 +1,11 @@
 import { defineStore } from 'pinia'
 import request from '@/config/axiosInstance'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useUserStore } from '@/stores/userStore'
 
 export const useMovieStore = defineStore('movie', () => {
   const movies = ref([])
+  const userMovies = computed(() => movies.value.filter((movie) => movie.author.id === useUserStore().user.id))
 
   const fetchMovies = async () => {
     const response = await request.get('/api/movies')
@@ -30,6 +32,7 @@ export const useMovieStore = defineStore('movie', () => {
     fetchMovies,
     setMovies,
     addNewMovie,
-    updateMovies
+    updateMovies,
+    userMovies
   }
 })

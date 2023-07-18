@@ -59,9 +59,7 @@ const handleSubmit = async ({ touched, valid }) => {
 <template>
   <QuoteModalWrapper>
     <FormWrapperTransition>
-      <div
-        class="dialog bg-almostBlack pt-6 lg:w-1/2 rounded-xl pb-24 overflow-y-scroll text-white"
-      >
+      <div class="dialog bg-almostBlack pt-6 lg:w-1/2 rounded-xl pb-24 overflow-y-scroll text-white">
         <div class="px-8 pt-4 pb-6 border-b border-b-darkGray relative">
           <h2 class="text-center text-2xl">{{ $t('movie_details.add_quote') }}</h2>
           <CloseIcon class="right-8 top-3 hover:text-darkGray" @click="handleCancel" />

@@ -4,18 +4,17 @@ import FormField from '@/components/UI/AddPostFormInput.vue'
 import AddMovieWrapper from '@/components/shared/AddNewPostModalWrapper.vue'
 import UploadImage from '@/components/UI/ImageUploader.vue'
 import AddButton from '@/components/UI/RedButton.vue'
-import { useModalStore } from '@/stores/modalStore.js'
 import MovieGenres from '@/components/movies/MovieGenres.vue'
 import { reactive, ref } from 'vue'
 import { useMovieStore } from '@/stores/movieStore.js'
 import ServerErrors from '@/components/shared/ServerErrors.vue'
 import fillFormData from '@/utils/fillFormData.js'
 import useSendPostRequest from '@/composables/useSendPostRequest.js'
+import { useRouter } from 'vue-router'
 
 const serverErrors = ref([])
 const movieStore = useMovieStore()
 
-const { setShowAddMovieModal } = useModalStore()
 const movieDetails = reactive({
   name: null,
   name_ka: null,
@@ -29,23 +28,23 @@ const movieDetails = reactive({
 })
 
 const addNewPost = useSendPostRequest()
+const router = useRouter()
 
 const AddNewMovie = async ({ valid, touched }) => {
   const isFormValid = valid && touched && movieDetails.genre.length > 0 && movieDetails.poster
   const formData = fillFormData(movieDetails)
-  const { data, errors } = await addNewPost(formData, 'movies', isFormValid)
-  serverErrors.value = []
+  const { data, errors, status } = await addNewPost(formData, 'movies', isFormValid)
 
-  if (!errors) {
+  if (status === 201) {
     movieStore.addNewMovie(data)
-    setShowAddMovieModal(false)
+    router.push({ name: 'movies' })
   }
   serverErrors.value = errors || []
 }
 </script>
 
 <template>
-  <AddMovieWrapper :heading="$t('movies.add_movie')" :handleClose="() => setShowAddMovieModal(false)">
+  <AddMovieWrapper :heading="$t('movies.add_movie')" :handleClose="() => router.push({ name: 'movies' })">
     <Form class="flex flex-col gap-6" v-slot="{ meta }">
       <FormField
         name="movie_name"

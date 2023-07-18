@@ -7,7 +7,7 @@ export default () => {
   const { t, locale } = useI18n()
   const responseData = ref([])
   const errors = ref(null)
-
+  const status = ref(null)
   const sendRequest = async (formData, endpoint, isFormValid = true) => {
     try {
       if (isFormValid) {
@@ -18,14 +18,14 @@ export default () => {
           }
         })
         responseData.value = response.data
+        status.value = response.status
       } else {
         throw new Error(t('messages.invalid_form'))
       }
     } catch (error) {
-      console.error(error)
       errors.value = getServerErrorMessages(error) || error.message
     }
-    return { data: responseData.value, errors: errors.value }
+    return { data: responseData.value, errors: errors.value, status: status.value }
   }
   return sendRequest
 }

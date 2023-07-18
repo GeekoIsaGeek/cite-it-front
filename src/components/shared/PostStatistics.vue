@@ -31,7 +31,7 @@ const isPostLikedByUser = computed(() => !!likes.value.find((liker) => liker.id 
 watch(
   () => quoteStore.quotes,
   (updatedQuotes) => {
-    commentsCount.value = updatedQuotes.find((quote) => quote.id === props.quote.id).comments.length
+    commentsCount.value = updatedQuotes.find((quote) => quote.id === props.quote.id)?.comments.length
   }
 )
 
