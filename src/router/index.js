@@ -120,7 +120,7 @@ router.beforeEach(async (to) => {
     !to.path.startsWith('/auth/verification-succeed') &&
     !to.path.startsWith('/auth/email-confirmation')
   ) {
-    return { name: 'my-profile' }
+    return { name: 'news-feed' }
   }
   if (!userStore.isLoggedIn && to.name !== 'home' && !to.path.startsWith('/auth')) {
     return { name: 'forbidden' }

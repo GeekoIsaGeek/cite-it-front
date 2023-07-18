@@ -71,7 +71,7 @@ const handleMarkAllAsRead = async () => {
             />
           </ul>
           <TheTriangleIcon
-            class="fixed top-[70px] right-[150px] z-10 sm:right-[130px] md:right-[284px] lg:right-[315px]"
+            class="fixed top-[70px] right-[100px] z-10 sm:right-[140px] md:right-[280px] lg:right-[315px]"
           />
         </div>
       </Transition>
