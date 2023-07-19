@@ -141,5 +141,13 @@ export default {
     changes_are_not_bilingual: 'You should edit fields in both languages',
     invalid_form: 'Make sure every field is valid',
     nothing_found: 'Nothing found'
+  },
+  landing_movies: {
+    interstellar: 'You have to leave something behind to go forward',
+    tenenbaums: 'I think we’re just gonna have to be secretly in love with earch other and leave it that',
+    lord_of_the_rings: 'I see in your eyes the same fear that would take the heart of me',
+    interstellar_movie: 'Interstellar, 2014',
+    tenenbaums_movie: 'The Tenenbaums, 2001',
+    lord_of_the_rings_movie: 'The Lord of the Rings, 2003'
   }
 }
