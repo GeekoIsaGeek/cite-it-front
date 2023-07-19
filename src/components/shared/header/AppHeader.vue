@@ -79,6 +79,7 @@ const newNotificationsCount = computed(() => useNotificationStore().newNotificat
       <NotificationsButton
         :count="newNotificationsCount"
         v-if="showNotificationsButton"
+        :showNotifications="showNotifications"
         @click="() => (showNotifications = !showNotifications)"
       />
       <LanguageSwitcher />
