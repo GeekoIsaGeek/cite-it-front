@@ -12,19 +12,13 @@ onMounted(() => {
     useRouter().push('news-feed')
   }
 })
-
-const scrollToFirstMovie = () => {
-  const element = document.getElementById('first-movie')
-  const y = element.getBoundingClientRect().top + window.pageYOffset
-  window.scrollTo({ top: y, behavior: 'smooth' })
-}
 </script>
 
 <template>
   <div class="bg-darkBlue min-h-screen">
     <NavigationMobile />
     <AppHeader />
-    <HeroSection @scrollTo="scrollToFirstMovie" />
+    <HeroSection />
     <div class="relative">
       <div class="bg-gradient-to-r from-black z-0 absolute top-0 left-0 h-full w-full"></div>
       <MovieWrapper
