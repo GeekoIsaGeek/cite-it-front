@@ -1,6 +1,5 @@
 <script setup>
 import NotificationCard from '@/components/notifications/NotificationCard.vue'
-import TheTriangleIcon from '@/components/icons/TheTriangleIcon.vue'
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 import request from '@/config/axiosInstance.js'
 import useInfiniteScroll from '@/composables/useInfiniteScroll.js'
@@ -70,9 +69,6 @@ const handleMarkAllAsRead = async () => {
               :notification="notification"
             />
           </ul>
-          <TheTriangleIcon
-            class="fixed top-[70px] right-[100px] z-10 sm:right-[140px] md:right-[284px] lg:right-[315px]"
-          />
         </div>
       </Transition>
     </div>

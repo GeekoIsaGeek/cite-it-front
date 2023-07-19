@@ -9,7 +9,7 @@ defineRule('max', max)
 defineRule('confirmed', confirmed)
 
 defineRule('only_lowercase', (value) => {
-  return RegExp(/^[a-z][a-z0-9_.]*$/).test(value)
+  return RegExp(/^[a-z\s][a-z0-9_\s.]*$/).test(value)
 })
 defineRule('only_georgian', (value) => {
   return RegExp(/^[ა-ჰ\s]*$/).test(value)
