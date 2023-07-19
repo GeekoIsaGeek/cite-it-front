@@ -24,7 +24,7 @@ const handleSelect = (selectedMovieName) => {
   props.setMovie(selectedMovieName)
 }
 const movieNames = computed(() => {
-  return Object.values(movieStore.movies).map((movie) => {
+  return Object.values(movieStore.userMovies).map((movie) => {
     if (movie.author.id === userStore.user.id) {
       return movie.name[locale.value]
     }
@@ -43,10 +43,7 @@ const movieNames = computed(() => {
     </div>
 
     <TheArrowDownIcon :class="`text-3xl ${showMovieList && 'rotate-180'}`" />
-    <div
-      class="absolute top-full left-0 pb-4 bg-[#1c192c] w-full border-t border-t-[#9686e8]"
-      v-if="showMovieList"
-    >
+    <div class="absolute top-full left-0 pb-4 bg-[#1c192c] w-full border-t border-t-[#9686e8]" v-if="showMovieList">
       <ul class="rounded-b-[4px]">
         <li
           v-for="(movie, index) in movieNames"

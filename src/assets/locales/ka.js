@@ -143,5 +143,13 @@ export default {
     changes_are_not_bilingual: 'აუცილებელია დაარედაქტიროთ ორივე ენაზე',
     invalid_form: 'დარწმუნდით, რომ ყველა ველი ვალიდურია',
     nothing_found: 'არაფერი მოიძებნა'
+  },
+  landing_movies: {
+    interstellar: 'უკან უნდა მოიტოვო რაღაც, იმისთვის რომ წინ წახვიდე',
+    interstellar_movie: 'ინტერსტელარი, 2014',
+    tenenbaums: 'ვფიქრობ, ფარულად უნდა გვიყვარდეს ერთმანეთი და ასეც უნდა დავტოვოთ',
+    tenenbaums_movie: 'თენენბაუმები, 2001',
+    lord_of_the_rings: 'შენს თვალებში იმავე შიშს ვხედავ, რაც ჩემს გულს შეიპყრობდა',
+    lord_of_the_rings_movie: 'ბეჭდების მბრძანებელი, 2003'
   }
 }
