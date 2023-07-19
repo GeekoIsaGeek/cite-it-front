@@ -70,9 +70,10 @@ const newNotificationsCount = computed(() => useNotificationStore().newNotificat
       v-if="canDisplayNavigationMenu"
       @click="modalStore.setShowMobileNavigation(true)"
     />
-    <div class="flex items-center gap-3 flex-row-reverse md:flex-row">
+    <div class="flex items-center gap-5 lg:gap-3 flex-row">
+      <LanguageSwitcher />
       <SearchIcon
-        class="lg:hidden cursor-pointer mr-5 h-6 w-6"
+        class="lg:hidden cursor-pointer lg:mr-5 h-6 w-6"
         color="white"
         @click="() => searchStore.setShowSearchBar(true)"
         v-if="routeName === 'news-feed'"
@@ -83,7 +84,6 @@ const newNotificationsCount = computed(() => useNotificationStore().newNotificat
         :showNotifications="showNotifications"
         @click="() => (showNotifications = !showNotifications)"
       />
-      <LanguageSwitcher />
       <SignUpButton
         class="px-4 md:px-6 text-sm md:text-base"
         @click="() => router.push({ name: 'register' })"
@@ -100,7 +100,7 @@ const newNotificationsCount = computed(() => useNotificationStore().newNotificat
       <button
         @click="handleLogout"
         v-if="userStore.isLoggedIn"
-        class="hidden md:flex px-4 py-1.5 md:px-6 md:py-2 border border-white justify-center items-center text-white rounded hover:text-darkBlue hover:bg-white transition-colors"
+        class="flex px-4 py-1.5 md:px-6 md:py-2 border border-white justify-center items-center text-white rounded hover:text-darkBlue hover:bg-white transition-colors"
       >
         {{ $t('landing.logout') }}
       </button>

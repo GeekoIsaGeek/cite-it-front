@@ -21,7 +21,7 @@ const handleLocalization = (language) => {
 
 <template>
   <div
-    class="hidden md:flex items-center gap-2 text-white mr-6 relative cursor-pointer"
+    class="flex items-center gap-1 text-white lg:mr-6 relative cursor-pointer"
     @click="() => (showLocales = !showLocales)"
   >
     <h5>{{ locale === 'en' ? 'Eng' : 'ქარ' }}</h5>

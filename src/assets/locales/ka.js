@@ -85,7 +85,6 @@ export default {
     save_changes: 'ცვლილებების შენახვა',
     confirm: 'დადასტურება',
     confirm_changes: 'დარწმუნებული ხართ რომ გინდათ შეცვლა?',
-    profile_updated: 'პროფილი წარმატებით განახლდა',
     email_changed: 'თქვენი ელ-ფოსტა წარმატებით განახლდა',
     success: 'გილოცავთ'
   },
