@@ -14,6 +14,7 @@ import { useRoute } from 'vue-router'
 import { computed, ref, onMounted, provide } from 'vue'
 import { useNotificationStore } from '@/stores/notificationStore'
 import { echo } from '@/echo.js'
+import { onBeforeUnmount } from 'vue'
 
 defineProps({
   showNotificationsButton: {
@@ -23,11 +24,24 @@ defineProps({
 })
 
 onMounted(() => {
+  canHideLanguageSwitcher.value = window.innerWidth < 624 && currentRoute.value === '/'
+  window.addEventListener(
+    'resize',
+    () => (canHideLanguageSwitcher.value = window.innerWidth < 624 && currentRoute.value === '/')
+  )
+
   echo.private(`notifications.${userStore.user.id}`).listen('QuoteNotificationEvent', (data) => {
     if (userStore.user.id === data.receiverId) {
       useNotificationStore().addNewNotification(data.notification)
     }
   })
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener(
+    'resize',
+    () => (canHideLanguageSwitcher.value = window.innerWidth < 624 && currentRoute.value === '/')
+  )
 })
 
 const searchStore = useSearchStore()
@@ -40,6 +54,7 @@ const showNotifications = ref(false)
 provide('showNotifications', showNotifications)
 const router = useRouter()
 const currentRoute = computed(() => router.currentRoute.value.path)
+const canHideLanguageSwitcher = ref(false)
 
 const canDisplayNavigationMenu = computed(() => currentRoute.value !== '/' && !currentRoute.value.startsWith('/auth'))
 
@@ -71,7 +86,7 @@ const newNotificationsCount = computed(() => useNotificationStore().newNotificat
       @click="modalStore.setShowMobileNavigation(true)"
     />
     <div class="flex items-center gap-5 lg:gap-3 flex-row">
-      <LanguageSwitcher />
+      <LanguageSwitcher :class="[canHideLanguageSwitcher && 'hidden']" />
       <SearchIcon
         class="lg:hidden cursor-pointer lg:mr-5 h-6 w-6"
         color="white"
