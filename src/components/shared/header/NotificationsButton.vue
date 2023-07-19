@@ -15,7 +15,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="relative flex mr-9 cursor-pointer">
+  <div class="relative flex lg:mr-9 cursor-pointer">
     <TheBellIcon />
     <div
       v-if="count > 0"

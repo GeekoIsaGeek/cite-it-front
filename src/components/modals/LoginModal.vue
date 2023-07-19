@@ -27,7 +27,6 @@ const serverErrors = ref([])
 
 const handleLogin = async () => {
   try {
-    serverErrors.value = []
     const additionalHeaders = {
       'Accept-Language': locale.value
     }
@@ -42,7 +41,8 @@ const handleLogin = async () => {
     fetchUser()
     router.push({ name: 'news-feed' })
   } catch (error) {
-    serverErrors.value = getServerErrorMessages(error)
+    console.log(error)
+    serverErrors.value = getServerErrorMessages(error) || []
   }
 }
 </script>

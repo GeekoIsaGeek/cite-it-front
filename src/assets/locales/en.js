@@ -84,7 +84,6 @@ export default {
     save_changes: 'Save changes',
     confirm: 'confirm',
     confirm_changes: 'Are you sure to make changes?',
-    profile_updated: 'Changes updated successfully',
     email_changed: 'Your Email changed successfully',
     success: 'Success'
   },

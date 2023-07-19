@@ -18,6 +18,7 @@ const router = useRouter()
 const { locale } = useI18n()
 const userStore = useUserStore()
 const showSuccessMessage = ref(false)
+const successMessage = ref('')
 const serverErrors = ref([])
 const canUpdate = ref(false)
 
@@ -28,10 +29,8 @@ const handleCancel = () => {
   userStore.clearUpdatableCredentials()
   router.push({ name: 'news-feed' })
 }
-
 const handleSave = async () => {
   try {
-    serverErrors.value = []
     const formData = new FormData()
     const credentialsArray = Object.entries(userStore.updatableCredentials)
     if (credentialsArray.length < 1) return
@@ -44,9 +43,11 @@ const handleSave = async () => {
     const response = await request.post('/api/update-profile', formData, {
       headers: { 'Content-Type': 'multipart/form-data', 'Accept-Language': locale.value }
     })
-    if (response.data.message === 'Email has been updated') {
+    if (response.data.message === 'Verification email has been sent') {
       router.push({ name: 'email-confirmation' })
     } else if (response.status === 200) {
+      console.log(response.data.message)
+      successMessage.value = response.data.message
       showSuccessMessage.value = true
     }
     const currentUserData = userStore.user
@@ -54,7 +55,7 @@ const handleSave = async () => {
     userStore.clearUpdatableCredentials()
   } catch (error) {
     const errorMessages = getServerErrorMessages(error)
-    serverErrors.value = errorMessages
+    serverErrors.value = errorMessages || []
     return errorMessages
   }
 }
@@ -85,6 +86,10 @@ provide('handleUpdate', handleSave)
         <ButtonSave class="px-4" @click="handleSave">{{ $t('my_profile.save_changes') }}</ButtonSave>
       </div>
     </section>
-    <ProfileUpdated v-if="showSuccessMessage" :modalCloser="() => (showSuccessMessage = false)" />
+    <ProfileUpdated
+      v-if="showSuccessMessage"
+      :message="successMessage"
+      :modalCloser="() => (showSuccessMessage = false)"
+    />
   </NewsFeedWrapper>
 </template>
