@@ -3,6 +3,7 @@ import { ErrorMessage, Field, useIsFieldTouched, useIsFieldValid } from 'vee-val
 import ThePreviewIcon from '@/components/icons/ThePreviewIcon.vue'
 import TheInvalidIcon from '@/components/icons/TheInvalidIcon.vue'
 import TheValidIcon from '@/components/icons/TheValidIcon.vue'
+import TheOpenEyeIcon from '@/components/icons/TheOpenEyeIcon.vue'
 import { ref } from 'vue'
 
 const props = defineProps({
@@ -73,9 +74,14 @@ const handleInput = (event) => {
       <TheValidIcon v-if="isValid && isTouched" />
       <TheInvalidIcon v-if="!isValid && isTouched" />
       <ThePreviewIcon
-        v-if="type === 'password'"
+        v-if="variableType === 'password'"
         :class="{ 'right-[40px]': isTouched, 'right-[13px]': !isTouched }"
-        @click="variableType = variableType === 'password' ? 'text' : 'password'"
+        @click="variableType = 'text'"
+      />
+      <TheOpenEyeIcon
+        v-if="type === 'password' && variableType === 'text'"
+        :class="{ 'right-[40px]': isTouched, 'right-[13px]': !isTouched }"
+        @click="variableType = 'password'"
       />
     </Field>
   </div>
