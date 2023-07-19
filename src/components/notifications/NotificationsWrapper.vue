@@ -56,7 +56,7 @@ const handleMarkAllAsRead = async () => {
           <div class="flex items-center justify-between">
             <h1 class="text-xl lg:text-[32px]">{{ $t('notifications.notifications') }}</h1>
             <p
-              class="cursor-pointer underline text-sm lg:text-base hover:text-gray-300 lg:mb-6"
+              class="cursor-pointer text-right underline text-sm lg:text-base hover:text-gray-300 lg:mb-6"
               @click="handleMarkAllAsRead"
             >
               {{ $t('notifications.mark_as_all_read') }}
