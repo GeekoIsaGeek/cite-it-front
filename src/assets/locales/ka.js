@@ -60,7 +60,7 @@ export default {
     movies: 'ჩემი ფილმები',
     search_by: 'მოძებნეთ',
     write_new_quote: 'შექმენი ახალი პოსტი',
-    search_guide: 'ჩაწერე @ ფილმის მოსაძებნად, ჩაწერე # ციტატის მოძაძებნად',
+    search_guide: "ჩაწერე {'@'} ფილმის მოსაძებნად, ჩაწერე {'#'} ციტატის მოძაძებნად",
     post: 'გამოქვეყნება',
     choose_file: 'აირჩიეთ ფაილი',
     drag_and_drop: 'ჩააგდეთ სურათი ან',
@@ -69,8 +69,8 @@ export default {
     write_comment: 'დაწერეთ კომენტარი',
     upload_image: 'ატვირთვა',
     search: 'ძებნა',
-    search_movies: 'მიუთითეთ @ ფილმის მოსაძებნად',
-    search_quotes: 'მიუთითეთ # ციტატის მოსაძებნად'
+    search_movies: "მიუთითეთ {'@'} ფილმის მოსაძებნად",
+    search_quotes: "მიუთითეთ {'#} ციტატის მოსაძებნად"
   },
   my_profile: {
     my_profile: 'ჩემი პროფილი',
