@@ -46,7 +46,6 @@ const handleSave = async () => {
     if (response.data.message === 'Verification email has been sent') {
       router.push({ name: 'email-confirmation' })
     } else if (response.status === 200) {
-      console.log(response.data.message)
       successMessage.value = response.data.message
       showSuccessMessage.value = true
     }
