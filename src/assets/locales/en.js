@@ -59,7 +59,7 @@ export default {
     movies: 'List of movies',
     search_by: 'Search by',
     write_new_quote: 'Write new quote',
-    search_guide: "Enter {'@'} to search movies, Enter # to search quotes",
+    search_guide: "Enter {'@'} to search movies, Enter {'#'} to search quotes",
     post: 'Post',
     choose_file: 'Choose file',
     drag_and_drop: 'Drag and drop an image here or',
@@ -69,7 +69,7 @@ export default {
     upload_image: 'Upload image',
     search: 'Search',
     search_movies: "Enter {'@'} to search movies",
-    search_quotes: 'Enter # to search quotes'
+    search_quotes: "Enter {'#'}' to search quotes"
   },
   my_profile: {
     my_profile: 'My Profile',
