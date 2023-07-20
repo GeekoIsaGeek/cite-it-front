@@ -24,7 +24,7 @@ const image = computed(() => useGetImagePath(quote.value.image))
       <div class="dialog bg-almostBlack lg:w-1/2 pt-10 pb-8 overflow-y-scroll rounded-xl" v-if="quote">
         <TopPanel :heading="$t('movie_details.view_quote')" :movie="quote.movie" />
         <div class="flex flex-col px-8 gap-11">
-          <QuoteAuthor class="text-white mt-8" :imageUrl="quote.movie.author.profile_picture" />
+          <QuoteAuthor class="text-white mt-8" :imageUrl="quote.author.profile_picture" />
           <Quotes :quotes="quote.quote" />
           <img :src="image" alt="movie" class="rounded-[10px] w-full h-[300px] lg:h-[30vw] object-cover" />
           <PostStatistics class="text-white text-xl py-0" :quote="quote" />

@@ -48,7 +48,6 @@ const handleSubmit = async ({ touched, valid }) => {
   if (isFormValid) {
     const formData = fillFormData(quoteData)
     formData.append('id', movieId.value)
-
     const { data: newQuote, errors } = await addNewPost(formData, 'quotes', isFormValid)
     if (!errors) {
       movie.value = { ...movie.value, quotes: [...movie.value.quotes, newQuote] }
