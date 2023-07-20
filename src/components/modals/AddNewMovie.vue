@@ -11,8 +11,10 @@ import ServerErrors from '@/components/shared/ServerErrors.vue'
 import fillFormData from '@/utils/fillFormData.js'
 import useSendPostRequest from '@/composables/useSendPostRequest.js'
 import { useRouter } from 'vue-router'
+import FormFillingError from '@/components/shared/FormFillingError.vue'
 
 const serverErrors = ref([])
+const isFormIncorrectlyFilled = ref(false)
 const movieStore = useMovieStore()
 
 const movieDetails = reactive({
@@ -31,15 +33,19 @@ const addNewPost = useSendPostRequest()
 const router = useRouter()
 
 const AddNewMovie = async ({ valid, touched }) => {
+  isFormIncorrectlyFilled.value = false
   const isFormValid = valid && touched && movieDetails.genre.length > 0 && movieDetails.poster
-  const formData = fillFormData(movieDetails)
-  const { data, errors, status } = await addNewPost(formData, 'movies', isFormValid)
 
-  if (status === 201) {
-    movieStore.addNewMovie(data)
-    router.push({ name: 'movies' })
-  }
-  serverErrors.value = errors || []
+  if (isFormValid) {
+    const formData = fillFormData(movieDetails)
+    const { data, errors, status } = await addNewPost(formData, 'movies', isFormValid)
+
+    if (status === 201) {
+      movieStore.addNewMovie(data)
+      router.push({ name: 'movies' })
+    }
+    serverErrors.value = errors || []
+  } else isFormIncorrectlyFilled.value = true
 }
 </script>
 
@@ -93,6 +99,7 @@ const AddNewMovie = async ({ valid, touched }) => {
         v-model="movieDetails.description_ka"
       />
       <UploadImage previewImage v-model="movieDetails.poster" />
+      <FormFillingError v-show="isFormIncorrectlyFilled" />
       <ServerErrors :errors="serverErrors" />
       <AddButton @click="() => AddNewMovie(meta)">Add</AddButton>
     </Form>
