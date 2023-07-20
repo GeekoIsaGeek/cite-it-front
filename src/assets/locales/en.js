@@ -139,7 +139,8 @@ export default {
   messages: {
     changes_are_not_bilingual: 'You should edit fields in both languages',
     invalid_form: 'Make sure every field is valid',
-    nothing_found: 'Nothing found'
+    nothing_found: 'Nothing found',
+    make_sure_every_field_is_filled: 'Make sure every field is filled'
   },
   landing_movies: {
     interstellar: 'You have to leave something behind to go forward',

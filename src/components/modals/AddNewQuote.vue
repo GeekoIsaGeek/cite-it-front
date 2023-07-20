@@ -11,6 +11,8 @@ import { useMovieStore } from '@/stores/movieStore.js'
 import fillFormData from '@/utils/fillFormData'
 import useSendPostRequest from '@/composables/useSendPostRequest.js'
 import { useQuoteStore } from '@/stores/quoteStore.js'
+import FormFillingError from '@/components/shared/FormFillingError.vue'
+import { ref } from 'vue'
 
 const props = defineProps({
   addQuoteHandler: {
@@ -22,6 +24,7 @@ const props = defineProps({
 const { setShowAddNewPostModal } = useModalStore()
 const movieStore = useMovieStore()
 const quoteStore = useQuoteStore()
+const isFormIncorrectlyFilled = ref(false)
 const quoteData = reactive({
   quote: null,
   quote_ka: null,
@@ -32,19 +35,22 @@ const quoteData = reactive({
 const addNewPost = useSendPostRequest()
 
 const handleSubmit = async ({ valid, touched }) => {
+  isFormIncorrectlyFilled.value = false
   const isFormValid = valid && touched && quoteData.image && quoteData.movieName
-  const targetMovie = movieStore.movies.find(
-    (movie) => movie.name.en === quoteData.movieName || movie.name.ka === quoteData.movieName
-  )
-  const formData = fillFormData(quoteData, 'movieName')
-  formData.append('id', targetMovie.id)
+  if (isFormValid) {
+    const targetMovie = movieStore.movies.find(
+      (movie) => movie.name.en === quoteData.movieName || movie.name.ka === quoteData.movieName
+    )
+    const formData = fillFormData(quoteData, 'movieName')
+    formData.append('id', targetMovie.id)
 
-  const { data: newQuote, errors } = await addNewPost(formData, 'quotes', isFormValid)
-  if (!errors) {
-    quoteStore.addNewQuote({ ...newQuote, movie: targetMovie })
-    props.addQuoteHandler({ ...newQuote, movie: targetMovie })
-    setShowAddNewPostModal(false)
-  }
+    const { data: newQuote, errors } = await addNewPost(formData, 'quotes', isFormValid)
+    if (!errors) {
+      quoteStore.addNewQuote({ ...newQuote, movie: targetMovie })
+      props.addQuoteHandler({ ...newQuote, movie: targetMovie })
+      setShowAddNewPostModal(false)
+    }
+  } else isFormIncorrectlyFilled.value = true
 }
 </script>
 
@@ -71,6 +77,7 @@ const handleSubmit = async ({ valid, touched }) => {
       />
       <ImageUploader previewImage v-model="quoteData.image" />
       <ChooseMovie :setMovie="(selectedMovieName) => (quoteData.movieName = selectedMovieName)" />
+      <FormFillingError v-show="isFormIncorrectlyFilled" />
       <PostButton
         class="text-xl"
         @click="

@@ -32,7 +32,7 @@ const image = useGetImagePath(quoteObject.value.image)
 
 <template>
   <div class="px-6 py-6 bg-almostBlack rounded-xl">
-    <PostAuthor :author="quoteObject.movie.author" />
+    <PostAuthor :author="quoteObject.author" />
     <p class="lg:text-xl mt-4 mb-7 w-full">
       “{{ quoteObject.quote[locale] }}” -
       <span class="text-[#DDCCAA]">{{ quoteObject.movie.name[locale] }} ({{ quoteObject.movie.release_date }})</span>.

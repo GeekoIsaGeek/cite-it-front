@@ -141,7 +141,8 @@ export default {
   messages: {
     changes_are_not_bilingual: 'აუცილებელია დაარედაქტიროთ ორივე ენაზე',
     invalid_form: 'დარწმუნდით, რომ ყველა ველი ვალიდურია',
-    nothing_found: 'არაფერი მოიძებნა'
+    nothing_found: 'არაფერი მოიძებნა',
+    make_sure_every_field_is_filled: 'დარწმუნდით, რომ ყველა ველი შევსებულია'
   },
   landing_movies: {
     interstellar: 'უკან უნდა მოიტოვო რაღაც, იმისთვის რომ წინ წახვიდე',

@@ -15,6 +15,7 @@ import ServerErrors from '@/components/shared/ServerErrors.vue'
 import fillFormData from '@/utils/fillFormData'
 import useSendPostRequest from '@/composables/useSendPostRequest.js'
 import FormWrapperTransition from '@/components/shared/FormWrapperTransition.vue'
+import FormFillingError from '../shared/FormFillingError.vue'
 
 const quoteData = reactive({
   quote: null,
@@ -22,12 +23,13 @@ const quoteData = reactive({
   image: null
 })
 
+const isFormIncorrectlyFilled = ref(false)
 const router = useRouter()
 const movieId = computed(() => router.currentRoute.value.params.id)
 const movieStore = useMovieStore()
 const { movies } = storeToRefs(useMovieStore())
 const movie = ref(movies.value.find((movie) => movie.id === parseInt(movieId.value)))
-const errorMessages = ref([])
+const serverErrorMessages = ref([])
 
 const handleCancel = () => {
   router.push({
@@ -41,18 +43,19 @@ const handleCancel = () => {
 const addNewPost = useSendPostRequest()
 
 const handleSubmit = async ({ touched, valid }) => {
-  errorMessages.value = []
+  isFormIncorrectlyFilled.value = false
   const isFormValid = touched && valid && quoteData.image
-  const formData = fillFormData(quoteData)
-  formData.append('id', movieId.value)
-
-  const { data: newQuote, errors } = await addNewPost(formData, 'quotes', isFormValid)
-  if (!errors) {
-    movie.value = { ...movie.value, quotes: [...movie.value.quotes, newQuote] }
-    movieStore.updateMovies(movie.value)
-    handleCancel()
-  }
-  errorMessages.value = errors || []
+  if (isFormValid) {
+    const formData = fillFormData(quoteData)
+    formData.append('id', movieId.value)
+    const { data: newQuote, errors } = await addNewPost(formData, 'quotes', isFormValid)
+    if (!errors) {
+      movie.value = { ...movie.value, quotes: [...movie.value.quotes, newQuote] }
+      movieStore.updateMovies(movie.value)
+      handleCancel()
+    }
+    serverErrorMessages.value = errors || []
+  } else isFormIncorrectlyFilled.value = true
 }
 </script>
 
@@ -87,7 +90,8 @@ const handleSubmit = async ({ touched, valid }) => {
               isTextArea
             />
             <ImageUploader previewImage v-model="quoteData.image" />
-            <ServerErrors :errors="errorMessages" v-if="errorMessages.length > 0" />
+            <FormFillingError v-show="isFormIncorrectlyFilled" />
+            <ServerErrors :errors="serverErrorMessages" v-if="serverErrorMessages.length > 0" />
             <AddQuoteButton class="w-full mt-14 py-[9px]" @click="() => handleSubmit(meta)">{{
               $t('movie_details.add_quote')
             }}</AddQuoteButton>
