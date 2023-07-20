@@ -70,7 +70,7 @@ export default {
     upload_image: 'ატვირთვა',
     search: 'ძებნა',
     search_movies: "მიუთითეთ {'@'} ფილმის მოსაძებნად",
-    search_quotes: "მიუთითეთ {'#} ციტატის მოსაძებნად"
+    search_quotes: "მიუთითეთ {'#'} ციტატის მოსაძებნად"
   },
   my_profile: {
     my_profile: 'ჩემი პროფილი',
