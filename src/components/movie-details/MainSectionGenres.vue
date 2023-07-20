@@ -19,7 +19,6 @@ const genres = ref([])
 
 watchEffect(() => {
   genres.value = getLocalizedGenres(movie.value.genre.split(','), locale.value)
-  console.log(genres.value)
 }, locale.value)
 </script>
 
