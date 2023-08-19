@@ -24,10 +24,10 @@ This is a client-side app for "Epic Movie Quotes" project. The app consists of c
 
 ### Getting Started
 
-1\. First of all you need to clone Movie-Quotes-Upgraded repository from github:
+1\. First of all you need to clone epic-movie-quotes-front repository from github:
 
 ```sh
-https://github.com/RedberryInternship/giorgi-kvrivishvili-epic-movie-quotes-front
+https://github.com/GeekoIsaGeek/epic-movie-quotes-front
 ```
 
 2\. Next step requires you to run _npm install_ in order to install all dependencies.
