@@ -51,6 +51,7 @@ And now you should provide **.env** file all the necessary environment variables
 **Pusher:**
 
 > VITE_PUSHER_APP_KEY=
+
 > VITE_PUSHER_APP_CLUSTER=
 
 ### Development
