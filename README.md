@@ -1,6 +1,5 @@
-# Epic Movie Quotes
-
-This is a client-side app for "Epic Movie Quotes" project. The app consists of couple of modals and 4 main pages including: Home, News Feed, Movies, and Edit Profile. Modals and several other UI components of the app are animated. App design is mobile friendly. As for static texts, they can be shown in Georgian and English languages.
+# Cite It
+This is a client-side app for "Cite It" project. The app consists of couple of modals and 4 main pages including: Home, News Feed, Movies, and Edit Profile. Modals and several other UI components of the app are animated. App design is mobile friendly. As for static texts, they can be shown in Georgian and English languages.
 
 ### Table of Contents
 
@@ -24,10 +23,10 @@ This is a client-side app for "Epic Movie Quotes" project. The app consists of c
 
 ### Getting Started
 
-1\. First of all you need to clone epic-movie-quotes-front repository from github:
+1\. First of all you need to clone cite-it-front repository from github:
 
 ```sh
-https://github.com/GeekoIsaGeek/epic-movie-quotes-front
+https://github.com/GeekoIsaGeek/cite-it-front
 ```
 
 2\. Next step requires you to run _npm install_ in order to install all dependencies.
